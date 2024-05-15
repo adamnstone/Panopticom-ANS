@@ -89,16 +89,15 @@
             </div>
 
             <p id="earth">
-                <span id="show-menu" class="text-button" title="menu">Panopticom</span>
+                <span class="text-button" title="menu">Panopticom</span>
                 <span id="progress" class="invisible"></span>
+                
+                <select name="data-type" id="data_types">
+                    <option value="wind-mode-enable">Air</option>
+                    <option value="ocean-mode-enable">Ocean</option>
+                </select>    
             </p>
-            <p>
-                <select name="data type" id="data_types">
-                    <option value="wind_currents">Wind currents</option>
-                    <option value="sea_currents">Sea currents</option>
-                    <option value="fab_labs">Fab Labs</option>
-                </select>
-            </p>
+            
             <div id="menu">
                 <p>Date | <span
                     id="data-date" class="local"></span> <span
@@ -115,10 +114,6 @@
                     class="text-button" id="nav-forward-more"> » </span><span
                     class="text-button" id="show-location" title="Current Position">Find me</span><span
                     class="text-button" id="option-show-grid" title="Toggle Grid">Grid</span>
-                </p>
-                <p>Mode | <span
-                    class="text-button" id="wind-mode-enable">Air</span> – <span
-                    class="text-button" id="ocean-mode-enable">Ocean</span>
                 </p>
                 <p class="wind-mode">Height | <span
                     class="surface text-button" id="surface-level" title="Surface">Sfc</span> – <span
@@ -201,7 +196,8 @@
     <script src="/libs/earth/1.0.0/products.js" charset="utf-8"></script>
     <script src="/libs/earth/1.0.0/earth.js" charset="utf-8"></script>
 
-    <script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("sidebar-toggle").addEventListener("click", function() {
             var sidebar = document.getElementById("sidebar");
             var content = document.getElementById("content");
@@ -213,7 +209,23 @@
                 content.classList.remove("full-width");
             }
         });
-    </script>
+
+        document.getElementById("data_types").addEventListener("change", function() {
+            var selectedValue = this.value;
+            var windElements = document.querySelectorAll('.wind-mode');
+            var oceanElements = document.querySelectorAll('.ocean-mode');
+
+            if (selectedValue === "wind-mode-enable") {
+                windElements.forEach(el => el.classList.remove('invisible'));
+                oceanElements.forEach(el => el.classList.add('invisible'));
+            } else if (selectedValue === "ocean-mode-enable") {
+                windElements.forEach(el => el.classList.add('invisible'));
+                oceanElements.forEach(el => el.classList.remove('invisible'));
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

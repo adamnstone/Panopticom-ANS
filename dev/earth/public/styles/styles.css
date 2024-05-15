@@ -119,6 +119,10 @@ body {
     position: relative; 
 }
 
+.invisible {
+    display: none;
+}
+
 #status, #location, #menu {
     font-size: 0.75rem;
 }
