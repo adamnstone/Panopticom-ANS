@@ -22,8 +22,8 @@ The `.jsonl` file should consist of a list of json objects in the format below (
                 "lng": 3.2
             },
             "height": 10, // height of the arc
-            "dashLength": 0.5, // relative length of the arc, range 0-1
-            "gapLength": 0.5, // relative length of the gap when the arc is not displaed, range 0-1
+            "dashLength": 0.5, // relative length of the arc
+            "gapLength": 0.5, // relative length of the gap when the arc is not displaed
             "color": "red", // color of the arc
             "thickness": 1, // thickness of the arc
             "animationTime": 2000 // time (in ms) for the arc to complete one cycle
@@ -39,7 +39,7 @@ The `.jsonl` file should consist of a list of json objects in the format below (
                 "lng": 60.9
             },
             "height": 10,
-            "dashLength": [0.2, 0.5, 0.1, 0.35], // list of relative lengths of the arcs, range 0-1, for each corresponding arc `color`
+            "dashLength": [0.2, 0.5, 0.1, 0.35], // list of relative lengths of the arcs, for each corresponding arc `color`
             "gapLength": 0.6,
             "color": ["white", "red", "yellow", "silver"], // sequential color of the arcs
             "thickness": 2,
