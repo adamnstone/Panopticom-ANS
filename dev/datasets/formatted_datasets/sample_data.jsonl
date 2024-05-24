@@ -1,0 +1,66 @@
+[
+    {
+        "zoomLevel": 300,
+        "dataType": "arc",
+        "data": [
+            {
+                "hoverLabel": "Datapoint #1",
+                "start": {
+                    "lat": 11.04,
+                    "lng": 84.2
+                },
+                "end": {
+                    "lat": -10.4,
+                    "lng": 3.2
+                },
+                "height": 10,
+                "dashLength": 0.5,
+                "gapLength": 0.5,
+                "color": "red",
+                "thickness": 1,
+                "animationTime": 2000
+            },
+            {
+                "hoverLabel": "Datapoint #2",
+                "start": {
+                    "lat": 31.04,
+                    "lng": 40.2
+                },
+                "end": {
+                    "lat": 30.4,
+                    "lng": 60.9
+                },
+                "height": 10,
+                "dashLength": [0.2, 0.5, 0.1, 0.35],
+                "gapLength": 0.6,
+                "color": ["white", "red", "yellow", "silver"],
+                "thickness": 2,
+                "animationTime": 1000
+            }
+        ]
+    },
+    {
+        "zoomLevel": 250,
+        "dataType": "spikeHex",
+        "data": [
+            {
+                "hoverLabel": "Datapoint #1",
+                "pos": {
+                    "lat": 33.0,
+                    "lng": 30.2
+                },
+                "height": 1000000,
+                "color": "green"
+            },
+            {
+                "hoverLabel": "Datapoint #2",
+                "pos": {
+                    "lat": 33.0,
+                    "lng": 20.2
+                },
+                "height": 5000000,
+                "color": "yellow"
+            }
+        ]
+    }
+]
