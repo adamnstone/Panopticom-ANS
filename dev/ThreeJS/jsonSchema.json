@@ -1,0 +1,175 @@
+{
+  "$id": "https://panopti.com/json-schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Panopticom JSON Schema",
+  "description": "This schema defines the JSON format for each object ('data group') in a JSONL data file for the Panopticom.",
+  "type": "object",
+  "properties": {
+    "zoomLevel": {
+      "type": "number",
+      "description": "Zoom level at which the data is removed or added. Recommended 150 - 300. The globe initializes at 350. Smaller numbers are closer."
+    },
+    "dataType": {
+      "type": "string",
+      "enum": [
+        "arc",
+        "spikeHex"
+      ],
+      "description": "The data type of this data group."
+    },
+    "data": {
+      "type": "array",
+      "minContains": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "hoverLabel": {
+            "type": "string",
+            "description": "Text that appears when hovering over the datapoint. If set to an empty string, no label will appear."
+          },
+          "start": {
+            "$ref": "#/$defs/coordinates",
+            "description": "Start coordinates of the arc."
+          },
+          "end": {
+            "$ref": "#/$defs/coordinates",
+            "description": "End coordinates of the arc."
+          },
+          "pos": {
+            "$ref": "#/$defs/coordinates",
+            "description": "Coordinates of the spikeHex."
+          },
+          "height": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Height of the arc or spikeHex."
+          },
+          "dashLength": {},
+          "color": {},
+          "gapLength": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Length of the gap, as a ratio of the full length of the arc. For example, 0.5 would make a gap half the length of the full path. 2 would make a gap twice the length of the full path."
+          },
+          "thickness": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Thickness of the arc. 0 makes a hairline arc."
+          },
+          "animationTime": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Time for the arc animation to complete one cycle, in milliseconds."
+          }
+        },
+        "required": [
+          "hoverLabel",
+          "height",
+          "color"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "properties": {
+              "dashLength": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Length of the arc, as a ratio of the full length of the arc. For example, 0.5 would make an arc half the length of the full path. 2 would make an arc twice the length of the full path."
+              },
+              "color": { "$ref": "#/$defs/colorItem" }
+            }
+          },
+          {
+            "properties": {
+              "dashLength": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "minContains": 2,
+                "description": "Array of lengths of the arc segments in the multicolor arc, as a ratio of the full length of the arc. For example, 0.5 would make an arc segment half the length of the full path. 2 would make an arc segment twice the length of the full path."
+              },
+              "color": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/colorItem" },
+                "description": "Array of colors of each arc segment in the multicolor arc. RGBA format, for example, 'rgba(255,23,20,0.3)'."
+              }
+            }
+          }
+        ],
+        "description": "Each datapoint object."
+      },
+      "description": "Contains datapoints in the data group."
+    }
+  },
+  "required": [
+    "zoomLevel",
+    "dataType",
+    "data"
+  ],
+  "if": {
+    "properties": { "dataType": {"const": "arc"} }
+  },
+  "then": {
+    "properties": { 
+        "data": { 
+            "items": { 
+                "required": [
+                    "start",
+                    "end",
+                    "dashLength",
+                    "gapLength",
+                    "thickness",
+                    "animationTime"
+                ] 
+            } 
+        }
+    }
+  },
+  "else": {
+    "properties": { 
+        "data": { 
+            "items": { 
+                "required": [
+                    "pos"
+                ] 
+            } 
+        }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "lat": {
+      "type": "number",
+      "maximum": 90,
+      "minimum": -90
+    },
+    "lng": {
+      "type": "number",
+      "maximum": 180,
+      "minimum": -180
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "$ref": "#/$defs/lat"
+        },
+        "lng": {
+          "$ref": "#/$defs/lng"
+        }
+      },
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "additionalProperties": false
+    },
+    "colorItem": {
+        "type": "string",
+        "pattern": "^rgba\\((0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|0?\\.\\d|1(\\.0)?)\\)$",
+        "description": "Color of the arc or spikeHex. RGBA format, for example, 'rgba(255,23,20,0.3)'."
+    }
+  }
+}

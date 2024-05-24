@@ -16,7 +16,7 @@
                 "height": 10,
                 "dashLength": 0.5,
                 "gapLength": 0.5,
-                "color": "red",
+                "color": "rgba(255,0,0,1)",
                 "thickness": 1,
                 "animationTime": 2000
             },
@@ -33,7 +33,7 @@
                 "height": 10,
                 "dashLength": [0.2, 0.5, 0.1, 0.35],
                 "gapLength": 0.6,
-                "color": ["white", "red", "yellow", "silver"],
+                "color": ["rgba(255,255,255,1)", "rgba(255,0,0,1)", "rgba(255,255,0,1)", "rgba(192,192,192,1)"],
                 "thickness": 2,
                 "animationTime": 1000
             }
@@ -50,7 +50,7 @@
                     "lng": 30.2
                 },
                 "height": 1000000,
-                "color": "green"
+                "color": "rgba(0,255,0,1)"
             },
             {
                 "hoverLabel": "Datapoint #2",
@@ -59,7 +59,7 @@
                     "lng": 20.2
                 },
                 "height": 5000000,
-                "color": "yellow"
+                "color": "rgba(0,255,255,1)"
             }
         ]
     }
