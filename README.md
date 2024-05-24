@@ -7,6 +7,12 @@ Also see documentation for the [GeoJSON format here](https://datatracker.ietf.or
 
 ---
 
+**How to format `JSONL` datasets:**
+
+[Click here for the `JSONL` schema!](./standardized_json.md)
+
+---
+
 **How to run D3JS and ThreeJS examples:**
 
 1. Clone repo
