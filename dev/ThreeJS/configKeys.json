@@ -1,0 +1,13 @@
+{
+    "hexPointWeight": "height",
+    "hexTopColor": "color",
+    "hexSideColor": "color",
+    "hexLabel": "hoverLabel",
+
+    "arcLabel": "hoverLabel",
+    "arcColor": "color",
+    "arcDashLength": "dashLength",
+    "arcDashGap": "gapLength",
+    "arcAnimateTime": "animationTime",
+    "arcStroke": "thickness"
+}
