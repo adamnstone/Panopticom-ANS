@@ -68,7 +68,7 @@ const configureWorldDatasets = (world, configKeys) => {
         .arcDashLength(configKeys.arcDashLength)
         .arcDashGap(configKeys.arcDashGap)
         .arcDashAnimateTime(configKeys.arcAnimateTime)
-        .arcStroke(configKeys.arcStroke)
+        .arcStroke(d => d[configKeys.arcStroke] == 0 ? null : d[configKeys.arcStroke])
         .arcDashInitialGap('arcDashInitialGap'); // `arcDashInitialGap` is only accessed by multicolor code, not by user in creating the JSONL, so doesn't go through `configKeys`
     
     // spikeHex

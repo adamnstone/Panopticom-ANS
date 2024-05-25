@@ -1,7 +1,7 @@
 // Expert Network Map Data URL: https://gitlab.fabcloud.org/pub/project/expert-network-map/-/raw/main/public/final_data.json?ref_type=heads
 
 const formattedDatasetPaths = [
-  '../datasets/formatted_datasets/sample_data.jsonl'
+  '../datasets/formatted_datasets/exnm_data.jsonl'
 ];
 
 window.onload = () => {
