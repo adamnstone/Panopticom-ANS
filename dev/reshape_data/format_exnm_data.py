@@ -155,3 +155,4 @@ with open("../datasets/formatted_datasets/exnm_data.jsonl", "w") as file:
     json.dump(formatted_data, file)
 
 # TODO encode `animationTime` as a property value - even randomness makes it look very aesthetically pleasing with the variation
+# TODO issue with labs that aren't in the coordinates database
