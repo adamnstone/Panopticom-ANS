@@ -79,7 +79,7 @@ const configureWorldDatasets = (world, configKeys) => {
         .hexBinResolution(4)
         .hexTopColor(d => d.points[0][configKeys.hexTopColor])
         .hexSideColor(d => d.points[0][configKeys.hexSideColor])
-        .hexBinMerge(false);
+        .hexBinMerge(true);
 };
 
 const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys) => {
