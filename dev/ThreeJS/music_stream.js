@@ -61,7 +61,7 @@ const playMusic = pov => {
     let distances = [];
     let items = [];
     radioGardenData.forEach(item => {
-        distances.push(getDistance(lat, lng, item.geo[0], item.geo[1]));
+        distances.push(getDistance(lat, lng, item.geo[0], item.geo[1])); // TODO implement matrix operations in parallel to speed this step up
         items.push(item);
     });
     [distances, items] = sortArrays([distances, items])
