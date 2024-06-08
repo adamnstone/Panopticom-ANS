@@ -109,7 +109,9 @@ window.onload = () => {
         }
       }, 300); // delay for when the earth stops spinning after it's dragged. TODO replace with robust system.
     };
-    window.addEventListener('mouseup', mouseUpCallback)
+    window.addEventListener('mouseup', mouseUpCallback);
+
+    playMusic(-1);
 
   };
     

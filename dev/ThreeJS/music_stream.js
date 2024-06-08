@@ -40,15 +40,21 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return distance;
 }
 
-const playAudio = (url, successCallback, errorCallback) => {
-    console.log(url)
+const playAudio = (_url, successCallback, errorCallback) => {
+    console.log(_url)
     try {
+        let url;
+        if (_url == -1) {
+            url = "panopticom.mp3"
+        } else {
+            url = _url;
+        }
         var sound = new Howl({
             src: [url],
             ext: ['mp3'],
             onload: () => {successCallback(sound)},
             onloaderror: errorCallback,
-            html5: true
+            html5: _url != -1
         });
         return true;
     } catch {
@@ -57,6 +63,17 @@ const playAudio = (url, successCallback, errorCallback) => {
 };
 
 const playMusic = pov => {
+    if (pov == -1) {
+        playAudio(-1, sound => {
+            console.log("Audio Loaded Successfully")
+            currentSound = sound;
+            currentSound.play();
+            console.log("playing", currentSound)
+        }, () => { 
+            console.log("Panopticom audio failed to load...")
+        });
+        return;
+    }
     const {lat, lng} = pov;
     let distances = [];
     let items = [];
@@ -66,7 +83,13 @@ const playMusic = pov => {
     });
     [distances, items] = sortArrays([distances, items])
     const stationRecursion = i => {
-        const lowestItemChannels = items[i].channels_data.channels;
+        const channelsData = items[i].channels_data;
+        if (!channelsData) {
+            console.log("No channels data... skipping...");
+            stationRecursion(i + 1);
+            return;
+        }
+        const lowestItemChannels = channelsData.channels;
         const audioRecursion = j => {
             console.log(j)
             if (j > 0) {
