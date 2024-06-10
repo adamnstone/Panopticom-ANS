@@ -29,6 +29,12 @@ function App() {
       layerType: LayerType.STANDARD
     },
     {
+      title: "Radio Station Geo",
+      dataPath: '../datasets/formatted_datasets/radio_hex.jsonl',
+      id: "radio_hex",
+      layerType: LayerType.STANDARD
+    },
+    {
       title: "Radio Stations",
       dataPath: '../datasets/radio_garden_data/radio_garden.jsonl',
       id: "radio_garden",
