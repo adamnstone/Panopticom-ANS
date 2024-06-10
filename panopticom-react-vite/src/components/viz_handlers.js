@@ -1,3 +1,5 @@
+let filterLayers = [];
+
 const updateArcData = (arcData, world, configKeys) => {
     const formattedArcData = [];
     arcData.forEach(arc => {
@@ -84,14 +86,19 @@ const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCal
         .hexBinMerge(true);
 };
 
-const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys) => {
+const initializeFilterLayers = initializedFilterLayers => filterLayers = initializedFilterLayers;
+
+const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys, filterLayersToChange) => {
+    filterLayersToChange.forEach(f => {
+        filterLayers.filter(i => f.layerID == i.layerID)[0].enable = f.enable;
+    });
     const datasetsToChange = [];
     Object.keys(groupedDataByVizType).forEach(dataType => {
         groupedDataByVizType[dataType].forEach(dataGroup => {
-            if ((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) {
+            if (((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) || (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))) {
                 datasetsToChange.push({
                     data: dataGroup,
-                    enable: dataGroup.zoomLevel <= zoomLevel
+                    enable: (dataGroup.zoomLevel <= zoomLevel) && (filterLayers.filter(i => i.layerID == dataGroup.layerID)[0].enable)
                 });
             }
         });
@@ -110,4 +117,4 @@ const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataB
     updateData(currentDataset, world, configKeys, dataTypesUpdated);
 };
 
-export {configureWorldDatasets, updateCurrentDatasetFromZoom}
+export { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers }

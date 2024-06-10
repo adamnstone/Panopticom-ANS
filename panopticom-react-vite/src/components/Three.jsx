@@ -1,50 +1,60 @@
 import React, { useRef, useEffect, useState, memo } from 'react'
 import * as THREE from 'three';
+import { marked } from 'marked';
 import * as d3 from 'd3';
 import Globe from 'globe.gl';
-import { configureWorldDatasets, updateCurrentDatasetFromZoom } from './viz_handlers.js';
+import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
-
-const formattedDatasetPaths = [
-  '../../datasets/formatted_datasets/exnm_data.jsonl',
-  '../../datasets/formatted_datasets/labs_geo_data.jsonl'
-];
-
-const radioGardenDataPath = '../../datasets/radio_garden_data/radio_garden_data.jsonl';
+import { LayerType } from '../App.jsx';
 
 let radioGardenData, prevPov;
 
-const loadData = async path => fetch(path).then(data => {console.log(data);return data.json();});
-const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => {console.log(data);return data.json();});
+const loadData = async path => fetch(path).then(data => [path, data.json()]);
+const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => data.json());
 
-const Three = ({ setHoverDetails, setMusicDetails }) => {
+const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc }) => {
   const mountRef = useRef(null);
 
   const arcHoverCallback = (arc, prevArc) => {
     if (!arc) return;
-    console.log(arc);
-    setHoverDetails({title: "Expert Network Map Link", description: arc.hoverLabel});
+    setHoverDetails({title: "## Expert Network Map", description: arc.hoverLabel});
   };
 
   const hexHoverCallback = hex => {
-
+    if (!hex) return;
+    setHoverDetails({title: "## Expert Network Map", description: hex.hoverLabel});
   };
+
+  const musicChangeCallback = ({ station, channelData }) => {
+    const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
+    setMusicDetails({title: "#### Radio Station", description: description})
+  }
 
   useEffect(() => {
     const mount = mountRef.current;
-    console.log(mount);
     let renderer;
     const wrapper = async () => {
     
     const mainRender = async () => {
 
-      const loadDataPromises = formattedDatasetPaths.map(p => loadData(p));
+      const standardLayerData = layerData.filter(l => l.layerType == LayerType.STANDARD);
+      
+      initializeFilterLayers(standardLayerData.map(s => {
+        return {
+          "layerID": s.id,
+          "enable": true // all filters initially on
+        };
+      }));
+
+      const loadDataPromises = standardLayerData.map(l => l.dataPath).map(p => loadData(p));
       // Wait for all promises to resolve
-      const loadedDataArray = await Promise.all(loadDataPromises);
+      const partiallyResolvedLoadedDataArray = await Promise.all(loadDataPromises);
+      const fullyResolvedLoadedDataArray = await Promise.all(partiallyResolvedLoadedDataArray.map(promiseArray => Promise.all(promiseArray)))
+      const loadedDataArray = fullyResolvedLoadedDataArray.map(p => p[1].map(d => { return {"layerID": p[0].split("/")[p[0].split("/").length - 1].split(".")[0], ...d}; }));
       // Combine the results into a single array
       const loadedData = loadedDataArray.flat();
   
-      radioGardenData = await fetch(radioGardenDataPath).then(data => data.json());
+      radioGardenData = await fetch(layerData.filter(l => l.layerType == LayerType.CUSTOM && l.id == "radio_garden")[0].dataPath).then(data => data.json());
       
       let idCounter = 0;
       for (let i = 0; i < loadedData.length; i++) {
@@ -112,11 +122,19 @@ const Three = ({ setHoverDetails, setMusicDetails }) => {
         groupedDataset['spikeHex'].forEach(spikeHexData => currentDataset.spikeHex = [...currentDataset.spikeHex, ...spikeHexData.data]);
       };
 
-  
+      setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
+        const zoomLevelCurrent = getZoomLevel().distance;
+        updateCurrentDatasetFromZoom(zoomLevelCurrent, zoomLevelCurrent, groupedDataByVizType, world, currentDataset, configKeys, [{
+          "layerID": changedLayerID,
+          "enable": changedLayerEnabled
+        }]);
+        // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
+      });
+
       let previousZoomLevel = 0;
       const scrollCallback = () => {
         const zoomLevel = getZoomLevel().distance;
-        updateCurrentDatasetFromZoom(zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys);
+        updateCurrentDatasetFromZoom(zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys, []);
         previousZoomLevel = zoomLevel;
       };
       scrollCallback();
@@ -126,7 +144,7 @@ const Three = ({ setHoverDetails, setMusicDetails }) => {
         setTimeout(() => {
           const pov = world.pointOfView()
           if ((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) {
-            playMusic(pov);
+            playMusic(pov, musicChangeCallback);
             prevPov = pov;
           }
         }, 300); // delay for when the earth stops spinning after it's dragged. TODO replace with robust system.

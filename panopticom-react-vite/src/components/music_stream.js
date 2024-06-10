@@ -44,7 +44,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 const playAudio = (_url, successCallback, errorCallback) => {
-    console.log(_url)
     try {
         let url;
         if (_url == -1) {
@@ -65,7 +64,7 @@ const playAudio = (_url, successCallback, errorCallback) => {
     }
 };
 
-const playMusic = pov => {
+const playMusic = (pov, musicChangeCallback) => {
     if (pov == -1) {
         playAudio(-1, sound => {
             console.log("Audio Loaded Successfully")
@@ -94,7 +93,6 @@ const playMusic = pov => {
         }
         const lowestItemChannels = channelsData.channels;
         const audioRecursion = j => {
-            console.log(j)
             if (j > 0) {
                 console.log("Channel not functioning, checking next channel.")
             }
@@ -108,11 +106,15 @@ const playMusic = pov => {
                         if (currentSound) {
                             console.log("pausing", currentSound)
                             currentSound.pause();
-                            //delete currentSound;
                         }
                         currentSound = sound;
                         currentSound.play();
                         console.log("playing", currentSound)
+
+                        musicChangeCallback({
+                            station: items[i],
+                            channelData: lowestItemChannels[j]
+                        })
                     }, () => audioRecursion(j + 1))
                 )) {
                     console.log("Error playing audio.")
