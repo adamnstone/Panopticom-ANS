@@ -4,6 +4,8 @@ The `.jsonl` file should consist of a list of json objects in the format below (
 
 [For the technical `JSON Schema` click here!](./dev/ThreeJS/jsonSchema.json) Below is simply an explanation of the format but does not contain a technical description.
 
+**When adding a new datasource, the name of the file must match the 'id' provided in the 'id' field in the layerData object.
+
 ---
 
 ### Arc Example

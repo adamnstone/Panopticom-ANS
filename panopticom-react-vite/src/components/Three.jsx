@@ -123,6 +123,11 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       };
 
       setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
+        const layer = layerData.filter(l => l.id == changedLayerID)[0];
+        if (layer.layerType == LayerType.CUSTOM) {
+          console.log(layer)
+          return;
+        }
         const zoomLevelCurrent = getZoomLevel().distance;
         updateCurrentDatasetFromZoom(zoomLevelCurrent, zoomLevelCurrent, groupedDataByVizType, world, currentDataset, configKeys, [{
           "layerID": changedLayerID,

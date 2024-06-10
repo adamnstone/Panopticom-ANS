@@ -131,7 +131,7 @@ for source_lab in output_data.keys():
         obj_to_append.append({})
         current_dict = obj_to_append[-1]
 
-        current_dict['hoverLabel'] = f"{names_from_codes[source_lab]} --> {names_from_codes[target_lab]}; {sum([output_data[source_lab][target_lab][subj] for subj in output_data[source_lab][target_lab]])}"
+        current_dict['hoverLabel'] = f"*Source Lab*: **{names_from_codes[source_lab]}**\n\n*Target Lab*: **{names_from_codes[target_lab]}**\n\n*Number of Connections*: **{sum([output_data[source_lab][target_lab][subj] for subj in output_data[source_lab][target_lab]])}**"
         current_dict['start'] = {
             "lat": lab_code_to_coordinates(source_lab)[0],
             "lng": lab_code_to_coordinates(source_lab)[1]
@@ -151,7 +151,7 @@ for source_lab in output_data.keys():
         current_dict['animationTime'] = 2000
 
 
-with open("../datasets/formatted_datasets/exnm_data.jsonl", "w") as file:
+with open("../datasets/formatted_datasets/exnm_data_markdown.jsonl", "w") as file:
     json.dump(formatted_data, file)
 
 # TODO encode `animationTime` as a property value - even randomness makes it look very aesthetically pleasing with the variation
