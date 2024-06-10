@@ -152,7 +152,6 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       const mouseUpCallback = () => {
         setTimeout(() => {
           const pov = world.pointOfView()
-          console.log(radioActive);
           if (((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) && radioActive) {
             playMusic(pov, musicChangeCallback);
             prevPov = pov;
