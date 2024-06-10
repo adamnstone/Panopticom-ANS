@@ -47,7 +47,7 @@ const playAudio = (_url, successCallback, errorCallback) => {
     try {
         let url;
         if (_url == -1) {
-            url = "panopticom.mp3"
+            url = "../../panopticom.mp3"
         } else {
             url = _url;
         }

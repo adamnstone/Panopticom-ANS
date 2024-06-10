@@ -122,10 +122,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         groupedDataset['spikeHex'].forEach(spikeHexData => currentDataset.spikeHex = [...currentDataset.spikeHex, ...spikeHexData.data]);
       };
 
+      let radioActive = true; // radio active starts activated
       setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
         const layer = layerData.filter(l => l.id == changedLayerID)[0];
         if (layer.layerType == LayerType.CUSTOM) {
-          console.log(layer)
+          if (layer.id == "radio_garden") {
+            radioActive = changedLayerEnabled;
+            if (!changedLayerEnabled) playMusic(-1);
+          }
           return;
         }
         const zoomLevelCurrent = getZoomLevel().distance;
@@ -148,7 +152,8 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       const mouseUpCallback = () => {
         setTimeout(() => {
           const pov = world.pointOfView()
-          if ((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) {
+          console.log(radioActive);
+          if (((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) && radioActive) {
             playMusic(pov, musicChangeCallback);
             prevPov = pov;
           }
