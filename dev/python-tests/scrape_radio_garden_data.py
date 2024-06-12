@@ -68,8 +68,8 @@ for station in scraped_data:
             "lat": station["geo"][1],
             "lng": station["geo"][0]
         },
-        "height": station["size"]*10000,
-        "color": "white"
+        "height": station["size"]*50000*4,
+        "color": "rgba(255,255,255,1)"
     })
 
 if True:

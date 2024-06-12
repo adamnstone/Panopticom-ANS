@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 let filterLayers = [];
 
 const updateArcData = (arcData, world, configKeys) => {
@@ -57,12 +59,26 @@ const updateSpikeHexData = (spikeHexData, world, configKeys) => {
     world.hexBinPointsData(formattedSpikeHexData);
 };
 
+const updateCylinderData = (cylinderData, world, configKeys) => {
+    const formattedCylinderData = [];
+    cylinderData.forEach(cylinder => {
+        formattedCylinderData.push({
+            "lat": cylinder.pos.lat,
+            "lng": cylinder.pos.lng,
+            ...cylinder
+        })
+    });
+    console.log(formattedCylinderData)
+    world.objectsData(formattedCylinderData);
+};
+
 const updateData = (currentDataset, world, configKeys, datasetsToChange="all") => {
     if (datasetsToChange == "all" || datasetsToChange.includes("arc")) updateArcData(currentDataset.arc, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("spikeHex")) updateSpikeHexData(currentDataset.spikeHex, world, configKeys);
+    if (datasetsToChange == "all" || datasetsToChange.includes("cylinder")) updateCylinderData(currentDataset.cylinder, world, configKeys);
 };
 
-const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCallback) => {
+const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCallback, cylinderHoverCallback, worldRadius) => {
     // arc
     world
         .onArcHover((a,b) => arcHoverCallback(a,b))
@@ -79,11 +95,24 @@ const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCal
         .onHexHover(h => hexHoverCallback(h))
         .hexLabel(d => d.points[0][configKeys.hexLabel])
         .hexBinPointWeight(configKeys.hexPointWeight)
-        .hexAltitude(d => d.sumWeight * 6e-8)
+        .hexAltitude(d => d.sumWeight * 5e-9)
         .hexBinResolution(4)
         .hexTopColor(d => d.points[0][configKeys.hexTopColor])
         .hexSideColor(d => d.points[0][configKeys.hexSideColor])
         .hexBinMerge(true);
+
+    world
+        .objectThreeObject(obj => {
+            const geometry = new THREE.CylinderGeometry( 0.3, 0.3, obj.height, 16 ); 
+            const material = new THREE.MeshBasicMaterial( {color: obj.color} ); 
+            const cylinder = new THREE.Mesh( geometry, material );
+            return cylinder;
+        })
+        .objectLat(obj => obj.lat)
+        .objectLng(obj => obj.lng)
+        .objectRotation(obj => { return {x: 90, y: 0, z: 0}; })
+        .onObjectHover(o => cylinderHoverCallback(o))
+        .objectAltitude(obj => obj.height / 2 / worldRadius); // in terms of globe radius units
 };
 
 const initializeFilterLayers = initializedFilterLayers => filterLayers = initializedFilterLayers;

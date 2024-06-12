@@ -22,8 +22,13 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
 
   const hexHoverCallback = hex => {
     if (!hex) return;
-    setHoverDetails({title: "## Expert Network Map", description: hex.hoverLabel});
+    setHoverDetails({title: "## Radio Station", description: hex.hoverLabel});
   };
+
+  const cylinderHoverCallback = cylinder => {
+    if (!cylinder) return;
+    setHoverDetails({title: "## FabLabs", description: cylinder.hoverLabel});
+  };  
 
   const musicChangeCallback = ({ station, channelData }) => {
     const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
@@ -101,12 +106,13 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           };
       };
   
-      configureWorldDatasets(world, configKeys, arcHoverCallback, hexHoverCallback);
+      configureWorldDatasets(world, configKeys, arcHoverCallback, hexHoverCallback, cylinderHoverCallback, world.getGlobeRadius());
   
       // format data orgnized by visualization type
       const groupedDataByVizType = {
         "arc": [],
-        "spikeHex": []
+        "spikeHex": [],
+        "cylinder": []
       };
       loadedData.forEach(dataObj => {
         groupedDataByVizType[dataObj.dataType].push(dataObj);
@@ -114,12 +120,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       
       let currentDataset = {
         "arc": [],
-        "spikeHex": []
+        "spikeHex": [],
+        "cylinder": []
       };
   
       const setCurrentDataset = groupedDataset => {
         groupedDataset['arc'].forEach(arcData => currentDataset.arc = [...currentDataset.arc, ...arcData.data]);
         groupedDataset['spikeHex'].forEach(spikeHexData => currentDataset.spikeHex = [...currentDataset.spikeHex, ...spikeHexData.data]);
+        groupedDataset['cylinder'].forEach(cylinderData => currentDataset.cylinder = [...currentDataset.cylinder, ...cylinderData.data]);
       };
 
       let radioActive = true; // radio active starts activated

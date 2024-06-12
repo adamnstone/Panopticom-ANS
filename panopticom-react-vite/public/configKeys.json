@@ -1,4 +1,8 @@
 {
+    "cylinderHeight": "height",
+    "cylinderColor": "color",
+    "cylinderLabel": "hoverLabel",
+
     "hexPointWeight": "height",
     "hexTopColor": "color",
     "hexSideColor": "color",

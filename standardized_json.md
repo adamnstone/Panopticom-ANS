@@ -6,6 +6,8 @@ The `.jsonl` file should consist of a list of json objects in the format below (
 
 **When adding a new datasource, the name of the file must match the 'id' provided in the 'id' field in the layerData object.
 
+Hex is problematic because multiple datasets will overlap in their buckets. Only use one dataset in the spikeHex layer at a time.
+
 ---
 
 ### Arc Example
