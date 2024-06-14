@@ -15,44 +15,6 @@ const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => d
 const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc }) => {
   const mountRef = useRef(null);
 
-  const arcHoverCallback = (arc, prevArc, configKeys, world) => {
-    if (!arc) return;
-    setHoverDetails({title: "## Expert Network Map", description: arc[configKeys.arcLabel]});
-  };
-
-  const hexHoverCallback = (hex, configKeys, world) => {
-    // TODO understand why doesn't do anything
-    //if (!hex) return;
-    //setHoverDetails({title: "## Radio Station", description: hex.hoverLabel});
-  };
-
-  const cylinderHoverCallback = (cylinder, configKeys, world) => {
-    if (!cylinder) return;
-    setHoverDetails({title: "## FabLabs", description: cylinder[configKeys.cylinderLabel]});
-  };  
-
-  const htmlHoverCallback = (htmlObj, configKeys, world) => {
-    if (!htmlObj) return;
-    setHoverDetails({title: "## Individual Stories", description: htmlObj[configKeys.htmlHoverLabel]});
-  };
-
-  const htmlClickCallback = (htmlObj, configKeys, world) => {
-    if (!htmlObj[configKeys.htmlPopupOnClick]) return;
-    world.pointOfView({
-      lat: htmlObj.lat,
-      lng: htmlObj.lng,
-      altitude: 1.5
-    }, 1000);
-    setTimeout(() => {
-      zoo
-    }, 1000); // must be same as animation time for world.pointOfView() above
-  };
-
-  const musicChangeCallback = ({ station, channelData }) => {
-    const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
-    setMusicDetails({title: "#### Radio Station", description: description})
-  };
-
   useEffect(() => {
     const mount = mountRef.current;
     let renderer;
@@ -124,8 +86,6 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           };
       };
   
-      configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
-  
       // format data orgnized by visualization type
       const groupedDataByVizType = {
         "arc": [],
@@ -151,6 +111,55 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         groupedDataset['html'].forEach(htmlData => currentDataset.html = [...currentDataset.html, ...htmlData.data]);
       };
 
+      const zoomUpdate = (changedLayerID, changedLayerEnabled, zoomPrevious) => {
+        const zoomLevelCurrent = getZoomLevel().distance;
+        updateCurrentDatasetFromZoom(zoomLevelCurrent, zoomPrevious != null ? zoomPrevious : zoomLevelCurrent, groupedDataByVizType, world, currentDataset, configKeys, (((changedLayerID != null && changedLayerEnabled != null)) ? [{
+          "layerID": changedLayerID,
+          "enable": changedLayerEnabled
+        }] : []));
+      }
+
+      const arcHoverCallback = (arc, prevArc) => {
+        if (!arc) return;
+        setHoverDetails({title: "## Expert Network Map", description: arc[configKeys.arcLabel]});
+      };
+    
+      const hexHoverCallback = hex => {
+        // TODO understand why doesn't do anything
+        //if (!hex) return;
+        //setHoverDetails({title: "## Radio Station", description: hex.hoverLabel});
+      };
+    
+      const cylinderHoverCallback = cylinder => {
+        if (!cylinder) return;
+        setHoverDetails({title: "## FabLabs", description: cylinder[configKeys.cylinderLabel]});
+      };  
+    
+      const htmlHoverCallback = htmlObj => {
+        if (!htmlObj) return;
+        setHoverDetails({title: "## Individual Stories", description: htmlObj[configKeys.htmlHoverLabel]});
+      };
+    
+      const htmlClickCallback = htmlObj => {
+        if (!htmlObj[configKeys.htmlPopupOnClick]) return;
+        const currentZoom = getZoomLevel().distance;
+        world.pointOfView({
+          lat: htmlObj.lat,
+          lng: htmlObj.lng,
+          altitude: 1.5
+        }, 1000);
+        setTimeout(() => {
+          zoomUpdate(null, null, currentZoom);
+        }, 1000); // must be same as animation time for world.pointOfView() above
+      };
+    
+      const musicChangeCallback = ({ station, channelData }) => {
+        const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
+        setMusicDetails({title: "#### Radio Station", description: description})
+      };
+  
+      configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
+
       let radioActive = true; // radio active starts activated
       setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
         const layer = layerData.filter(l => l.id == changedLayerID)[0];
@@ -161,18 +170,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           }
           return;
         }
-        const zoomLevelCurrent = getZoomLevel().distance;
-        updateCurrentDatasetFromZoom(zoomLevelCurrent, zoomLevelCurrent, groupedDataByVizType, world, currentDataset, configKeys, [{
-          "layerID": changedLayerID,
-          "enable": changedLayerEnabled
-        }]);
+        zoomUpdate(changedLayerID, changedLayerEnabled, null);
         // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
       });
 
       let previousZoomLevel = 0;
       const scrollCallback = () => {
         const zoomLevel = getZoomLevel().distance;
-        updateCurrentDatasetFromZoom(zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys, []);
+        zoomUpdate(null, null, previousZoomLevel);
         previousZoomLevel = zoomLevel;
       };
       scrollCallback();

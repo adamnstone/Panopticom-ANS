@@ -94,7 +94,7 @@ const updateData = (currentDataset, world, configKeys, datasetsToChange="all") =
 const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback ], worldRadius) => {
     // arc
     world
-        .onArcHover((a,b) => arcHoverCallback(a, b, configKeys, world))
+        .onArcHover((a,b) => arcHoverCallback(a, b))
         //.arcLabel(configKeys.arcLabel)
         .arcColor(configKeys.arcColor)
         .arcDashLength(configKeys.arcDashLength)
@@ -105,7 +105,7 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
     
     // spikeHex
     world
-        .onHexHover(h => hexHoverCallback(h, configKeys, world))
+        .onHexHover(h => hexHoverCallback(h))
         .hexLabel(d => d.points[0][configKeys.hexLabel])
         .hexBinPointWeight(configKeys.hexPointWeight)
         .hexAltitude(d => d.sumWeight * 5e-9)
@@ -126,7 +126,7 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
         .objectLat(obj => obj.lat)
         .objectLng(obj => obj.lng)
         .objectRotation(obj => { return {x: 90, y: 0, z: 0}; })
-        .onObjectHover(o => cylinderHoverCallback(o, configKeys, world))
+        .onObjectHover(o => cylinderHoverCallback(o))
         .objectAltitude(obj => obj[configKeys.cylinderHeight] / 2 / worldRadius); // in terms of globe radius units
 
     // html
@@ -139,8 +139,8 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
             el.className = obj[configKeys.htmlClass];
             el.style['pointer-events'] = 'auto';
             el.style.cursor = 'pointer';
-            el.addEventListener("mouseover", () => htmlHoverCallback(obj, configKeys));
-            el.onclick = () => htmlClickCallback(obj, configKeys, world);
+            el.addEventListener("mouseover", () => htmlHoverCallback(obj));
+            el.onclick = () => htmlClickCallback(obj);
             const imgEl = document.createElement("img");
             imgEl.src = obj[configKeys.htmlImgPath];
             imgEl.alt = obj[configKeys.htmlAltText];
