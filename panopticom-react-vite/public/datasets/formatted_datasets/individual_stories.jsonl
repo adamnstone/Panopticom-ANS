@@ -1,0 +1,18 @@
+[{
+    "zoomLevel": 50,
+    "dataType": "html",
+    "data": [
+        {
+            "pos": {
+                "lat": 50,
+                "lng": 50
+            },
+            "altitude": 0.1,
+            "hoverLabel": "Hover Label",
+            "class": "story-thought-bubble",
+            "imgPath": "../thought_bubble.png",
+            "altText": "My Image",
+            "popupOnClick": true
+        }
+    ]
+}]

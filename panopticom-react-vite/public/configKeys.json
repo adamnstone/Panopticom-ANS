@@ -1,4 +1,11 @@
 {
+    "htmlAltitude": "altitude",
+    "htmlHoverLabel": "hoverLabel",
+    "htmlClass": "class",
+    "htmlImgPath": "imgPath",
+    "htmlAltText": "altText",
+    "htmlPopupOnClick": "popupOnClick",
+
     "cylinderHeight": "height",
     "cylinderColor": "color",
     "cylinderLabel": "hoverLabel",

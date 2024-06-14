@@ -1,3 +1,4 @@
+import { formatDefaultLocale } from 'd3';
 import * as THREE from 'three';
 
 let filterLayers = [];
@@ -68,21 +69,33 @@ const updateCylinderData = (cylinderData, world, configKeys) => {
             ...cylinder
         })
     });
-    console.log(formattedCylinderData)
     world.objectsData(formattedCylinderData);
+};
+
+const updateHtmlData = (htmlData, world, configKeys) => {
+    const formattedHtmlData = [];
+    htmlData.forEach(html => {
+        formattedHtmlData.push({
+            "lat": html.pos.lat,
+            "lng": html.pos.lng,
+            ...html
+        })
+    });
+    world.htmlElementsData(formattedHtmlData);
 };
 
 const updateData = (currentDataset, world, configKeys, datasetsToChange="all") => {
     if (datasetsToChange == "all" || datasetsToChange.includes("arc")) updateArcData(currentDataset.arc, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("spikeHex")) updateSpikeHexData(currentDataset.spikeHex, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("cylinder")) updateCylinderData(currentDataset.cylinder, world, configKeys);
+    if (datasetsToChange == "all" || datasetsToChange.includes("html")) updateHtmlData(currentDataset.html, world, configKeys);
 };
 
-const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCallback, cylinderHoverCallback, worldRadius) => {
+const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback ], worldRadius) => {
     // arc
     world
-        .onArcHover((a,b) => arcHoverCallback(a,b))
-        .arcLabel(configKeys.arcLabel)
+        .onArcHover((a,b) => arcHoverCallback(a, b, configKeys, world))
+        //.arcLabel(configKeys.arcLabel)
         .arcColor(configKeys.arcColor)
         .arcDashLength(configKeys.arcDashLength)
         .arcDashGap(configKeys.arcDashGap)
@@ -92,27 +105,48 @@ const configureWorldDatasets = (world, configKeys, arcHoverCallback, hexHoverCal
     
     // spikeHex
     world
-        .onHexHover(h => hexHoverCallback(h))
+        .onHexHover(h => hexHoverCallback(h, configKeys, world))
         .hexLabel(d => d.points[0][configKeys.hexLabel])
         .hexBinPointWeight(configKeys.hexPointWeight)
         .hexAltitude(d => d.sumWeight * 5e-9)
-        .hexBinResolution(4)
+        .hexBinResolution(5)
         .hexTopColor(d => d.points[0][configKeys.hexTopColor])
         .hexSideColor(d => d.points[0][configKeys.hexSideColor])
-        .hexBinMerge(true);
+        .hexBinMerge(true)
+        .hexTransitionDuration(0);
 
+    // cylinder
     world
         .objectThreeObject(obj => {
-            const geometry = new THREE.CylinderGeometry( 0.3, 0.3, obj.height, 16 ); 
-            const material = new THREE.MeshBasicMaterial( {color: obj.color} ); 
+            const geometry = new THREE.CylinderGeometry( 0.3, 0.3, obj[configKeys.cylinderHeight], 16 ); 
+            const material = new THREE.MeshBasicMaterial( {color: obj[configKeys.cylinderColor]} ); 
             const cylinder = new THREE.Mesh( geometry, material );
             return cylinder;
         })
         .objectLat(obj => obj.lat)
         .objectLng(obj => obj.lng)
         .objectRotation(obj => { return {x: 90, y: 0, z: 0}; })
-        .onObjectHover(o => cylinderHoverCallback(o))
-        .objectAltitude(obj => obj.height / 2 / worldRadius); // in terms of globe radius units
+        .onObjectHover(o => cylinderHoverCallback(o, configKeys, world))
+        .objectAltitude(obj => obj[configKeys.cylinderHeight] / 2 / worldRadius); // in terms of globe radius units
+
+    // html
+    world
+        .htmlLat(obj => obj.lat)
+        .htmlLng(obj => obj.lng)
+        .htmlAltitude(obj => obj[configKeys.htmlAltitude])
+        .htmlElement(obj => {
+            const el = document.createElement("div");
+            el.className = obj[configKeys.htmlClass];
+            el.style['pointer-events'] = 'auto';
+            el.style.cursor = 'pointer';
+            el.addEventListener("mouseover", () => htmlHoverCallback(obj, configKeys));
+            el.onclick = () => htmlClickCallback(obj, configKeys, world);
+            const imgEl = document.createElement("img");
+            imgEl.src = obj[configKeys.htmlImgPath];
+            imgEl.alt = obj[configKeys.htmlAltText];
+            el.appendChild(imgEl);
+            return el;
+        });
 };
 
 const initializeFilterLayers = initializedFilterLayers => filterLayers = initializedFilterLayers;

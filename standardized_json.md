@@ -8,6 +8,8 @@ The `.jsonl` file should consist of a list of json objects in the format below (
 
 Hex is problematic because multiple datasets will overlap in their buckets. Only use one dataset in the spikeHex layer at a time.
 
+**NOTE** for html elements the class goes on the div surrounding the image
+
 ---
 
 ### Arc Example

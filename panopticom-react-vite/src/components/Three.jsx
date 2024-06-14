@@ -15,25 +15,43 @@ const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => d
 const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc }) => {
   const mountRef = useRef(null);
 
-  const arcHoverCallback = (arc, prevArc) => {
+  const arcHoverCallback = (arc, prevArc, configKeys, world) => {
     if (!arc) return;
-    setHoverDetails({title: "## Expert Network Map", description: arc.hoverLabel});
+    setHoverDetails({title: "## Expert Network Map", description: arc[configKeys.arcLabel]});
   };
 
-  const hexHoverCallback = hex => {
-    if (!hex) return;
-    setHoverDetails({title: "## Radio Station", description: hex.hoverLabel});
+  const hexHoverCallback = (hex, configKeys, world) => {
+    // TODO understand why doesn't do anything
+    //if (!hex) return;
+    //setHoverDetails({title: "## Radio Station", description: hex.hoverLabel});
   };
 
-  const cylinderHoverCallback = cylinder => {
+  const cylinderHoverCallback = (cylinder, configKeys, world) => {
     if (!cylinder) return;
-    setHoverDetails({title: "## FabLabs", description: cylinder.hoverLabel});
+    setHoverDetails({title: "## FabLabs", description: cylinder[configKeys.cylinderLabel]});
   };  
+
+  const htmlHoverCallback = (htmlObj, configKeys, world) => {
+    if (!htmlObj) return;
+    setHoverDetails({title: "## Individual Stories", description: htmlObj[configKeys.htmlHoverLabel]});
+  };
+
+  const htmlClickCallback = (htmlObj, configKeys, world) => {
+    if (!htmlObj[configKeys.htmlPopupOnClick]) return;
+    world.pointOfView({
+      lat: htmlObj.lat,
+      lng: htmlObj.lng,
+      altitude: 1.5
+    }, 1000);
+    setTimeout(() => {
+      zoo
+    }, 1000); // must be same as animation time for world.pointOfView() above
+  };
 
   const musicChangeCallback = ({ station, channelData }) => {
     const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
     setMusicDetails({title: "#### Radio Station", description: description})
-  }
+  };
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -106,13 +124,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           };
       };
   
-      configureWorldDatasets(world, configKeys, arcHoverCallback, hexHoverCallback, cylinderHoverCallback, world.getGlobeRadius());
+      configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
   
       // format data orgnized by visualization type
       const groupedDataByVizType = {
         "arc": [],
         "spikeHex": [],
-        "cylinder": []
+        "cylinder": [],
+        "html": []
       };
       loadedData.forEach(dataObj => {
         groupedDataByVizType[dataObj.dataType].push(dataObj);
@@ -121,13 +140,15 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       let currentDataset = {
         "arc": [],
         "spikeHex": [],
-        "cylinder": []
+        "cylinder": [],
+        "html": []
       };
   
       const setCurrentDataset = groupedDataset => {
         groupedDataset['arc'].forEach(arcData => currentDataset.arc = [...currentDataset.arc, ...arcData.data]);
         groupedDataset['spikeHex'].forEach(spikeHexData => currentDataset.spikeHex = [...currentDataset.spikeHex, ...spikeHexData.data]);
         groupedDataset['cylinder'].forEach(cylinderData => currentDataset.cylinder = [...currentDataset.cylinder, ...cylinderData.data]);
+        groupedDataset['html'].forEach(htmlData => currentDataset.html = [...currentDataset.html, ...htmlData.data]);
       };
 
       let radioActive = true; // radio active starts activated
