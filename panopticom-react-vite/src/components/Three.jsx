@@ -117,7 +117,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           "layerID": changedLayerID,
           "enable": changedLayerEnabled
         }] : []));
-      }
+      };
+
+      const musicChangeCallback = ({ station, channelData }) => {
+        const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
+        setMusicDetails({title: "#### Radio Station", description: description})
+      };
+
+      const playMusicStandard = pov => playMusic(pov, musicChangeCallback);
 
       const arcHoverCallback = (arc, prevArc) => {
         if (!arc) return;
@@ -143,19 +150,18 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       const htmlClickCallback = htmlObj => {
         if (!htmlObj[configKeys.htmlPopupOnClick]) return;
         const currentZoom = getZoomLevel().distance;
-        world.pointOfView({
+        const latLng = {
           lat: htmlObj.lat,
-          lng: htmlObj.lng,
+          lng: htmlObj.lng
+        };
+        world.pointOfView({
+          ...latLng,
           altitude: 1.5
         }, 1000);
         setTimeout(() => {
           zoomUpdate(null, null, currentZoom);
+          playMusicStandard(latLng);
         }, 1000); // must be same as animation time for world.pointOfView() above
-      };
-    
-      const musicChangeCallback = ({ station, channelData }) => {
-        const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
-        setMusicDetails({title: "#### Radio Station", description: description})
       };
   
       configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
@@ -187,7 +193,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         setTimeout(() => {
           const pov = world.pointOfView()
           if (((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) && radioActive) {
-            playMusic(pov, musicChangeCallback);
+            playMusicStandard(pov);
             prevPov = pov;
           }
         }, 300); // delay for when the earth stops spinning after it's dragged. TODO replace with robust system.

@@ -25,7 +25,7 @@ const Filters = ({ hoverDetails, musicDetails, layerData, filterUpdateFunc }) =>
     };
 
     return (
-        <div className="card position-absolute top-50 translate-middle-y w-25" style={{left: "5%", height: "85%"}}>
+        <div className="card position-absolute top-50 translate-middle-y" style={{left: "1%", height: "85%", width: "29%"}}>
             <div className="card-body d-flex flex-column justify-content-center rounded border border-primary">
                 <div className="row my-auto">
                     <div className="column">
