@@ -8,10 +8,10 @@
                 "lng": 50
             },
             "altitude": 0.1,
-            "hoverLabel": "Hover Label",
+            "hoverLabel": "Coral Reef Builders",
             "class": "story-thought-bubble",
             "imgPath": "../thought_bubble.png",
-            "altText": "My Image",
+            "altText": "Thought Bubble",
             "modalOnClick": true,
             "modalTitle": "Coral Reef Builders",
             "modalText": "On the beach shore every day, two people go out to take care of the coral. Coral bleaching has caused significant damage to our planet's beautiful coral reef, and the initiative to protect and restore them to their beauty is incredible."

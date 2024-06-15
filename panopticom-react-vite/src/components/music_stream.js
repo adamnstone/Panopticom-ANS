@@ -43,14 +43,17 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return distance;
 }
 
+let prevURL;
 const playAudio = (_url, successCallback, errorCallback) => {
     try {
         let url;
         if (_url == -1) {
+            if (prevURL == _url) return;
             url = "../../panopticom.mp3"
         } else {
             url = _url;
         }
+        prevURL = _url;
         var sound = new Howl({
             src: [url],
             ext: ['mp3'],
@@ -64,13 +67,24 @@ const playAudio = (_url, successCallback, errorCallback) => {
     }
 };
 
+let mostRecentMusicID = 0;
+const swapOutSound = (newSound, currentMusicID) => {
+    if (currentMusicID != mostRecentMusicID) return;
+    if (currentSound) {
+        console.log("pausing", currentSound)
+        currentSound.pause();
+    }
+    currentSound = newSound;
+    currentSound.play();
+    console.log("playing", currentSound)
+}
+
 const playMusic = (pov, musicChangeCallback) => {
+    mostRecentMusicID++; 
+    const currentMusicID = mostRecentMusicID;
     if (pov == -1) {
         playAudio(-1, sound => {
-            console.log("Audio Loaded Successfully")
-            currentSound = sound;
-            currentSound.play();
-            console.log("playing", currentSound)
+            swapOutSound(sound, mostRecentMusicID)
         }, () => { 
             console.log("Panopticom audio failed to load...")
         });
@@ -103,13 +117,7 @@ const playMusic = (pov, musicChangeCallback) => {
                 if (!(
                     playAudio(lowestItemChannels[j].mp3_url, sound => {
                         console.log("Audio Loaded Successfully")
-                        if (currentSound) {
-                            console.log("pausing", currentSound)
-                            currentSound.pause();
-                        }
-                        currentSound = sound;
-                        currentSound.play();
-                        console.log("playing", currentSound)
+                        swapOutSound(sound, currentMusicID);
 
                         musicChangeCallback({
                             station: items[i],

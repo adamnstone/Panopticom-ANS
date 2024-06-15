@@ -12,10 +12,6 @@ let radioGardenData, prevPov;
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
 const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => data.json());
 
-const initializeIndividualStories = () => {
-
-};
-
 const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails }) => {
   const mountRef = useRef(null);
 
@@ -75,8 +71,6 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       controls.autoRotate = false;
       //controls.autoRotate = true;
       //controls.autoRotateSpeed = 0.6;
-
-      initializeIndividualStories();
   
       // get how much the user is zoomed in
       const getZoomLevel = () => {
@@ -130,7 +124,10 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         setMusicDetails({title: "#### Radio Station", description: description})
       };
 
-      const playMusicStandard = pov => playMusic(pov, musicChangeCallback);
+      const playMusicStandard = pov => {
+        if (!radioActive) return;
+        playMusic(pov, musicChangeCallback)
+      };
 
       const arcHoverCallback = (arc, prevArc) => {
         if (!arc) return;
