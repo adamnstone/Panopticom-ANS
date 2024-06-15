@@ -1,17 +1,41 @@
-# The Docker image that will be used to build your app
-image: node:18-alpine
-# Functions that should be executed before the build script is run
+image: node:16
+
+stages:
+  - install
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
 before_script:
-  - npm ci
-pages:
+  - npm install -g pnpm
+
+install_dependencies:
+  stage: install
   script:
-    - npm run build
-    - npx -s serve build
+    - pnpm install
   artifacts:
     paths:
-      # The folder that contains the files to be exposed at the Page URL
+      - node_modules/
+
+build:
+  stage: build
+  script:
+    - pnpm run build
+  artifacts:
+    paths:
+      - dist/
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r dist/* public/
+  artifacts:
+    paths:
       - public
-  rules:
-    # This ensures that only pushes to the default branch will trigger
-    # a pages deploy
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  only:
+    - master
+
