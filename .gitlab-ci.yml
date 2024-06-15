@@ -31,11 +31,10 @@ build:
 pages:
   stage: deploy
   script:
-    - mkdir public
-    - cp -r dist/* public/
+    - rm -rf public/*       # Clear the existing public directory
+    - cp -r dist/* public/  # Copy the built files to the public directory
   artifacts:
     paths:
       - public
   only:
-    - master
-
+    - main  # Change this to your default branch if it's not 'main'
