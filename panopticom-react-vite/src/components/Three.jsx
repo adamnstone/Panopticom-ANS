@@ -12,7 +12,11 @@ let radioGardenData, prevPov;
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
 const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => data.json());
 
-const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc }) => {
+const initializeIndividualStories = () => {
+
+};
+
+const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -71,6 +75,8 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       controls.autoRotate = false;
       //controls.autoRotate = true;
       //controls.autoRotateSpeed = 0.6;
+
+      initializeIndividualStories();
   
       // get how much the user is zoomed in
       const getZoomLevel = () => {
@@ -148,7 +154,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       };
     
       const htmlClickCallback = htmlObj => {
-        if (!htmlObj[configKeys.htmlPopupOnClick]) return;
+        if (!htmlObj[configKeys.htmlModalOnClick]) return;
         const currentZoom = getZoomLevel().distance;
         const latLng = {
           lat: htmlObj.lat,
@@ -161,7 +167,11 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         setTimeout(() => {
           zoomUpdate(null, null, currentZoom);
           playMusicStandard(latLng);
+          setStoryDetails({ newTitle: htmlObj[configKeys.htmlModalTitle], newText: htmlObj[configKeys.htmlModalText] })
         }, 1000); // must be same as animation time for world.pointOfView() above
+        setTimeout(() => {
+          openModal();
+        }, 1250)
       };
   
       configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());

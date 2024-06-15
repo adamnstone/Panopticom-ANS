@@ -4,7 +4,9 @@
     "htmlClass": "class",
     "htmlImgPath": "imgPath",
     "htmlAltText": "altText",
-    "htmlPopupOnClick": "popupOnClick",
+    "htmlModalOnClick": "modalOnClick",
+    "htmlModalTitle": "modalTitle",
+    "htmlModalText": "modalText",
 
     "cylinderHeight": "height",
     "cylinderColor": "color",
