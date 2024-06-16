@@ -100,7 +100,7 @@ const playMusic = (pov, musicChangeCallback) => {
     [distances, items] = sortArrays([distances, items])
     const stationRecursion = i => {
         const channelsData = items[i].channels_data;
-        if (!channelsData || channelsData.channels.length == 0) {
+        if (!channelsData || (!channelsData.channels) || channelsData.channels.length == 0) {
             console.log("No channels data... skipping...");
             stationRecursion(i + 1);
             return;

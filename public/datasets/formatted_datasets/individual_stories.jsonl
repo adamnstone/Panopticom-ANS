@@ -4,17 +4,17 @@
     "data": [
         {
             "pos": {
-                "lat": 50,
-                "lng": 50
+                "lat": 27.4730743, 
+                "lng": 89.6386794
             },
             "altitude": 0.1,
-            "hoverLabel": "Coral Reef Builders",
+            "hoverLabel": "Visit from Rosemarry School to FabLab Bhutan",
             "class": "story-thought-bubble",
             "imgPath": "../thought_bubble.png",
             "altText": "Thought Bubble",
             "modalOnClick": true,
-            "modalTitle": "Coral Reef Builders",
-            "modalText": "On the beach shore every day, two people go out to take care of the coral. Coral bleaching has caused significant damage to our planet's beautiful coral reef, and the initiative to protect and restore them to their beauty is incredible."
+            "modalTitle": "Visit from Rosemarry School to FabLab Bhutan",
+            "modalText": "A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines."
         }
     ]
 }]
