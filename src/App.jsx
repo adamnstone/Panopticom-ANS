@@ -48,6 +48,12 @@ function App() {
       layerType: LayerType.STANDARD
     },
     {
+      title: "Music Narrative Summaries",
+      dataPath: "../datasets/formatted_datasets/music_narrative.jsonl",
+      id: "music_narrative",
+      layerType: LayerType.STANDARD
+    },
+    {
       title: "Radio Station Geo",
       dataPath: '../datasets/formatted_datasets/radio_hex.jsonl',
       id: "radio_hex",

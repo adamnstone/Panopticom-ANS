@@ -8,6 +8,12 @@ p {
     height: 5vh;
     width: auto;
 }
+.story-billboard-summary > img {
+  height: 5vh;
+  width: 5vh; 
+  object-fit: cover;
+  border-radius: 90%;
+}
 
 .fs-6 {
     line-height: 0.5em;
