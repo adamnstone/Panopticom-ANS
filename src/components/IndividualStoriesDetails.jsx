@@ -3,13 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import parseSanitizeModifyLinks from './clean_markdown';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '30%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -26,11 +27,9 @@ const IndividualStoriesDetails = ({ open, handleOpen, handleClose, storyTitle, s
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {storyTitle}
+            <Typography id="modal-modal-title" variant="h6" component="h2" dangerouslySetInnerHTML={{ __html: parseSanitizeModifyLinks(storyTitle)}}>
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {storyText}
+            <Typography id="modal-modal-description" sx={{ mt: 2 }} dangerouslySetInnerHTML={{ __html: parseSanitizeModifyLinks(storyText)}}>
             </Typography>
           </Box>
         </Modal>

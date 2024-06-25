@@ -1,12 +1,5 @@
 import React from 'react'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify';
-
-const parseSanitizeModifyLinks = str => {
-    const innerHTML = new DOMParser().parseFromString(DOMPurify.sanitize(marked.parse(str)), 'text/html');
-    innerHTML.querySelectorAll("a").forEach(a => a.target = "_blank");
-    return innerHTML.body.innerHTML;
-}
+import parseSanitizeModifyLinks from './clean_markdown';
 
 const MusicDetails = ({ musicDetails }) => {
     let title, description;

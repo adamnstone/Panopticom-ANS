@@ -7,6 +7,7 @@
     "htmlModalOnClick": "modalOnClick",
     "htmlModalTitle": "modalTitle",
     "htmlModalText": "modalText",
+    "htmlImgTint": "imgTint",
 
     "cylinderHeight": "height",
     "cylinderColor": "color",

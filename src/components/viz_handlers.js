@@ -144,6 +144,9 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
             const imgEl = document.createElement("img");
             imgEl.src = obj[configKeys.htmlImgPath];
             imgEl.alt = obj[configKeys.htmlAltText];
+            if (obj[configKeys.htmlImgTint]) {
+                imgEl.style.filter = `opacity(0.6) drop-shadow(0 0 0 ${obj[configKeys.htmlImgTint]})`;
+            }
             el.appendChild(imgEl);
             return el;
         });
