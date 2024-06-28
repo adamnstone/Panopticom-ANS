@@ -17,27 +17,27 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 ```json
 {
     "zoomLevel": 300, // zoom at which this attribute is disabled/enabled
-    "dataType": "arc", // options: arc, spikeHex
+    "dataType": "arc", // options: arc, html, cylinder, spikeHex
     "data": [ // includes all arcs
         { // single-color arc example
-            "hoverLabel": "Datapoint #1", // what text appears when hovering over this arc
+            "hoverLabel": "*Arc #1*: **Label in markdown...**", // what text appears when hovering over this arc, written in markdown
             "start": { // starting coordinates
                 "lat": 11.04,
-                "lng": 324.2
+                "lng": 32.2
             },
             "end": { // ending coordinates
                 "lat": -10.4,
                 "lng": 3.2
             },
             "height": 10, // height of the arc
-            "dashLength": 0.5, // relative length of the arc
-            "gapLength": 0.5, // relative length of the gap when the arc is not displaed
-            "color": "red", // color of the arc
+            "dashLength": [0.5], // relative length of the arc
+            "gapLength": 0.5, // relative length of the gap when the arc is not displayed
+            "color": ["rgba(0,0,255,1)"], // color of the arc, must be in rgba format
             "thickness": 1, // thickness of the arc
             "animationTime": 2000 // time (in ms) for the arc to complete one cycle
         },
         { // multicolor arc example
-            "hoverLabel": "Datapoint #2",
+            "hoverLabel": "*Arc #2*: **Label in markdown...**",
             "start": {
                 "lat": 31.04,
                 "lng": 40.2
@@ -49,7 +49,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
             "height": 10,
             "dashLength": [0.2, 0.5, 0.1, 0.35], // list of relative lengths of the arcs, for each corresponding arc `color`
             "gapLength": 0.6,
-            "color": ["white", "red", "yellow", "silver"], // sequential color of the arcs
+            "color": ["rgba(0,0,255,1)", "rgba(255,255,0,1)", "rgba(255,255,255,1)"], // sequential color of the arcs, must be in rgba format
             "thickness": 2,
             "animationTime": 1000
         }
@@ -57,21 +57,89 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 }
 ```
 
-### SpikeHex Example
+### HTML Example
+
+```json
+{
+    "zoomLevel": 50, // zoom at which this attribute is disabled/enabled
+    "dataType": "html", // options: arc, html, cylinder, spikeHex
+    "data": [ // includes all html datapoints
+        { // example #1
+            "pos": { // coordinates
+                "lat": 27.4730743, 
+                "lng": 89.6386794
+            },
+            "altitude": 0.1, // altitude above globe
+            "hoverLabel": "Visit from Rosemarry School to FabLab Bhutan", // what text appears when hovering over this html element, written in markdown
+            "class": "story-thought-bubble", // css class of the html element (div)
+            "imgPath": "../thought_bubble.png", // path to an image placed inside of the div
+            "altText": "Thought Bubble", // alt text property of the <img> element
+            "modalOnClick": true, // if true, a modal will appear when the html element is clicked on (details of the modal are in the following properties)
+            "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan", // title of the modal, written in markdown
+            "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines." // body text of the modal, written in markdown
+        },
+        { // example #2
+            "pos": {
+                "lat": 63.4427, 
+                "lng": -20.2734
+            },
+            "altitude": 0.1,
+            "hoverLabel": "Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
+            "class": "story-thought-bubble",
+            "imgPath": "../thought_bubble.png",
+            "altText": "Thought Bubble",
+            "modalOnClick": true,
+            "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
+            "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON"
+        }
+    ]
+}
+```
+
+### Cylinder Example
 
 ```json
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
-    "dataType": "spikeHex", // options: arc, spikeHex
+    "dataType": "cylinder", // options: arc, html, cylinder, spikeHex
     "data": [
         {
-            "hoverLabel": "Datapoint #1", // what text appears when hovering over this spike
+            "hoverLabel": "Datapoint #1", // what text appears when hovering over this cylinder, written in markdown
+            "pos": { // coordinates of the cylinder
+                "lat": 33.0,
+                "lng": -50.2
+            },
+            "height": 1, // height of the cylinder
+            "color": "rgba(0,255,0,1)" // color of the cylinder, must be in rgba format
+        },
+        {
+            "hoverLabel": "Datapoint #2",
+            "pos": {
+                "lat": -33.0,
+                "lng": 50.2
+            },
+            "height": 1,
+            "color": "rgba(0,0,255,1)"
+        }
+    ]
+}
+```
+
+### SpikeHex Example (Not Recommended)
+
+```json
+{
+    "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
+    "dataType": "spikeHex", // options: arc, html, cylinder, spikeHex
+    "data": [
+        {
+            "hoverLabel": "Datapoint #1", // what text appears when hovering over this spike, written in markdown
             "pos": { // coordinates of the spike
                 "lat": 33.0,
                 "lng": -50.2
             },
             "height": 1000000, // height of the spike
-            "color": "green" // color of the spike
+            "color": "rgba(0,255,0,1)" // color of the spike, must be in rgba format
         },
         {
             "hoverLabel": "Datapoint #2",
@@ -80,7 +148,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "lng": 50.2
             },
             "height": 5000000,
-            "color": "yellow"
+            "color": "rgba(0,0,255,1)"
         }
     ]
 }
@@ -97,24 +165,24 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
         "dataType": "arc",
         "data": [
             {
-                "hoverLabel": "Datapoint #1",
+                "hoverLabel": "*Arc #1*: **Label in markdown...**",
                 "start": {
                     "lat": 11.04,
-                    "lng": 84.2
+                    "lng": 32.2
                 },
                 "end": {
                     "lat": -10.4,
                     "lng": 3.2
                 },
                 "height": 10,
-                "dashLength": 0.5,
+                "dashLength": [0.5],
                 "gapLength": 0.5,
-                "color": "red",
+                "color": ["rgba(0,0,255,1)"],
                 "thickness": 1,
                 "animationTime": 2000
             },
             {
-                "hoverLabel": "Datapoint #2",
+                "hoverLabel": "*Arc #2*: **Label in markdown...**",
                 "start": {
                     "lat": 31.04,
                     "lng": 40.2
@@ -126,9 +194,67 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "height": 10,
                 "dashLength": [0.2, 0.5, 0.1, 0.35],
                 "gapLength": 0.6,
-                "color": ["white", "red", "yellow", "silver"],
+                "color": ["rgba(0,0,255,1)", "rgba(255,255,0,1)", "rgba(255,255,255,1)"],
                 "thickness": 2,
                 "animationTime": 1000
+            }
+        ]
+    },
+    {
+        "zoomLevel": 50,
+        "dataType": "html",
+        "data": [
+            {
+                "pos": {
+                    "lat": 27.4730743, 
+                    "lng": 89.6386794
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Visit from Rosemarry School to FabLab Bhutan",
+                "class": "story-thought-bubble",
+                "imgPath": "../thought_bubble.png",
+                "altText": "Thought Bubble",
+                "modalOnClick": true,
+                "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan",
+                "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines."
+            },
+            {
+                "pos": {
+                    "lat": 63.4427, 
+                    "lng": -20.2734
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
+                "class": "story-thought-bubble",
+                "imgPath": "../thought_bubble.png",
+                "altText": "Thought Bubble",
+                "modalOnClick": true,
+                "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
+                "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON"
+            }
+        ]
+    },
+    {
+        "zoomLevel": 250,
+        "dataType": "cylinder",
+        "data": [
+            {
+                "hoverLabel": "Datapoint #1",
+                "pos": {
+                    "lat": 33.0,
+                    "lng": -50.2
+                },
+                "height": 1,
+                "color": "rgba(0,255,0,1)"
+            },
+            {
+                "hoverLabel": "Datapoint #2",
+                "pos": {
+                    "lat": -33.0,
+                    "lng": 50.2
+                },
+                "height": 1,
+                "color": "rgba(0,0,255,1)"
             }
         ]
     },
@@ -140,19 +266,19 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "hoverLabel": "Datapoint #1",
                 "pos": {
                     "lat": 33.0,
-                    "lng": 30.2
+                    "lng": -50.2
                 },
                 "height": 1000000,
-                "color": "green"
+                "color": "rgba(0,255,0,1)"
             },
             {
                 "hoverLabel": "Datapoint #2",
                 "pos": {
-                    "lat": 33.0,
-                    "lng": 20.2
+                    "lat": -33.0,
+                    "lng": 50.2
                 },
                 "height": 5000000,
-                "color": "yellow"
+                "color": "rgba(0,0,255,1)"
             }
         ]
     }

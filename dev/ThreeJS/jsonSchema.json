@@ -13,6 +13,8 @@
       "type": "string",
       "enum": [
         "arc",
+        "html",
+        "cylinder",
         "spikeHex"
       ],
       "description": "The data type of this data group."
@@ -25,7 +27,31 @@
         "properties": {
           "hoverLabel": {
             "type": "string",
-            "description": "Text that appears when hovering over the datapoint. If set to an empty string, no label will appear."
+            "description": "Text that appears when hovering over the datapoint, written in Markdown syntax. If set to an empty string, no label will appear."
+          },
+          "class": {
+            "type": "string",
+            "description": "CSS class of the <div> element containing the <img> element."
+          },
+          "imgPath": {
+            "type": "string",
+            "description": "Filepath that becomes the value of the 'src' property of the <img> element."
+          },
+          "altText": {
+            "type": "string",
+            "description": "Alternative text that becomes the 'alt' property of the <img> element."
+          },
+          "modalOnClick": {
+            "type": "boolean",
+            "description": "If true, a modal will appear when the <div> element is clicked. If false, a modal will not appear, and the 'modalTitle' and 'modalText' properties have no effect."
+          },
+          "modalTitle": {
+            "type": "string",
+            "description": "Title of the modal, written in Markdown syntax."
+          },
+          "modalText": {
+            "type": "string",
+            "description": "Body text of the modal, written in Markdown syntax."
           },
           "start": {
             "$ref": "#/$defs/coordinates",
@@ -37,14 +63,27 @@
           },
           "pos": {
             "$ref": "#/$defs/coordinates",
-            "description": "Coordinates of the spikeHex."
+            "description": "Coordinates of the element."
           },
           "height": {
             "type": "number",
             "minimum": 0,
-            "description": "Height of the arc or spikeHex."
+            "description": "Height of the element."
           },
-          "dashLength": {},
+          "altitude": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Altitude of the element above the surface of the globe."
+          },
+          "dashLength": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minContains": 1,
+            "description": "Array of lengths of the arc segments in the multicolor arc, as a ratio of the full length of the arc. For example, 0.5 would make an arc segment half the length of the full path. 2 would make an arc segment twice the length of the full path."
+          },
           "color": {},
           "gapLength": {
             "type": "number",
@@ -63,41 +102,9 @@
           }
         },
         "required": [
-          "hoverLabel",
-          "height",
-          "color"
+          "hoverLabel"
         ],
         "additionalProperties": false,
-        "anyOf": [
-          {
-            "properties": {
-              "dashLength": {
-                "type": "number",
-                "minimum": 0,
-                "description": "Length of the arc, as a ratio of the full length of the arc. For example, 0.5 would make an arc half the length of the full path. 2 would make an arc twice the length of the full path."
-              },
-              "color": { "$ref": "#/$defs/colorItem" }
-            }
-          },
-          {
-            "properties": {
-              "dashLength": {
-                "type": "array",
-                "items": {
-                  "type": "number",
-                  "minimum": 0
-                },
-                "minContains": 2,
-                "description": "Array of lengths of the arc segments in the multicolor arc, as a ratio of the full length of the arc. For example, 0.5 would make an arc segment half the length of the full path. 2 would make an arc segment twice the length of the full path."
-              },
-              "color": {
-                "type": "array",
-                "items": { "$ref": "#/$defs/colorItem" },
-                "description": "Array of colors of each arc segment in the multicolor arc. RGBA format, for example, 'rgba(255,23,20,0.3)'."
-              }
-            }
-          }
-        ],
         "description": "Each datapoint object."
       },
       "description": "Contains datapoints in the data group."
@@ -108,36 +115,138 @@
     "dataType",
     "data"
   ],
-  "if": {
-    "properties": { "dataType": {"const": "arc"} }
-  },
-  "then": {
-    "properties": { 
-        "data": { 
-            "items": { 
-                "required": [
-                    "start",
-                    "end",
-                    "dashLength",
-                    "gapLength",
-                    "thickness",
-                    "animationTime"
-                ] 
-            } 
+  "allOf": [
+    {
+      "if": {
+        "properties": { "dataType": {"const": "html"} }
+      },
+      "then": {
+        "properties": { 
+            "data": { 
+                "items": { 
+                    "required": [
+                        "altitude",
+                        "class",
+                        "imgPath",
+                        "altText",
+                        "modalOnClick",
+                        "modalTitle",
+                        "modalText"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                              "required": ["altitude"]
+                            }
+                          ]
+                    }
+                } 
+            }
         }
-    }
-  },
-  "else": {
-    "properties": { 
-        "data": { 
-            "items": { 
-                "required": [
-                    "pos"
-                ] 
-            } 
+      },
+      "else": {
+        "properties": { 
+            "data": { 
+                "items": { 
+                    "required": [
+                        "height",
+                        "color"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                              "required": ["altitude"]
+                            },
+                            {
+                              "required": ["class"]
+                            },
+                            {
+                              "required": ["imgPath"]
+                            },
+                            {
+                              "required": ["altText"]
+                            },
+                            {
+                              "required": ["modalOnClick"]
+                            },
+                            {
+                              "required": ["modalTitle"]
+                            },
+                            {
+                              "required": ["modalText"]
+                            }
+                        ]
+                    }
+                } 
+            }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataType": {"const": "arc"} }
+      },
+      "then": {
+        "properties": { 
+            "data": { 
+                "items": { 
+                    "properties": {
+                      "color": {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/colorItem" },
+                        "description": "Array of colors of each arc segment in the multicolor arc. RGBA format, for example, 'rgba(255,23,20,0.3)'."
+                      }
+                    },
+                    "required": [
+                        "start",
+                        "end",
+                        "dashLength",
+                        "gapLength",
+                        "thickness",
+                        "animationTime"
+                    ] 
+                } 
+            }
+        }
+      },
+      "else": {
+        "properties": { 
+            "data": { 
+                "items": { 
+                    "properties": {
+                      "color": { "$ref": "#/$defs/colorItem" }
+                    },
+                    "required": [
+                        "pos"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                              "required": ["start"]
+                            },
+                            {
+                              "required": ["end"]
+                            },
+                            {
+                              "required": ["dashLength"]
+                            },
+                            {
+                              "required": ["gapLength"]
+                            },
+                            {
+                              "required": ["thickness"]
+                            },
+                            {
+                              "required": ["animationTime"]
+                            }
+                        ]
+                    }
+                } 
+            }
+        }
+      }
     }
-  },
+  ],
   "additionalProperties": false,
   "$defs": {
     "lat": {
@@ -169,7 +278,7 @@
     "colorItem": {
         "type": "string",
         "pattern": "^rgba\\((0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|0?\\.\\d|1(\\.0)?)\\)$",
-        "description": "Color of the arc or spikeHex. RGBA format, for example, 'rgba(255,23,20,0.3)'."
+        "description": "Color of the element. RGBA format, for example, 'rgba(255,23,20,0.3)'."
     }
   }
 }
