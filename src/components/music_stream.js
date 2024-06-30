@@ -78,7 +78,7 @@ const swapOutSound = (newSound, currentMusicID, changedCallback) => {
     currentSound = newSound;
     currentSound.play();
     changedCallback();
-    console.log("playing", currentSound)
+    //console.log("playing", currentSound)
 }
 
 const playMusic = (pov, musicChangeCallback) => {
