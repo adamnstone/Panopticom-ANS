@@ -119,9 +119,15 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         }] : []));
       };
 
-      const musicChangeCallback = ({ station, channelData }) => {
-        const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
-        setMusicDetails({title: "#### Radio Station", description: description})
+      const musicChangeCallback = (displayData) => {
+        if (displayData == -1) {
+          setMusicDetails({title: "#### Music: Panopticom by Peter Gabriel", description: "\"The first song to be released from i/o is based on an idea I have been working on, to initiate the creation of an infinitely expandable accessible data globe: **The Panopticom**.\"\n\n*- Peter Gabriel*"})
+        }
+        else {
+          const { station, channelData } = displayData;
+          const description = `*Station*: **${station.title}**\n\n*Visit Station on Radio Garden*: [Click here!](https://radio.garden${station.url})\n\n*Country*: **${station.country}**\n\n---\n\n*Channel Title*: **${channelData.title}**\n\n*Visit Channel on Radio Garden*: [Click here!](https://radio.garden${channelData.radio_garden_url})`;
+          setMusicDetails({title: "#### Radio Station", description: description})
+        }
       };
 
       const playMusicStandard = pov => {
@@ -179,7 +185,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         if (layer.layerType == LayerType.CUSTOM) {
           if (layer.id == "radio_garden") {
             radioActive = changedLayerEnabled;
-            if (!changedLayerEnabled) playMusic(-1);
+            if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
           }
           return;
         }
@@ -207,7 +213,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       };
       window.addEventListener('mouseup', mouseUpCallback);
   
-      playMusic(-1);
+      playMusic(-1, musicChangeCallback);
   
     };
       

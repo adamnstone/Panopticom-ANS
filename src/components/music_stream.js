@@ -68,7 +68,8 @@ const playAudio = (_url, successCallback, errorCallback) => {
 };
 
 let mostRecentMusicID = 0;
-const swapOutSound = (newSound, currentMusicID) => {
+const swapOutSound = (newSound, currentMusicID, changedCallback) => {
+    //console.log(currentMusicID, "just finished but most recent is", mostRecentMusicID, "so", currentMusicID == mostRecentMusicID ? "will" : "won't", "play")
     if (currentMusicID != mostRecentMusicID) return;
     if (currentSound) {
         console.log("pausing", currentSound)
@@ -76,6 +77,7 @@ const swapOutSound = (newSound, currentMusicID) => {
     }
     currentSound = newSound;
     currentSound.play();
+    changedCallback();
     console.log("playing", currentSound)
 }
 
@@ -84,7 +86,9 @@ const playMusic = (pov, musicChangeCallback) => {
     const currentMusicID = mostRecentMusicID;
     if (pov == -1) {
         playAudio(-1, sound => {
-            swapOutSound(sound, mostRecentMusicID)
+            swapOutSound(sound, mostRecentMusicID, () => {
+                musicChangeCallback(-1);
+            })
         }, () => { 
             console.log("Panopticom audio failed to load...")
         });
@@ -117,12 +121,12 @@ const playMusic = (pov, musicChangeCallback) => {
                 if (!(
                     playAudio(lowestItemChannels[j].mp3_url, sound => {
                         console.log("Audio Loaded Successfully")
-                        swapOutSound(sound, currentMusicID);
-
-                        musicChangeCallback({
-                            station: items[i],
-                            channelData: lowestItemChannels[j]
-                        })
+                        swapOutSound(sound, currentMusicID, () => {
+                            musicChangeCallback({
+                                station: items[i],
+                                channelData: lowestItemChannels[j]
+                            })
+                        });
                     }, () => audioRecursion(j + 1))
                 )) {
                     console.log("Error playing audio.")
