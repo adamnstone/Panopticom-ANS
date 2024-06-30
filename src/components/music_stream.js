@@ -1,4 +1,4 @@
-import {Howl, Howler} from 'howler';
+import { Howl, Howler } from 'howler';
 import { radioGardenData } from './Three';
 
 let currentSound;
