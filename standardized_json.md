@@ -76,7 +76,8 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
             "altText": "Thought Bubble", // alt text property of the <img> element
             "modalOnClick": true, // if true, a modal will appear when the html element is clicked on (details of the modal are in the following properties)
             "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan", // title of the modal, written in markdown
-            "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines." // body text of the modal, written in markdown
+            "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines.", // body text of the modal, written in markdown
+            "imgTint": "rgb(0,255,0)" // adds a tint to the <img> element, for no tint write "none"
         },
         { // example #2
             "pos": {
@@ -90,7 +91,8 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
             "altText": "Thought Bubble",
             "modalOnClick": true,
             "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
-            "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON"
+            "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON",
+            "imgTint": "none"
         }
     ]
 }
@@ -216,7 +218,8 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "altText": "Thought Bubble",
                 "modalOnClick": true,
                 "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan",
-                "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines."
+                "modalText": "###### A group of young and inspiring students along with few Teachers from Rosemarry Primary School, Thimphu  visits Fablab Bhutan on 22 May 2019 . The Kids have been introduced the little bits, how to play with the little bits, introduction on the different types of machines available in the lab. They were also Showcased with some of the products made from the machines.",
+                "imgTint": "rgb(0,255,0)"
             },
             {
                 "pos": {
@@ -230,7 +233,8 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "altText": "Thought Bubble",
                 "modalOnClick": true,
                 "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
-                "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON"
+                "modalText": "###### Húsið Tunga stóð við Heimagötu 4, var byggt árið 1913, en fór undir hraun árið 1973. Í húsinu var bakarí og síðar hótel og var það því oftast kallað Hótel Berg eða Magnúsarbakarí. Jóhann Sörensen byggði húsið. Þar leigði herbergi um tíma Björn Kalman, lögfræðingur og skákmaður á árunum milli 1931-1940.\n\n ###### Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.\n\n ###### BJARNI RÚNAR KRISTJÁNSSON, BREKI GEORG FREYSSON, BENEDIKT ÞÓR EYÞÓRSSON",
+                "imgTint": "rgb(255,100,50)"
             }
         ]
     },
