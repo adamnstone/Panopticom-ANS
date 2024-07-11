@@ -5,19 +5,29 @@ import * as d3 from 'd3';
 import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
-import { LayerType } from '../App.jsx';
 
 let radioGardenData, prevPov;
 
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
 const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => data.json());
 
-const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails }) => {
+const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails, LayerType }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
     const mount = mountRef.current;
-    let renderer;
+    let renderer, world;
+
+    const resizeRenderer = () => {
+      if (renderer && mount) {
+        const { clientWidth, clientHeight } = mount;
+        renderer.setSize(clientWidth, clientHeight);
+        world.width([clientWidth]);
+        world.height([clientHeight]);
+        world.controls().update();
+      }
+    };
+
     const wrapper = async () => {
     
     const mainRender = async () => {
@@ -54,7 +64,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       const weightColor = d3.scaleSequentialSqrt(d3.interpolateYlOrRd)
         .domain([0, 1e7]);
   
-      const world = Globe()
+      world = Globe()
         (mountRef.current)
         .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
         .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -230,6 +240,13 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
     };
       
     await mainRender();
+
+    resizeRenderer();
+    window.addEventListener('resize', resizeRenderer);
+
+    return () => {
+      window.removeEventListener('resize', resizeRenderer);
+    };
 
   };
   
