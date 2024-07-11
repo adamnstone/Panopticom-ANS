@@ -78,7 +78,7 @@
           "altitude": {
             "type": "number",
             "minimum": 0,
-            "description": "Altitude of the element above the surface of the globe."
+            "description": "Altitude of the element above the surface of the globe. Recommended value is 0.1."
           },
           "dashLength": {
             "type": "array",

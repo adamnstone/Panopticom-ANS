@@ -180,17 +180,29 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
 
       let radioActive = true; // radio active starts activated
-      setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
-        const layer = layerData.filter(l => l.id == changedLayerID)[0];
-        if (layer.layerType == LayerType.CUSTOM) {
-          if (layer.id == "radio_garden") {
-            radioActive = changedLayerEnabled;
-            if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
-          }
-          return;
+      setFilterUpdateFunc(() => (_changedLayerID, _changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
+        let changedLayerIDs, changedLayerEnableds;
+        if (Array.isArray(_changedLayerID) && Array.isArray(_changedLayerEnabled)) {
+          changedLayerIDs = _changedLayerID;
+          changedLayerEnableds = _changedLayerEnabled;
+        } else {
+          changedLayerIDs = [_changedLayerID];
+          changedLayerEnableds = [_changedLayerEnabled];
         }
-        zoomUpdate(changedLayerID, changedLayerEnabled, null);
-        // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
+        for (let i = 0; i < changedLayerIDs.length; i++) {
+          const changedLayerID = changedLayerIDs[i];
+          const changedLayerEnabled = changedLayerEnableds[i];
+          const layer = layerData.filter(l => l.id == changedLayerID)[0];
+          if (layer.layerType == LayerType.CUSTOM) {
+            if (layer.id == "radio_garden") {
+              radioActive = changedLayerEnabled;
+              if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
+            }
+            continue;
+          }
+          zoomUpdate(changedLayerID, changedLayerEnabled, null);
+          // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
+        }
       });
 
       let previousZoomLevel = 0;

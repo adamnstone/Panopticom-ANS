@@ -60,6 +60,12 @@ function App() {
       layerType: LayerType.STANDARD
     },
     {
+      title: "Traditional Dance",
+      dataPath: '../datasets/formatted_datasets/dance.jsonl',
+      id: "dance",
+      layerType: LayerType.STANDARD
+    },
+    {
       title: "Radio Stations",
       dataPath: '../datasets/radio_garden_data/radio_garden.jsonl',
       id: "radio_garden",

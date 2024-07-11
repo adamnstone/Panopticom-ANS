@@ -6,22 +6,31 @@ import ActiveLayerFilters from './ActiveLayerFilters.jsx'
 const Filters = ({ hoverDetails, musicDetails, layerData, filterUpdateFunc }) => {
     const [checkedList, setCheckedList] = useState(layerData.map(l => true)); // all filters initially true, also must change in Three.jsx
 
-    const onChangeCallback = (layerID, position) => {
-        let changedLayerEnabled;
-        const updatedCheckedState = checkedList.map((item, index) =>
-            {
-                if (index === position) {
-                    changedLayerEnabled = !item;
-                    return changedLayerEnabled;
-                } else {
-                    return item;
-                }
-            }
-        );
+    const onChangeCallback = (layerID, position, isSolo) => {
+        if (isSolo) {
+            const updatedCheckedState = checkedList.map((item, index) => index === position);
 
-        filterUpdateFunc(layerID, changedLayerEnabled);
-      
-        setCheckedList(updatedCheckedState);
+            filterUpdateFunc(layerData.map(i => i.id), updatedCheckedState);
+
+            setCheckedList(updatedCheckedState);
+        }
+        else {
+            let changedLayerEnabled;
+            const updatedCheckedState = checkedList.map((item, index) =>
+                {
+                    if (index === position) {
+                        changedLayerEnabled = !item;
+                        return changedLayerEnabled;
+                    } else {
+                        return item;
+                    }
+                }
+            );
+
+            filterUpdateFunc(layerID, changedLayerEnabled);
+        
+            setCheckedList(updatedCheckedState);
+        }
     };
 
     return (
