@@ -6,7 +6,7 @@ const Dashboard = ({ layerData, LayerType }) => {
     <>
     <style>{`
     #three-container {
-        width: 50vw; 
+        width: 50vh; 
         height: 50vh;
     }
     `}</style>

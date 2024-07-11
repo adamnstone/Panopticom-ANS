@@ -254,7 +254,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
 
   }, [mountRef]);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
 }
 
 export default memo(Three)
