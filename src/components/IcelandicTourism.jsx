@@ -5,13 +5,17 @@ const IcelandicTourism = () => {
   const ref = useRef();
 
   const data = [
-    { label: 'USA', value: 27 },
-    { label: 'UK', value: 13.5 },
-    { label: 'Germany', value: 7.8 },
-    { label: 'France', value: 5.6 },
-    { label: 'Poland', value: 4.8 },
-    { label: 'Others', value: 41.3 }
-  ];
+    { label: 'USA', value: 28.9 },
+    { label: 'UK', value: 12.7 },
+    { label: 'Germany', value: 6.1 },
+    { label: 'Poland', value: 5.7 },
+    { label: 'France', value: 4.3 },
+    { label: 'Italy', value: 3.9 },
+    { label: 'Spain', value: 3.4 },
+    { label: 'China', value: 3.3 },
+    { label: 'Canada', value: 3.0 },
+    { label: 'Netherlands', value: 2.8 }
+  ].reverse();
 
   useEffect(() => {
     const svg = d3.select(ref.current);
@@ -38,7 +42,7 @@ const IcelandicTourism = () => {
       .attr("transform", `translate(${width / 2},${height / 2})`);
 
     const tooltip = d3.select("body").append("div")
-      .attr("class", "tooltip")
+      .attr("class", "tooltip-c")
       .style("opacity", 0);
 
     const arcs = g.selectAll(".arc")
@@ -66,7 +70,7 @@ const IcelandicTourism = () => {
       arcs.append("text")
       .attr("transform", d => `translate(${labelArc.centroid(d)})`)
       .attr("dy", ".35em")
-      .text(d => d.data.value > 7.8 ? `${d.data.label}` : '');
+      .text(d => d.data.value > 4 ? `${d.data.label}` : '');
   }, []);
 
   return (
@@ -85,8 +89,10 @@ svg {
   height: 100%;
 }
 
-.tooltip {
+.tooltip-c {
   position: absolute;
+  top:0;
+  left:0;
   text-align: center;
   width: 120px;
   height: 28px;

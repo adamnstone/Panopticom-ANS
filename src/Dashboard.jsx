@@ -297,15 +297,15 @@ In essence, Fab Lab Ísafjörður is a microcosm of Iceland's broader trends: te
             </div>
             <div className="col-3">
                 <div className="item-container include-bg grid-item align-items-start justify-content-center d-flex">
-                    <div className="container">
+                    <div className="container" style={{overflow:'hidden'}}>
                         <div className="row">
-                            <div className="col align-items-center justify-content-center d-flex">
-                                <h6>🕺Traditional Dance💃</h6>
+                            <div className="col align-items-center justify-content-center d-flex" style={{textAlign:'center'}}>
+                                <h5>Tourism to Iceland (June 2024)</h5>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col scrollable-div more-height">
-                                <p style={{fontSize: '0.9rem'}}>Traditional dance in Iceland, known as "Vikivaki," is a significant part of the nation's cultural heritage. These dances are typically performed during communal gatherings and festive occasions, featuring circle dances with linked arms and rhythmic stepping. The music accompanying Vikivaki includes traditional Icelandic folk songs, often passed down through generations. Costumes worn during these performances are usually simple, reflecting Iceland's historical attire. The dances, rooted in medieval traditions, are a vital way for Icelanders to connect with their history and maintain their cultural identity.</p>
+                        <div className="row" style={{height:'25vh'}}>
+                            <div className="col" style={{overflow:'visible'}}>
+                                <IcelandicTourism/>
                             </div>
                         </div>
                     </div>
