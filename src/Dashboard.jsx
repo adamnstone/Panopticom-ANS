@@ -69,6 +69,75 @@ const Dashboard = ({ layerData, LayerType }) => {
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
 }
+
+
+
+
+#dna-img {
+background-image: url('../public/dna_realistic.png');
+background-size: contain;
+background-repeat: no-repeat;
+width: 100%;
+height: 100%;
+border-radius: 1000px;
+box-shadow: 0 0 8px 8px #eeeeee inset;
+}
+
+#stry-btn-1 {
+width: 110px;
+height: 10px;
+transform: rotate(90deg);
+position: absolute;
+top: 160px;
+right: 276px;
+background: transparent;
+border: none !important;
+}
+
+#stry-btn-2 {
+width: 110px;
+height: 10px;
+transform: rotate(90deg);
+position: absolute;
+top: 160px;
+right: 220px;
+background: transparent;
+border: none !important;
+}
+
+#stry-btn-3 {
+width: 80px;
+height: 10px;
+transform: rotate(100deg);
+position: absolute;
+top: 160px;
+right: 184px;
+background: transparent;
+border: none !important;
+}
+
+.tooltip-t {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.7rem;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
     `}</style>
     <div className="container">
         <div className="row">
@@ -108,13 +177,74 @@ The lab's impact extends beyond technological innovation; it also serves as a so
                 <div className="item-container include-bg grid-item align-items-start justify-content-center d-flex">
                     <div className="container full-h">
                         <div className="row">
-                            <div className="col align-items-center justify-content-center d-flex">
-                                <h4>Icelandic Tourism by Country</h4>
+                            <div className="col align-items-center justify-content-center d-flex" style={{textAlign:'center'}}>
+                                <h4>Icelandic Personal Stories</h4>
                             </div>
                         </div>
                         <div className="row full-h">
                             <div className="col full-h">
-                                <IcelandicTourism />
+                                <div id="dna-img"/>
+                                
+                                <button id='stry-btn-1' onClick={(event) => {
+                                    const tooltip = document.getElementById('tooltip-1');
+                                    const buttonRect = event.target.getBoundingClientRect();
+                                  // Show the tooltip
+                                  tooltip.style.display = 'block';
+                                    // Set the position of the tooltip
+                                    tooltip.style.left = `${buttonRect.left -(tooltip.offsetWidth / 2)}px`;
+                                    tooltip.style.top = `${buttonRect.bottom + window.scrollY + 10}px`;
+                                  
+                                    
+                                    document.addEventListener('click', function(event) {
+                                        const tooltip = document.getElementById('tooltip-1');
+                                        const button = document.getElementById('stry-btn-1');
+                                      
+                                        // Hide the tooltip if the click is outside the button and the tooltip
+                                        if (event.target !== button && !button.contains(event.target) && !tooltip.contains(event.target)) {
+                                          tooltip.style.display = 'none';
+                                        }
+                                      });
+                                }}></button>
+                                <button id='stry-btn-2' onClick={(event) => {
+                                    const tooltip = document.getElementById('tooltip-2');
+                                    const buttonRect = event.target.getBoundingClientRect();
+                                  // Show the tooltip
+                                  tooltip.style.display = 'block';
+                                    // Set the position of the tooltip
+                                    tooltip.style.left = `${buttonRect.left -(tooltip.offsetWidth / 2)}px`;
+                                    tooltip.style.top = `${buttonRect.bottom + window.scrollY + 10}px`;
+                                  
+                                    
+                                    document.addEventListener('click', function(event) {
+                                        const tooltip = document.getElementById('tooltip-2');
+                                        const button = document.getElementById('stry-btn-2');
+                                      
+                                        // Hide the tooltip if the click is outside the button and the tooltip
+                                        if (event.target !== button && !button.contains(event.target) && !tooltip.contains(event.target)) {
+                                          tooltip.style.display = 'none';
+                                        }
+                                      });
+                                }}></button>
+                                <button id='stry-btn-3' onClick={(event) => {
+                                    const tooltip = document.getElementById('tooltip-3');
+                                    const buttonRect = event.target.getBoundingClientRect();
+                                  // Show the tooltip
+                                  tooltip.style.display = 'block';
+                                    // Set the position of the tooltip
+                                    tooltip.style.left = `${buttonRect.left -(tooltip.offsetWidth / 2)}px`;
+                                    tooltip.style.top = `${buttonRect.bottom + window.scrollY + 10}px`;
+                                  
+                                    
+                                    document.addEventListener('click', function(event) {
+                                        const tooltip = document.getElementById('tooltip-3');
+                                        const button = document.getElementById('stry-btn-3');
+                                      
+                                        // Hide the tooltip if the click is outside the button and the tooltip
+                                        if (event.target !== button && !button.contains(event.target) && !tooltip.contains(event.target)) {
+                                          tooltip.style.display = 'none';
+                                        }
+                                      });
+                                }}></button>
                             </div>
                         </div>
                     </div>
@@ -148,18 +278,18 @@ The lab's impact extends beyond technological innovation; it also serves as a so
                     <div className="container">
                             <div className="row">
                                 <div className="col align-items-center justify-content-center d-flex">
-                    <h2>Narrative Summary & Personal Stories</h2>
+                    <h2>Narrative Summary</h2>
                     </div>
                         </div>
                         <div className="row">
                             <div className="col scrollable-div">
-                    <p style={{fontSize: '1rem'}}>Iceland's tourism industry reveals fascinating insights into the global interest in this unique island nation. In 2022, a significant 27% of tourists to Iceland came from the USA, highlighting strong transatlantic ties and possibly reflecting a cultural curiosity and adventurous spirit among Americans. The UK followed with 13.5% of the visitors, showcasing enduring connections perhaps rooted in historical and cultural links. Germany, France, and Poland also contributed notable numbers, with 7.8%, 5.6%, and 4.8% of tourists respectively, underscoring Europe's substantial role in Icelandic tourism.
-<br></br>
-Interestingly, these tourism trends can be linked to Iceland's rich cultural heritage and traditions. For instance, the traditional dance "Vikivaki," performed during communal gatherings, might attract tourists interested in authentic cultural experiences. The simplicity of the costumes and the historical significance of these dances, which are deeply rooted in medieval traditions, offer visitors a unique glimpse into Icelandic history and identity.
-<br></br>
-Moreover, the popularity of certain top Billboard songs in Iceland, such as "Houdini" by NEW and "Million Dollar Baby" by Tommy Richman, which explore themes of freedom and ambition, may resonate with the adventurous spirit of the tourists. These themes align with the experiences that visitors seek when exploring Iceland's dramatic landscapes and engaging in local traditions.
-<br></br>
-Additionally, innovative spaces like Fab Lab Ísafjörður in remote regions highlight Iceland's commitment to bridging gaps between education, industry, and community. This blend of traditional and modern attractions likely contributes to the diverse range of interests that draw visitors from around the world. Thus, Iceland not only offers breathtaking natural wonders but also a rich cultural tapestry that continues to captivate a global audience.</p>
+                    <p style={{fontSize: '1rem'}}>In the remote and picturesque town of Ísafjörður, the Fab Lab Ísafjörður plays a crucial role in bridging education, industry, and community through innovative digital fabrication tools. This lab, part of the global Fab Lab network, is surrounded by the inspiring natural beauty of mountains and the sea, fostering a unique environment for creativity and collaboration. The lab's impact is multifaceted: it promotes STEM education through workshops and courses, supports local businesses and artists, and drives economic development and cultural projects.
+<br/><br/>
+For instance, the reconstruction of houses destroyed by the 1973 volcanic eruption in Vestmannaeyjar showcases how local communities preserve and recreate significant historical and cultural artifacts. Additionally, the lab’s collaboration with local artists and businesses parallels the development seen in the Vestmannaeyjar archipelago, where technological advancements, like the new electric ferry, enhance connectivity and promote conservation efforts.
+<br/><br/>
+Traditional Icelandic dance, such as Vikivaki, underscores the cultural richness that complements the technological and economic progress facilitated by Fab Labs. These dances, deeply rooted in history, connect Icelanders to their heritage, just as Fab Labs connect them to the future. Furthermore, the story of the Aflakóngur, or "Fish King," reflects the importance of tradition in Iceland's fishing communities, demonstrating the blend of historical and modern practices that define Icelandic culture.
+<br/><br/>
+In essence, Fab Lab Ísafjörður is a microcosm of Iceland's broader trends: technological innovation harmoniously integrated with cultural preservation and community development.</p>
                             </div>
                         </div>
                     </div>
@@ -183,6 +313,9 @@ Additionally, innovative spaces like Fab Lab Ísafjörður in remote regions hig
             </div>
         </div>
     </div>
+    <div id="tooltip-1" className="tooltip-t"><b>Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar</b><br></br>Tunga's house stood at Heimagatu 4, was built in 1913, but was destroyed by lava in 1973. The building housed a bakery and later a hotel, so it was often called Hotel Berg or Magnúsar Bakery. Jóhann Sörensen built the house. Björn Kalman, a lawyer and chess player, rented a room there for a while between 1931-1940.</div>
+    <div id="tooltip-2" className="tooltip-t">A new electric ferry has helped connect Iceland's mainland to this small archipelago — also called the Westman Islands — off the country's south coast, where the world's largest puffin colony has turned many residents into active conservationists. (The archipelago was unaffected by the mid-December volcanic eruptions elsewhere in Iceland.) From May to September, Heimaey, the main island, becomes a favorite weekend destination for Icelanders, who fill up sleek new villas during the frequent concerts and festivals, while cruise ship passengers can be seen racing around the outer islands on rib boats, visiting the Beluga whale sanctuary and riding A.T.V.s into the crater of the Eldfell volcano, which nearly wiped out the town during a 1973 eruption. Home to one of the country's most important fishing communities, with a new seafood festival and a wave of culinary offerings like an artisan bakery and a craft brewery, Vestmannaeyjar has been hailed by the local media as the “food capital of Iceland.”</div>
+    <div id="tooltip-3" className="tooltip-t">Aflakóngur is the person who catches the most fish in his town. One well-known fishing king is Binni í Gröf. In 1965, this changed and two awards were given. Fish king was for the biggest catch (most tonnes caught per season) and fish king was the one with the most valuable catch. Ingolf's rod, which was given by the married couple Sigríði Sigurðardóttir and Ingólf Theódorsson, was a traveling trinket for the fishing king. With the introduction of the quota system, all the criteria for these awards changed significantly and they were discontinued in 1990.</div>
     </>
   )
 }
