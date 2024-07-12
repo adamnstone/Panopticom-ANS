@@ -276,11 +276,11 @@ The lab's impact extends beyond technological innovation; it also serves as a so
             <div className="col-6">
                 <div className="item-container include-bg grid-item align-items-center justify-content-center d-flex">
                     <div className="container">
-                            <div className="row">
+                            <div className="row" style={{marginBottom:'20px'}}>
                                 <div className="col align-items-center justify-content-center d-flex">
-                    <h2>Narrative Summary</h2>
-                    </div>
-                        </div>
+                                    <h1>Narrative Summary</h1>
+                                </div>
+                            </div>
                         <div className="row">
                             <div className="col scrollable-div">
                     <p style={{fontSize: '1rem'}}>In the remote and picturesque town of Ísafjörður, the Fab Lab Ísafjörður plays a crucial role in bridging education, industry, and community through innovative digital fabrication tools. This lab, part of the global Fab Lab network, is surrounded by the inspiring natural beauty of mountains and the sea, fostering a unique environment for creativity and collaboration. The lab's impact is multifaceted: it promotes STEM education through workshops and courses, supports local businesses and artists, and drives economic development and cultural projects.
