@@ -37,4 +37,4 @@ pages:
     paths:
       - public
   only:
-    - main  # Change this to your default branch if it's not 'main'
+    - master  # Change this to your default branch if it's not 'main'
