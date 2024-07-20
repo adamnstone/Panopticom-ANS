@@ -4,6 +4,7 @@ import App from './App.jsx'
 import AINav from './AINav.jsx'
 import AIDashboard from './AIDashboard.jsx'
 import Dashboard from './Dashboard.jsx'
+import About from './About.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const LayerType = {
