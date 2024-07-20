@@ -1,0 +1,218 @@
+[
+    {
+        "zoomLevel": 50,
+        "dataType": "html",
+        "data": [
+          {
+            "hoverLabel": "Samba",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Samba - Brazil",
+            "modalText": "###### Samba is a lively, rhythmical dance of Afro-Brazilian origin in Brazil. It is recognized around the world as a symbol of Brazil and the Brazilian Carnival. Samba's music and dance style have African roots. It is known for its rapid steps and swaying, rhythmic hip movements. Samba is a dance of celebration and joy. Today, Samba is performed at carnival parades and festive occasions. ![]()",
+            "imgTint": "none",
+            "pos": {
+              "lat": -14.235,
+              "lng": -51.9253
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Bharatanatyam",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Bharatanatyam - India",
+            "modalText": "###### Bharatanatyam is a major form of Indian classical dance that originated in Tamil Nadu. It is known for its grace, elegance, and intricate footwork. The dance is characterized by intricate rhythms and expressive hand gestures. Bharatanatyam is often performed by women and is usually accompanied by Carnatic music. The dance form includes both storytelling and pure dance movements. It has a rich tradition and cultural significance in India.\n\n<img src=\"../markdown-media/bharatanatyam.jpg\" style=\"width: 200px; height: auto; display: block; margin-left: auto; margin-right: auto;\">",
+            "imgTint": "none",
+            "pos": {
+              "lat": 20.5937,
+              "lng": 78.9629
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Flamenco",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Flamenco - Spain",
+            "modalText": "###### Flamenco is an art form based on the various folkloric music traditions of southern Spain. It includes singing, guitar playing, dance, and handclaps. Flamenco is known for its emotional intensity, proud carriage, and rhythmic footwork. The dance is often accompanied by a form of Spanish guitar music. Flamenco has Gypsy roots and is deeply ingrained in Spanish culture. Today, Flamenco is performed worldwide, with many festivals and competitions dedicated to it.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 40.4637,
+              "lng": -3.7492
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Ballet",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Ballet - France",
+            "modalText": "###### Ballet is a highly technical form of dance with its own vocabulary based on French terminology. It is primarily performed to classical music. Ballet is known for its grace, precision, and the athleticism of its dancers. The dance form originated during the Italian Renaissance and later developed in France and Russia. Ballet performances often tell a story or express a theme. It is one of the most demanding and respected dance forms in the world.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 46.6034,
+              "lng": 1.8883
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Tango",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Tango - Argentina",
+            "modalText": "###### Tango is a partner dance that originated in the 1880s along the River Plate, the natural border between Argentina and Uruguay. It is characterized by its close embrace and dramatic movements. Tango music is often melancholic and deeply emotional. The dance involves a variety of steps and patterns that require precision and timing. Tango has become a symbol of Argentine culture. Today, it is danced in many countries around the world, with a variety of styles and interpretations.",
+            "imgTint": "none",
+            "pos": {
+              "lat": -38.4161,
+              "lng": -63.6167
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Kathak",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Kathak - India",
+            "modalText": "###### Kathak is one of the eight major forms of Indian classical dance. It originated from traveling bards in northern India known as Kathakars or storytellers. Kathak dance is characterized by intricate footwork and spins. The dance form includes storytelling through expressive gestures and facial expressions. Kathak is performed by both men and women. It has a rich history and is an important cultural tradition in India.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 28.6139,
+              "lng": 77.209
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Hula",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Hula - Hawaii",
+            "modalText": "###### Hula is a Polynesian dance form accompanied by chant (oli) or song (mele). It was developed in the Hawaiian Islands by the Polynesians who originally settled there. Hula dance tells stories through movements and gestures. The dance is often performed to celebrate nature and Hawaiian culture. Hula can be performed as a solo dance or as part of a group. It remains an important cultural tradition in Hawaii.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 19.8968,
+              "lng": -155.5828
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Waltz",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Waltz - Austria",
+            "modalText": "###### The waltz is a ballroom and folk dance, normally in triple (3/4) time, performed primarily in closed position. It is known for its flowing, graceful movements. The dance originated in the late 18th century in Vienna. Waltz music is characterized by a strong, regular beat. The dance quickly became popular throughout Europe and America. Today, the waltz remains a staple of ballroom dancing.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 47.5162,
+              "lng": 14.5501
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Salsa",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Salsa - Cuba",
+            "modalText": "###### Salsa is a popular form of social dance that originated in New York City with strong influences from Latin America, particularly Cuba and Puerto Rico. The dance is characterized by its energetic movements and fast footwork. Salsa music combines elements of jazz, Afro-Cuban rhythms, and other Latin musical styles. The dance is often performed in pairs and emphasizes improvisation. Salsa has become a global phenomenon. Today, salsa is enjoyed in clubs and dance halls around the world.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 21.5218,
+              "lng": -77.7812
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Jive",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Jive - USA",
+            "modalText": "###### Jive is a lively and uninhibited variation of the Jitterbug, a form of Swing dance. It is known for its fast pace and high-energy moves. Jive originated in the United States in the early 1940s. The dance involves a lot of kicks, flicks, and sharp movements. Jive is usually performed to upbeat, swing-style music. It remains a popular dance in both social and competitive settings.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 37.0902,
+              "lng": -95.7129
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Hip-hop",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Hip-hop - USA",
+            "modalText": "###### Hip-hop dance refers to street dance styles primarily performed to hip-hop music or that have evolved as part of hip-hop culture. It includes a wide range of styles such as breaking, locking, and popping. Hip-hop dance originated in the 1970s in New York City. The dance is known for its freestyle movements and improvisation. Hip-hop culture emphasizes creativity and self-expression. Today, hip-hop dance is a global phenomenon, with many competitions and performances held worldwide.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 34.0522,
+              "lng": -118.2437
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Breakdance",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Breakdance - USA",
+            "modalText": "###### Breakdancing, also called breaking or b-boying/b-girling, is an athletic style of street dance. It originated among African American and Puerto Rican youth in New York City in the early 1970s. Breakdance includes four primary elements: toprock, downrock, power moves, and freezes. The dance is known for its acrobatic movements and complex footwork. Breakdancing is often performed to hip-hop, funk, or breakbeat music. It remains an important part of hip-hop culture and is performed in battles and competitions worldwide.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 40.7128,
+              "lng": -74.006
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Cossack Dance",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Cossack Dance - Ukraine",
+            "modalText": "###### Cossack dance is a traditional Ukrainian folk dance that is known for its acrobatic feats, such as the famed squat and kick movements. The dance originated among the Cossacks of Ukraine. It is characterized by its energetic and dynamic movements. Cossack dance often involves group formations and synchronized steps. The dance is performed at festivals, celebrations, and cultural events. It remains a vibrant part of Ukrainian cultural heritage.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 48.3794,
+              "lng": 31.1656
+            },
+            "altitude": 0.1
+          },
+          {
+            "hoverLabel": "Irish Dance",
+            "class": "dance-icon",
+            "imgPath": "../dance.png",
+            "altText": "Dance Icon",
+            "modalOnClick": true,
+            "modalTitle": "## Irish Dance - Ireland",
+            "modalText": "###### Irish dance refers to a group of traditional dance forms originating in Ireland. These are characterized by a stiff upper body and quick and precise movements of the feet. Irish dance includes both solo and group performances. It gained international popularity through shows like Riverdance. The dance is often accompanied by traditional Irish music. Today, Irish dance is performed worldwide and remains an important part of Irish culture.",
+            "imgTint": "none",
+            "pos": {
+              "lat": 53.1424,
+              "lng": -7.6921
+            },
+            "altitude": 0.1
+          }
+        ]
+    }      
+]

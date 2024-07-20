@@ -15,6 +15,11 @@ p {
   border-radius: 90%;
 }
 
+.dance-icon > img {
+  height: 5vh;
+  width: 5vh; 
+}
+
 .fs-6 {
     line-height: 0.5em;
 }

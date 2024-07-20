@@ -5,19 +5,29 @@ import * as d3 from 'd3';
 import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
-import { LayerType } from '../App.jsx';
 
 let radioGardenData, prevPov;
 
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
 const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => data.json());
 
-const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails }) => {
+const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails, LayerType }) => {
   const mountRef = useRef(null);
 
   useEffect(() => {
     const mount = mountRef.current;
-    let renderer;
+    let renderer, world;
+
+    const resizeRenderer = () => {
+      if (renderer && mount) {
+        const { clientWidth, clientHeight } = mount;
+        renderer.setSize(clientWidth, clientHeight);
+        world.width([clientWidth]);
+        world.height([clientHeight]);
+        world.controls().update();
+      }
+    };
+
     const wrapper = async () => {
     
     const mainRender = async () => {
@@ -54,7 +64,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       const weightColor = d3.scaleSequentialSqrt(d3.interpolateYlOrRd)
         .domain([0, 1e7]);
   
-      const world = Globe()
+      world = Globe()
         (mountRef.current)
         .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
         .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -180,17 +190,29 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
 
       let radioActive = true; // radio active starts activated
-      setFilterUpdateFunc(() => (changedLayerID, changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
-        const layer = layerData.filter(l => l.id == changedLayerID)[0];
-        if (layer.layerType == LayerType.CUSTOM) {
-          if (layer.id == "radio_garden") {
-            radioActive = changedLayerEnabled;
-            if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
-          }
-          return;
+      setFilterUpdateFunc(() => (_changedLayerID, _changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
+        let changedLayerIDs, changedLayerEnableds;
+        if (Array.isArray(_changedLayerID) && Array.isArray(_changedLayerEnabled)) {
+          changedLayerIDs = _changedLayerID;
+          changedLayerEnableds = _changedLayerEnabled;
+        } else {
+          changedLayerIDs = [_changedLayerID];
+          changedLayerEnableds = [_changedLayerEnabled];
         }
-        zoomUpdate(changedLayerID, changedLayerEnabled, null);
-        // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
+        for (let i = 0; i < changedLayerIDs.length; i++) {
+          const changedLayerID = changedLayerIDs[i];
+          const changedLayerEnabled = changedLayerEnableds[i];
+          const layer = layerData.filter(l => l.id == changedLayerID)[0];
+          if (layer.layerType == LayerType.CUSTOM) {
+            if (layer.id == "radio_garden") {
+              radioActive = changedLayerEnabled;
+              if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
+            }
+            continue;
+          }
+          zoomUpdate(changedLayerID, changedLayerEnabled, null);
+          // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
+        }
       });
 
       let previousZoomLevel = 0;
@@ -219,13 +241,20 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       
     await mainRender();
 
+    resizeRenderer();
+    window.addEventListener('resize', resizeRenderer);
+
+    return () => {
+      window.removeEventListener('resize', resizeRenderer);
+    };
+
   };
   
   wrapper();
 
   }, [mountRef]);
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
 }
 
 export default memo(Three)
