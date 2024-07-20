@@ -63,8 +63,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router basename={import.meta.env.BASE_URL}>     
             <Routes>
                 <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
-                <Route path="/ai-nav" element={<AINav />} />
-                <Route path="/ai-dashboard" element={<AIDashboard />} />
+                {/*<Route path="/ai-nav" element={<AINav />} />
+                <Route path="/ai-dashboard" element={<AIDashboard />} />*/}
                 <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
                 <Route path="/about" element={<About />} />
             </Routes>
