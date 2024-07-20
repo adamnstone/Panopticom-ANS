@@ -61,10 +61,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     // <App />
     <Router basename={import.meta.env.BASE_URL}>     
             <Routes>
-                <Route exact path="https://panopticom.fabcloud.io/" element={<App layerData={layerData} LayerType={LayerType} />} />
-                <Route path="https://panopticom.fabcloud.io/ai-nav" element={<AINav />} />
-                <Route path="https://panopticom.fabcloud.io/ai-dashboard" element={<AIDashboard />} />
-                <Route path="https://panopticom.fabcloud.io/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
+                <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
+                <Route path="/ai-nav" element={<AINav />} />
+                <Route path="/ai-dashboard" element={<AIDashboard />} />
+                <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
             </Routes>
         </Router>
   //</React.StrictMode>,
