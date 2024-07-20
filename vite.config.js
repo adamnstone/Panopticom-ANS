@@ -3,5 +3,15 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Base URL for the app
+  base: '/', // Ensure this is the correct base path
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+  server: {
+    historyApiFallback: true, // This ensures the dev server handles routing correctly
+  },
 });

@@ -33,6 +33,10 @@ pages:
   script:
     - rm -rf public/*       # Clear the existing public directory
     - cp -r dist/* public/  # Copy the built files to the public directory
+    - echo "RewriteEngine On" >> public/.htaccess
+    - echo "RewriteCond %{REQUEST_FILENAME} !-f" >> public/.htaccess
+    - echo "RewriteCond %{REQUEST_FILENAME} !-d" >> public/.htaccess
+    - echo "RewriteRule . /index.html [L]" >> public/.htaccess
   artifacts:
     paths:
       - public
