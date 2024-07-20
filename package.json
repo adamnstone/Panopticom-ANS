@@ -23,7 +23,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.24.1",
-    "three": "^0.165.0"
+    "three": "^0.165.0",
+    "vite-plugin-gh-pages": "^0.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
