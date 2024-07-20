@@ -59,7 +59,7 @@ const layerData = [
 ReactDOM.createRoot(document.getElementById('root')).render(
   //<React.StrictMode>
     // <App />
-    <Router>     
+    <Router basename={import.meta.env.BASE_URL}>     
             <Routes>
                 <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
                 <Route path="/ai-nav" element={<AINav />} />
