@@ -4,7 +4,7 @@ import App from './App.jsx'
 import AINav from './AINav.jsx'
 import AIDashboard from './AIDashboard.jsx'
 import Dashboard from './Dashboard.jsx'
-import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const LayerType = {
   STANDARD: 0,
