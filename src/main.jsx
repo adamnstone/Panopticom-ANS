@@ -4,7 +4,7 @@ import App from './App.jsx'
 import AINav from './AINav.jsx'
 import AIDashboard from './AIDashboard.jsx'
 import Dashboard from './Dashboard.jsx'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 
 const LayerType = {
   STANDARD: 0,
@@ -61,10 +61,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     // <App />
     <Router basename={import.meta.env.BASE_URL}>     
             <Routes>
-                <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
-                <Route path="/ai-nav" element={<AINav />} />
-                <Route path="/ai-dashboard" element={<AIDashboard />} />
-                <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
+                <Route exact path="https://gitlab.fabcloud.io/" element={<App layerData={layerData} LayerType={LayerType} />} />
+                <Route path="https://gitlab.fabcloud.io/ai-nav" element={<AINav />} />
+                <Route path="https://gitlab.fabcloud.io/ai-dashboard" element={<AIDashboard />} />
+                <Route path="https://gitlab.fabcloud.io/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
             </Routes>
         </Router>
   //</React.StrictMode>,
