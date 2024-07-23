@@ -1,6 +1,12 @@
 # Panopticom
 
+[To see the live site, click here!](https://panopticom.fabcloud.io/)
+
 [High level oveview here](https://petergabriel.com/focus/the-panopticom/)
+
+**Demo Videos**
+
+[]()
 
 ---
 

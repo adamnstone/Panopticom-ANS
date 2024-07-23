@@ -54,6 +54,12 @@ const layerData = [
     dataPath: '../datasets/radio_garden_data/radio_garden.jsonl',
     id: "radio_garden",
     layerType: LayerType.CUSTOM
+  },
+  {
+    title: "Gender Inequality",
+    dataPath: '../datasets/formatted_datasets/gender_inequality.jsonl',
+    id: 'gender_inequality',
+    layerType: LayerType.STANDARD
   }
 ];
 
@@ -64,8 +70,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Routes>
                 <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
                 {/*<Route path="/ai-nav" element={<AINav />} />
-                <Route path="/ai-dashboard" element={<AIDashboard />} />*/}
-                <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />
+                <Route path="/ai-dashboard" element={<AIDashboard />} />
+                <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />*/}
                 <Route path="/about" element={<About />} />
             </Routes>
         </Router>

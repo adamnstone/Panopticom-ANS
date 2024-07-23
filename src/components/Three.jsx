@@ -101,24 +101,22 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         "arc": [],
         "spikeHex": [],
         "cylinder": [],
-        "html": []
+        "html": [],
+        "poly": []
       };
+
+      let currentDataset = JSON.parse(JSON.stringify(groupedDataByVizType)); // deepcopy
+
       loadedData.forEach(dataObj => {
         groupedDataByVizType[dataObj.dataType].push(dataObj);
       });
-      
-      let currentDataset = {
-        "arc": [],
-        "spikeHex": [],
-        "cylinder": [],
-        "html": []
-      };
   
       const setCurrentDataset = groupedDataset => {
         groupedDataset['arc'].forEach(arcData => currentDataset.arc = [...currentDataset.arc, ...arcData.data]);
         groupedDataset['spikeHex'].forEach(spikeHexData => currentDataset.spikeHex = [...currentDataset.spikeHex, ...spikeHexData.data]);
         groupedDataset['cylinder'].forEach(cylinderData => currentDataset.cylinder = [...currentDataset.cylinder, ...cylinderData.data]);
         groupedDataset['html'].forEach(htmlData => currentDataset.html = [...currentDataset.html, ...htmlData.data]);
+        groupedDataset['poly'].forEach(polyData => currentDataset.poly = [...currentDataset.poly, ...polyData.data]);
       };
 
       const zoomUpdate = (changedLayerID, changedLayerEnabled, zoomPrevious) => {
@@ -186,8 +184,13 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           openModal();
         }, 1250)
       };
+
+      const polygonHoverCallback = poly => {
+        if (!poly) return;
+        setHoverDetails({title: "## Countries", description: poly[configKeys.polygonLabel]});
+      }; 
   
-      configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback], world.getGlobeRadius());
+      configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback], world.getGlobeRadius());
 
       let radioActive = true; // radio active starts activated
       setFilterUpdateFunc(() => (_changedLayerID, _changedLayerEnabled) => { // function in a function because the useState hook can be used with a function

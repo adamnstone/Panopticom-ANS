@@ -1,4 +1,11 @@
 {
+    "polyIsMultiPolygon": "isMultiPolygon",
+    "polygonMainColor": "mainColor",
+    "polygonSideColor": "sideColor",
+    "polygonLabel": "hoverLabel",
+    "polygonAltitude": "altitude",
+    "polygonCoordinates": "path",
+
     "htmlAltitude": "altitude",
     "htmlHoverLabel": "hoverLabel",
     "htmlClass": "class",

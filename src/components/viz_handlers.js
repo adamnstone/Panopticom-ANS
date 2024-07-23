@@ -84,14 +84,29 @@ const updateHtmlData = (htmlData, world, configKeys) => {
     world.htmlElementsData(formattedHtmlData);
 };
 
+const updatePolyData = (polyData, world, configKeys) => {
+    const formattedPolyData = [];
+    polyData.forEach(poly => {
+        formattedPolyData.push({
+            "geometry": {
+                "type": poly[configKeys.polyIsMultiPolygon] ? "MultiPolygon" : "Polygon",
+                "coordinates": poly[configKeys.polygonCoordinates]
+            },
+            ...poly
+        })
+    });
+    world.polygonsData(formattedPolyData);
+};  
+
 const updateData = (currentDataset, world, configKeys, datasetsToChange="all") => {
     if (datasetsToChange == "all" || datasetsToChange.includes("arc")) updateArcData(currentDataset.arc, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("spikeHex")) updateSpikeHexData(currentDataset.spikeHex, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("cylinder")) updateCylinderData(currentDataset.cylinder, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("html")) updateHtmlData(currentDataset.html, world, configKeys);
+    if (datasetsToChange == "all" || datasetsToChange.includes("poly")) updatePolyData(currentDataset.poly, world, configKeys);
 };
 
-const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback ], worldRadius) => {
+const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback ], worldRadius) => {
     // arc
     world
         .onArcHover((a,b) => arcHoverCallback(a, b))
@@ -113,7 +128,7 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
         .hexTopColor(d => d.points[0][configKeys.hexTopColor])
         .hexSideColor(d => d.points[0][configKeys.hexSideColor])
         .hexBinMerge(true)
-        .hexTransitionDuration(0);
+        .hexTransitionDuration(1000);
 
     // cylinder
     world
@@ -150,6 +165,20 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
             el.appendChild(imgEl);
             return el;
         });
+
+    // poly
+    world
+        .polygonCapColor(obj => obj[configKeys.polygonMainColor])
+        .polygonSideColor(obj => obj[configKeys.polygonSideColor])
+        .polygonsTransitionDuration(4000)
+        .polygonAltitude(obj => obj[configKeys.polygonAltitude])
+        .onPolygonHover(hoverD => {
+            world
+                .polygonAltitude(d => d === hoverD ? d[configKeys.polygonAltitude] + 0.06 : d[configKeys.polygonAltitude])
+                .polygonCapColor(d => d === hoverD ? 'steelblue' : d[configKeys.polygonMainColor]);
+
+            polygonHoverCallback(hoverD);
+        })
 };
 
 const initializeFilterLayers = initializedFilterLayers => filterLayers = initializedFilterLayers;
