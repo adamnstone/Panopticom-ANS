@@ -17,7 +17,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 ```json
 {
     "zoomLevel": 300, // zoom at which this attribute is disabled/enabled
-    "dataType": "arc", // options: arc, html, cylinder, spikeHex
+    "dataType": "arc", // options: arc, html, cylinder, poly, spikeHex
     "data": [ // includes all arcs
         { // single-color arc example
             "hoverLabel": "*Arc #1*: **Label in markdown...**", // what text appears when hovering over this arc, written in markdown
@@ -62,7 +62,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 ```json
 {
     "zoomLevel": 50, // zoom at which this attribute is disabled/enabled
-    "dataType": "html", // options: arc, html, cylinder, spikeHex
+    "dataType": "html", // options: arc, html, cylinder, poly, spikeHex
     "data": [ // includes all html datapoints
         { // example #1
             "pos": { // coordinates
@@ -103,7 +103,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 ```json
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
-    "dataType": "cylinder", // options: arc, html, cylinder, spikeHex
+    "dataType": "cylinder", // options: arc, html, cylinder, poly, spikeHex
     "data": [
         {
             "hoverLabel": "Datapoint #1", // what text appears when hovering over this cylinder, written in markdown
@@ -127,12 +127,39 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 }
 ```
 
+### Poly Example
+
+```json
+{
+    "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
+    "dataType": "poly", // options: arc, html, cylinder, poly, spikeHex
+    "data": [
+        {
+            "path": [[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]], // shape of the polygon, written in GeoJSON format (equivalent to 'coordinates' property, https://stevage.github.io/geojson-spec/, https://github.com/geojson/schema?tab=readme-ov-file)
+            "isMultiPolygon": false, // true if the 'path' is in the format of a GeoJSON MultiPolygon, false if the 'path' is in the format of a GoeJSON Polygon
+            "hoverLabel": "Datapoint #1", // what text appears when hovering over this polygon, written in markdown
+            "altitude": 0.1, // altitude of the polygon
+            "mainColor": "rgba(0,255,0,1)", // color of the polygon when viewed from above, must be in rgba format
+            "sideColor": "rgba(0,100,0,0.05)" // color of the walls around the perimeter of the polygon that connect to the globe, when viewed from the side; to have no walls, set alpha = 0
+        },
+        {
+            "path": [[[[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]]], [[[40.0, 20.20], [50.0, 20.20], [50.0, 10.20], [40.0, 10.20], [40.0, 20.20]]]],
+            "isMultiPolygon": true,
+            "hoverLabel": "Datapoint #2",
+            "altitude": 0.1,
+            "mainColor": "rgba(0,255,0,1)",
+            "sideColor": "rgba(0,100,0,0.05)"
+        }
+    ]
+}
+```
+
 ### SpikeHex Example (Not Recommended)
 
 ```json
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
-    "dataType": "spikeHex", // options: arc, html, cylinder, spikeHex
+    "dataType": "spikeHex", // options: arc, html, cylinder, poly, spikeHex
     "data": [
         {
             "hoverLabel": "Datapoint #1", // what text appears when hovering over this spike, written in markdown
@@ -259,6 +286,27 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 },
                 "height": 1,
                 "color": "rgba(0,0,255,1)"
+            }
+        ]
+    },
+    {
+        "zoomLevel": 250,
+        "dataType": "poly",
+        "data": [
+            {
+                "path": [[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]],
+                "isMultiPolygon": false,
+                "hoverLabel": "Datapoint #1",
+                "mainColor": "rgba(0,255,0,1)",
+                "sideColor": "rgba(0,100,0,0.05)"
+            },
+            {
+                "path": [[[[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]]], [[[40.0, 20.20], [50.0, 20.20], [50.0, 10.20], [40.0, 10.20], [40.0, 20.20]]]],
+                "isMultiPolygon": true,
+                "hoverLabel": "Datapoint #2",
+                "altitude": 0.1,
+                "mainColor": "rgba(0,255,0,1)",
+                "sideColor": "rgba(0,100,0,0.05)"
             }
         ]
     },
