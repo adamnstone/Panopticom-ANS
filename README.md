@@ -6,7 +6,9 @@
 
 **Demo Videos**
 
-[]()
+[Mockup Dashboard Interface Demo 7/19](https://drive.google.com/file/d/18YYwntT1GNpr8u8qol1IaIc5K7mkMG3n/view?usp=drive_link)
+
+[Prototype Demo 7/12](https://drive.google.com/file/d/1xNujsCFeTyHFPEHz83GBcIdpUmu3eIhG/view?usp=drive_link)
 
 ---
 
