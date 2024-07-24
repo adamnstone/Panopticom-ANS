@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="about-container">
       <div className="about-content">
-      <a href="https://petergabriel.com/focus/the-panopticom/" target="_blank"><img src="/images/panopticom_logo_large.jpg" alt="Panopticom logo" className="about-image"/></a>
+      <a href="https://petergabriel.com/focus/the-panopticom/" target="_blank"><img src="/about/images/panopticom_logo_large.jpg" alt="Panopticom logo" className="about-image"/></a>
         <h1>About</h1>
         <p>More and more data is being created and very little is visible. The Panopticom platform is a constantly changing satellite fed globe which will be the central tool that allows people to upload and monitor appropriate and meaningful, personal, social, economic and political data along with all manner of scientific and environmental information. It should allow the world to see much more of itself.</p>
       <br />
