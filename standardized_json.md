@@ -135,7 +135,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
     "dataType": "poly", // options: arc, html, cylinder, poly, spikeHex
     "data": [
         {
-            "path": [[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]], // shape of the polygon, written in GeoJSON format (equivalent to 'coordinates' property, https://stevage.github.io/geojson-spec/, https://github.com/geojson/schema?tab=readme-ov-file)
+            "path": [[[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]]], // shape of the polygon, written in GeoJSON format (equivalent to 'coordinates' property, https://stevage.github.io/geojson-spec/, https://github.com/geojson/schema?tab=readme-ov-file)
             "isMultiPolygon": false, // true if the 'path' is in the format of a GeoJSON MultiPolygon, false if the 'path' is in the format of a GoeJSON Polygon
             "hoverLabel": "Datapoint #1", // what text appears when hovering over this polygon, written in markdown
             "altitude": 0.1, // altitude of the polygon
@@ -221,7 +221,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                     "lng": 60.9
                 },
                 "height": 10,
-                "dashLength": [0.2, 0.5, 0.1, 0.35],
+                "dashLength": [0.2, 0.5, 0.1],
                 "gapLength": 0.6,
                 "color": ["rgba(0,0,255,1)", "rgba(255,255,0,1)", "rgba(255,255,255,1)"],
                 "thickness": 2,
@@ -294,9 +294,10 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
         "dataType": "poly",
         "data": [
             {
-                "path": [[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]],
+                "path": [[[10.0, 20.20], [20.0, 20.20], [20.0, 10.20], [10.0, 10.20], [10.0, 20.20]]],
                 "isMultiPolygon": false,
                 "hoverLabel": "Datapoint #1",
+                "altitude": 0.1,
                 "mainColor": "rgba(0,255,0,1)",
                 "sideColor": "rgba(0,100,0,0.05)"
             },

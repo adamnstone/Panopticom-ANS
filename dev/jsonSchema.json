@@ -15,6 +15,7 @@
         "arc",
         "html",
         "cylinder",
+        "poly",
         "spikeHex"
       ],
       "description": "The data type of this data group."
@@ -104,7 +105,14 @@
             "type": "number",
             "minimum": 0,
             "description": "Time for the arc animation to complete one cycle, in milliseconds."
-          }
+          },
+          "path": {},
+          "isMultiPolygon": {
+            "type": "boolean",
+            "description": "Is the 'path' attribute of the polygon a Polygon or MultiPolygon geometry (as per GeoJSON coordinates list specification)."
+          },
+          "mainColor": { "$ref": "#/$defs/colorItem" },
+          "sideColor": { "$ref": "#/$defs/colorItem" }
         },
         "required": [
           "hoverLabel"
@@ -138,14 +146,7 @@
                         "modalTitle",
                         "modalText",
                         "imgTint"
-                    ],
-                    "not": {
-                        "anyOf": [
-                            {
-                              "required": ["height"]
-                            }
-                          ]
-                    }
+                    ]
                 } 
             }
         }
@@ -154,15 +155,8 @@
         "properties": { 
             "data": { 
                 "items": { 
-                    "required": [
-                        "height",
-                        "color"
-                    ],
                     "not": {
                         "anyOf": [
-                            {
-                              "required": ["altitude"]
-                            },
                             {
                               "required": ["class"]
                             },
@@ -225,9 +219,6 @@
                     "properties": {
                       "color": { "$ref": "#/$defs/colorItem" }
                     },
-                    "required": [
-                        "pos"
-                    ],
                     "not": {
                         "anyOf": [
                             {
@@ -252,6 +243,178 @@
                     }
                 } 
             }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataType": {"const": "poly"} }
+      },
+      "then": {
+        "properties": { 
+            "data": { 
+              "items": {  
+                      "allOf": [
+                        {
+                          "if": {
+                            "properties": { "isMultiPolygon": { "const": true } }
+                          },
+                          "then": {
+                            "properties": {
+                              "path": {
+                                "type": "array",
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "array",
+                                    "minItems": 4,
+                                    "items": {
+                                      "type": "array",
+                                      "minItems": 2,
+                                      "items": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                },
+                                "description": "Equivalent to 'coordinates' property of GeoJSON Polygon."
+                              }
+                            }
+                          },
+                          "else": {
+                            "properties": {
+                              "path": {
+                                "type": "array",
+                                "items": {
+                                  "type": "array",
+                                  "minItems": 4,
+                                  "items": {
+                                    "type": "array",
+                                    "minItems": 2,
+                                    "items": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "description": "Equivalent to 'coordinates' property of GeoJSON MultiPolygon."
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    ,
+                  "required": [
+                        "path",
+                        "isMultiPolygon",
+                        "mainColor",
+                        "sideColor"
+                    ] 
+              }
+            }
+                    
+          }
+        },
+      "else": {
+        "properties": { 
+            "data": { 
+                "items": {
+                    "not": {
+                        "anyOf": [
+                            {
+                              "required": ["path"]
+                            },
+                            {
+                              "required": ["isMultiPolygon"]
+                            },
+                            {
+                              "required": ["mainColor"]
+                            },
+                            {
+                              "required": ["sideColor"]
+                            }
+                        ]
+                    }
+                } 
+            }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataType": { "enum": ["arc", "cylinder", "spikeHex"] } }
+      },
+      "then": {
+        "properties": { 
+            "data": { 
+                "items": { 
+                    "required": [
+                          "height",
+                          "color"
+                      ]
+                } 
+            }
+        }
+      },
+      "else": {
+        "properties": {
+          "data": {
+            "items": {
+              "not": {
+                "anyOf": [
+                    {
+                      "required": ["height"]
+                    },
+                    {
+                      "required": ["color"]
+                    }
+                  ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataType": { "enum": ["arc", "poly"] } }
+      },
+      "then": {
+        
+      },
+      "else": {
+        "properties": {
+          "data": {
+            "items": {
+              "allOf": [
+                  {
+                    "required": ["pos"]
+                  }
+                ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataType": { "enum": ["html", "poly"] } }
+      },
+      "then": {
+        
+      },
+      "else": {
+        "properties": {
+          "data": {
+            "items": {
+              "not": {
+                "anyOf": [
+                    {
+                      "required": ["altitude"]
+                    }
+                  ]
+              }
+            }
+          }
         }
       }
     }
@@ -286,7 +449,7 @@
     },
     "colorItem": {
         "type": "string",
-        "pattern": "^rgba\\((0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d)\\s*,\\s*(0|0?\\.\\d|1(\\.0)?)\\)$",
+        "pattern": "^rgba\\((0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d),(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d),(0|255|25[0-4]|2[0-4]\\d|1\\d\\d|0?\\d?\\d),(0|0?\\.(\\d)+|1(\\.0)?)\\)$",
         "description": "Color of the element. RGBA format, for example, 'rgba(255,23,20,0.3)'."
     }
   }
