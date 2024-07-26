@@ -226,6 +226,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       };
       scrollCallback();
       window.addEventListener('wheel', scrollCallback);
+      window.addEventListener('touchmove', scrollCallback);
   
       const mouseUpCallback = () => {
         setTimeout(() => {
