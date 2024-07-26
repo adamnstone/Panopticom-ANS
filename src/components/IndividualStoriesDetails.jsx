@@ -26,7 +26,7 @@ const IndividualStoriesDetails = ({ open, handleOpen, handleClose, storyTitle, s
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={style} id="personal-story-modal">
             <Typography id="modal-modal-title" variant="h6" component="h2" dangerouslySetInnerHTML={{ __html: parseSanitizeModifyLinks(storyTitle)}}>
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }} dangerouslySetInnerHTML={{ __html: parseSanitizeModifyLinks(storyText)}}>

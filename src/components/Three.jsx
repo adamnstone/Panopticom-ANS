@@ -173,7 +173,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
         };
         world.pointOfView({
           ...latLng,
-          altitude: 1.5
+          altitude: 0.5
         }, 1000);
         setTimeout(() => {
           zoomUpdate(null, null, currentZoom);
