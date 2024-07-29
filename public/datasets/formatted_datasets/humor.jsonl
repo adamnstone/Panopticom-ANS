@@ -1,0 +1,173 @@
+[
+    {
+       "zoomLevel": 50,
+        "dataType": "html",
+        "data": [
+            {
+                "pos": {
+                    "lat": 51.5074, 
+                    "lng": 1.3722
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in the United Kingdom",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in the United Kingdom",
+                "modalText": "###### People from the UK expressed a strong preference for jokes involving word plays. Top joke (2002):\n\n##### **A woman gets on a bus with her baby. The bus driver says: “That's the ugliest baby that I've ever seen. Ugh!” The woman goes to the rear of the bus and sits down, fuming. She says to a man next to her: “The driver just insulted me!” The man says: “You go right up there and tell him off - go ahead, I'll hold your monkey for you.”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 38.9072,
+                    "lng": -75.5369
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in the United States",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in the United States",
+                "modalText": "###### Americans much prefer gags where there is a sense of superiority - either because a person looks stupid, or is made to look stupid by another person.  Top joke (2002):\n\n##### **A man and a friend are playing golf one day at their local golf course. One of the guys is about to chip onto the green when he sees a long funeral procession on the road next to the course. He stops in mid-swing, takes off his golf cap, closes his eyes, and bows down in prayer. His friend says: “Wow, that is the most thoughtful and touching thing I have ever seen. You truly are a kind man.” The man then replies: “Yeah, well we were married 35 years.”**\n\n###### Another example:\n\n##### **Texan: “Where are you from?”**\n##### **Harvard grad: “I come from a place where we do not end our sentences with prepositions.”**\n##### **Texan: “Okay - where are you from, jackass?”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 45.4201, 
+                    "lng": -74.2003
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Canada",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in the Canada",
+                "modalText": "###### Canadians much prefer gags where there is a sense of superiority - either because a person looks stupid, or is made to look stupid by another person.  Top joke (2002):\n\n##### **When NASA first started sending up astronauts, they quickly discovered that ballpoint pens would not work in zero gravity. To combat the problem, NASA scientists spent a decade and $12 billion to develop a pen that writes in zero gravity, upside down, underwater, on almost any surface including glass and at temperatures ranging from below freezing to 300 C. The Russians used a pencil.**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 50.8476,
+                    "lng": 5.8572
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Belgium",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in the Belgium",
+                "modalText": "###### People in Belgium liked jokes that were somewhat surreal.  Top joke (2002):\n\n##### **Why do ducks have webbed feet?**\n##### **To stamp out fires.**\n##### **Why do elephants have flat feet?**\n##### **To stamp out burning ducks.**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": -35.2802,
+                    "lng": 150.6310
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Australia",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Australia",
+                "modalText": "###### People from Australia expressed a strong preference for jokes involving word plays.  Top joke (2002):\n\n##### **This woman rushed to see her doctor, looking very much worried and all strung out. She rattles off: “Doctor, take a look at me. When I woke up this morning, I looked at myself in the mirror and saw my hair all wiry and frazzled up, my skin was all wrinkled and pasty, my eyes were bloodshot and bugging out, and I had this corpse-like look on my face! What's WRONG with me, Doctor!?” The doctor looks her over for a couple of minutes, then calmly says: “Well, I can tell you that there ain't nothing wrong with your eyesight....”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 52.5200, 
+                    "lng": 16.4050
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Germany",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Germany",
+                "modalText": "###### Germans did not express a strong preference for any type of joke - and so they tend to find a wide spectrum of jokes funny.  Top joke (2002):\n\n##### **A general noticed one of his soldiers behaving oddly. The soldier would pick up any piece of paper he found, frown and say: “That's not it” and put it down again. This went on for some time, until the general arranged to have the soldier psychologically tested. The psychologist concluded that the soldier was deranged, and wrote out his discharge from the army. The soldier picked it up, smiled and said: “That's it.”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 55.7558, 
+                    "lng": 39.1173
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Russia",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Russia",
+                "modalText": "###### Though the Russian temperament can seem dower on the surface, in fact it hides a deep love of laughter. Much Russian humor is tightly bound to the subtleties of the language, and so can often be extremely difficult to translate.\n\n##### **This joke based on a well-known proverb: \"Без труда не вытащишь и рыбку из пруда\" (Without effort, you won't even pull a fish out of a pond); or in English \"No pain, no gain.\"**\n##### **The joke based on the proverb is: \"Без пруда не вытащишь и рыбки из него\" (Without a pond, you won't pull a fish out of it).**\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 39.9042,
+                    "lng": 117.9074
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in China",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in China",
+                "modalText": "###### In Chinese humour, jokes are often deeply embedded into the multi-level meanings of the Chinese writing system, which uses characters that change their meaning depending on the grammatical context. The Chinese language, therefore, is the perfect place for clever puns and wordplay.\n\n##### **單身的原因有兩個：一是誰都看不上，二是誰都看不上。**\n##### **(There are two reasons why you are single: first is nobody is good enough for you; second is you are not good enough for anybody.)**\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 19.4326, 
+                    "lng": -97.6332
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Mexico",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Mexico",
+                "modalText": "###### In Mexico, mockery is used as a way to break tension and build affectionate relationships. Mexicans also pride themselves on their political-incorrectness and ability to make light of nearly everything.\n\n##### **¿Por qué los mexicanos no pueden jugar billar? Porque se comen los tacos.**\n\n##### **(Why Mexicans can't play pool? Because they eat tacos.)**\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 28.6139, 
+                    "lng": 78.7088
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in India",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in India",
+                "modalText": "###### Indian humour is diverse and difficult to pin down but often revolves around the roasting of certain individuals or groups, especially those from rival regions or with different daily practices. You’re also likely to hear people in India making fun of their own cultural practices and traditions; this is much more likely to occur in groups of younger people, for whom certain activities seem outdated. There is also a big spin on typical family scenarios, and humour in the media maximises on this as it is universally applicable to those from all walks of life. For example, a TV son who gets married to an ‘overly modern’ woman can spark enough jokes to last many months, usually based around the mother-in-law/daughter-in-law rivalry, with the son caught in the middle.\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 35.6764, 
+                    "lng": 142.1500
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Japan",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Japan",
+                "modalText": "###### Japanese humour frequently uses puns, though they’re often referred to as ‘old man’ jokes with a groan and a sigh. The Japanese also love to tell long, comical stories, called Rakugo that feature foolish characters and awkward social faux pas.\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            }
+        ]
+    }
+]

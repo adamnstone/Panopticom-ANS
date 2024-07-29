@@ -14,7 +14,7 @@
             "imgTint": "none",
             "pos": {
               "lat": -14.235,
-              "lng": -51.9253
+              "lng": -53.4253
             },
             "altitude": 0.1
           },
@@ -29,7 +29,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 20.5937,
-              "lng": 78.9629
+              "lng": 77.4629
             },
             "altitude": 0.1
           },
@@ -44,7 +44,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 40.4637,
-              "lng": -3.7492
+              "lng": -5.2492
             },
             "altitude": 0.1
           },
@@ -59,7 +59,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 46.6034,
-              "lng": 1.8883
+              "lng": 0.3883
             },
             "altitude": 0.1
           },
@@ -74,7 +74,7 @@
             "imgTint": "none",
             "pos": {
               "lat": -38.4161,
-              "lng": -63.6167
+              "lng": -65.1167
             },
             "altitude": 0.1
           },
@@ -89,7 +89,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 28.6139,
-              "lng": 77.209
+              "lng": 75.709
             },
             "altitude": 0.1
           },
@@ -104,7 +104,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 19.8968,
-              "lng": -155.5828
+              "lng": -157.0828
             },
             "altitude": 0.1
           },
@@ -119,7 +119,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 47.5162,
-              "lng": 14.5501
+              "lng": 13.0501
             },
             "altitude": 0.1
           },
@@ -134,7 +134,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 21.5218,
-              "lng": -77.7812
+              "lng": -79.2812
             },
             "altitude": 0.1
           },
@@ -149,7 +149,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 37.0902,
-              "lng": -95.7129
+              "lng": -97.2129
             },
             "altitude": 0.1
           },
@@ -164,7 +164,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 34.0522,
-              "lng": -118.2437
+              "lng": -119.7437
             },
             "altitude": 0.1
           },
@@ -179,7 +179,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 40.7128,
-              "lng": -74.006
+              "lng": -75.506
             },
             "altitude": 0.1
           },
@@ -194,7 +194,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 48.3794,
-              "lng": 31.1656
+              "lng": 29.6656
             },
             "altitude": 0.1
           },
@@ -209,7 +209,7 @@
             "imgTint": "none",
             "pos": {
               "lat": 53.1424,
-              "lng": -7.6921
+              "lng": -9.1921
             },
             "altitude": 0.1
           }

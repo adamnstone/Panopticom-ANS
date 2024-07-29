@@ -20,6 +20,11 @@ p {
   width: 5vh; 
 }
 
+.laughing-icon > img {
+  height: 3vh;
+  width: 3vh;
+}
+
 .fs-6 {
     line-height: 0.5em;
 }
@@ -81,7 +86,8 @@ p {
     top: 0;
     left: 0;
     transform: translateX(-101%); /* 101 so that no slight black line visible */
-    width: min(auto, 100%);
+    width: 360px;
+    max-width: 100dvw;
     height: 100%;
     background-color: white;
     transition: left 0.3s ease;
@@ -107,5 +113,5 @@ p {
 /* end CSS for hamburger menu */
 
 #personal-story-modal {
-  width: min(100dvw, 100dvh)
+  width: min(90dvw, 90dvh)
 }

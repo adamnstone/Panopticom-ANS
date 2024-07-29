@@ -60,6 +60,12 @@ const layerData = [
     dataPath: '../datasets/formatted_datasets/gender_inequality.jsonl',
     id: 'gender_inequality',
     layerType: LayerType.STANDARD
+  },
+  {
+    title: "Humor",
+    dataPath: '../datasets/formatted_datasets/humor.jsonl',
+    id: 'humor',
+    layerType: LayerType.STANDARD
   }
 ];
 
