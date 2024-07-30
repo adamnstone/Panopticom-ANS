@@ -17,7 +17,7 @@
                 "modalTitle": "## Humor in the United Kingdom",
                 "modalText": "###### People from the UK expressed a strong preference for jokes involving word plays. Top joke (2002):\n\n##### **A woman gets on a bus with her baby. The bus driver says: “That's the ugliest baby that I've ever seen. Ugh!” The woman goes to the rear of the bus and sits down, fuming. She says to a man next to her: “The driver just insulted me!” The man says: “You go right up there and tell him off - go ahead, I'll hold your monkey for you.”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
                 "imgTint": "none"
-            },
+            }, 
             {
                 "pos": {
                     "lat": 38.9072,
@@ -121,21 +121,6 @@
                 "modalOnClick": true,
                 "modalTitle": "## Humor in China",
                 "modalText": "###### In Chinese humour, jokes are often deeply embedded into the multi-level meanings of the Chinese writing system, which uses characters that change their meaning depending on the grammatical context. The Chinese language, therefore, is the perfect place for clever puns and wordplay.\n\n##### **單身的原因有兩個：一是誰都看不上，二是誰都看不上。**\n##### **(There are two reasons why you are single: first is nobody is good enough for you; second is you are not good enough for anybody.)**\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
-                "imgTint": "none"
-            },
-            {
-                "pos": {
-                    "lat": 19.4326, 
-                    "lng": -97.6332
-                },
-                "altitude": 0.1,
-                "hoverLabel": "Humor in Mexico",
-                "class": "laughing-icon",
-                "imgPath": "../laughing.png",
-                "altText": "Laughing Icon",
-                "modalOnClick": true,
-                "modalTitle": "## Humor in Mexico",
-                "modalText": "###### In Mexico, mockery is used as a way to break tension and build affectionate relationships. Mexicans also pride themselves on their political-incorrectness and ability to make light of nearly everything.\n\n##### **¿Por qué los mexicanos no pueden jugar billar? Porque se comen los tacos.**\n\n##### **(Why Mexicans can't play pool? Because they eat tacos.)**\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
                 "imgTint": "none"
             },
             {
