@@ -6,15 +6,16 @@
 
 **Demo Videos**
 
-[Mockup Dashboard Interface Demo 7/19](https://drive.google.com/file/d/18YYwntT1GNpr8u8qol1IaIc5K7mkMG3n/view?usp=drive_link)
-
-[Prototype Demo 7/12](https://drive.google.com/file/d/1xNujsCFeTyHFPEHz83GBcIdpUmu3eIhG/view?usp=drive_link)
+- [Glacier Use Case Demo 7/26](https://drive.google.com/file/d/1NAW16UddEX_Dj0WP-a5uR5KRswMTh6ge/view?usp=sharing)
+- [Mockup Dashboard Interface Demo 7/19](https://drive.google.com/file/d/18YYwntT1GNpr8u8qol1IaIc5K7mkMG3n/view?usp=drive_link)
+- [Prototype Demo 7/12](https://drive.google.com/file/d/1xNujsCFeTyHFPEHz83GBcIdpUmu3eIhG/view?usp=drive_link)
 
 ---
 
 **How to format `JSONL` datasets:**
 
-[Click here for the `JSONL` schema!](./standardized_json.md)
+- [Click here for the human-readable `JSONL` schema!](./standardized_json.md)
+- [Click here for the technical `JSONL` schema](./dev/jsonSchema.json), and use a tool such as [this validator](https://www.jsonschemavalidator.net/) to ensure your dataset complies
 
 ---
 

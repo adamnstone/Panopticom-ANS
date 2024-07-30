@@ -2,7 +2,7 @@
 
 The `.jsonl` file should consist of a list of json objects in the format below (note that `.jsonl` doesn't support comments, they are just for explaining the format of the object).
 
-[For the technical `JSON Schema` click here!](./dev/jsonSchema.json) Below is simply an explanation of the format but does not contain a technical description.
+[For the technical `JSON Schema` click here!](./dev/jsonSchema.json) You can use a tool such as [this validator](https://www.jsonschemavalidator.net/) to ensure each `JSON` object in your `JSONL` dataset complies. Below is simply an explanation of the format but does not contain a technical description.
 
 **When adding a new datasource, the name of the file must match the 'id' provided in the 'id' field in the layerData object.
 
