@@ -15,7 +15,7 @@
                 "altText": "Laughing Icon",
                 "modalOnClick": true,
                 "modalTitle": "## Humor in the United Kingdom",
-                "modalText": "###### People from the UK expressed a strong preference for jokes involving word plays. Top joke (2002):\n\n##### **A woman gets on a bus with her baby. The bus driver says: “That's the ugliest baby that I've ever seen. Ugh!” The woman goes to the rear of the bus and sits down, fuming. She says to a man next to her: “The driver just insulted me!” The man says: “You go right up there and tell him off - go ahead, I'll hold your monkey for you.”**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab</a>",
+                "modalText": "###### People from the UK expressed a strong preference for jokes involving word plays. Top joke (2002):\n\n##### **A woman gets on a bus with her baby. The bus driver says: “That's the ugliest baby that I've ever seen. Ugh!” The woman goes to the rear of the bus and sits down, fuming. She says to a man next to her: “The driver just insulted me!” The man says: “You go right up there and tell him off - go ahead, I'll hold your monkey for you.”**\n\n###### Another example:\n\n##### **Did you hear about the guy who had his entire left side cut off? He’s all right now.**\n\n<a href=\"https://richardwiseman.wordpress.com/wp-content/uploads/2011/09/ll-final-report.pdf\">Source: LaughLab, </a><a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">LEAP</a>",
                 "imgTint": "none"
             }, 
             {
@@ -151,6 +151,36 @@
                 "modalOnClick": true,
                 "modalTitle": "## Humor in Japan",
                 "modalText": "###### Japanese humour frequently uses puns, though they’re often referred to as ‘old man’ jokes with a groan and a sigh. The Japanese also love to tell long, comical stories, called Rakugo that feature foolish characters and awkward social faux pas.\n\n<a href=\"https://leap.london/culture-shocks-humour-across-cultures/\">Source: LEAP</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": -34.6037,
+                    "lng": -56.8816
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Argentina",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Argentina",
+                "modalText": "##### **El optimista ve la copa medio llena. El pesimista la ve medio vacía. El borracho la ve doble**\n\n##### **(The optimist sees the cup half full. The pessimist sees it half empty. The drunk sees it double.)**\n\n<a href=\"https://www.lanacion.com.ar/lifestyle/los-mejores-chistes-para-festejar-el-dia-del-humorista-nid26112023/\">Source: La Nacion</a>",
+                "imgTint": "none"
+            },
+            {
+                "pos": {
+                    "lat": 19.4326,
+                    "lng": -97.6332
+                },
+                "altitude": 0.1,
+                "hoverLabel": "Humor in Mexico",
+                "class": "laughing-icon",
+                "imgPath": "../laughing.png",
+                "altText": "Laughing Icon",
+                "modalOnClick": true,
+                "modalTitle": "## Humor in Mexico",
+                "modalText": "##### **¿Cuál es el colmo de un pastor?**\n##### **¡Contar a sus ovejas y quedarse dormido!**\n\n##### **(What’s the worst thing that can happen to a shepherd?**\n##### **Falling asleep while counting his sheep!)**\n\n<a href=\"https://spanishunraveled.com/mexican-jokes-spanish/\">Source: Spanish Unraveled</a>",
                 "imgTint": "none"
             }
         ]
