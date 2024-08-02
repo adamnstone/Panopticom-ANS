@@ -147,6 +147,7 @@ p {
   pointer-events: auto;
   width: max(7%, 40px);
   height: auto;
+  cursor: pointer;
   /*filter: invert(1);*/
 }
 
