@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Three from './components/Three.jsx'
 import Filters from './components/Filters.jsx'
 import IndividualStoriesDetails from './components/IndividualStoriesDetails.jsx'
+import OverlayText from './components/OverlayText.jsx'
 import { filter } from 'd3'
 
 function App({ layerData, LayerType }) {
@@ -26,6 +27,7 @@ function App({ layerData, LayerType }) {
   return (
     <>
       <Three setHoverDetails={setHoverDetails} setMusicDetails={setMusicDetails} layerData={layerData} setFilterUpdateFunc={setFilterUpdateFunc} openModal={handleOpen} setStoryDetails={setStoryDetails} LayerType={LayerType} />
+      <OverlayText />
       <Filters hoverDetails={hoverDetails} musicDetails={musicDetails} layerData={layerData} filterUpdateFunc={filterUpdateFunc} />
       <IndividualStoriesDetails open={open} handleOpen={handleOpen} handleClose={handleClose} storyTitle={storyTitle} storyText={storyText} />
     </>
