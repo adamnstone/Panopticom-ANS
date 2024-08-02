@@ -113,5 +113,7 @@ p {
 /* end CSS for hamburger menu */
 
 #personal-story-modal {
-  width: min(90dvw, 90dvh)
+  width: min(90dvw, 90dvh);
+  max-height: 90dvh;
+  overflow: auto;
 }
