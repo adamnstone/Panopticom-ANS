@@ -25,7 +25,7 @@
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Bharatanatyam - India",
-            "modalText": "###### Bharatanatyam is a major form of Indian classical dance that originated in Tamil Nadu. It is known for its grace, elegance, and intricate footwork. The dance is characterized by intricate rhythms and expressive hand gestures. Bharatanatyam is often performed by women and is usually accompanied by Carnatic music. The dance form includes both storytelling and pure dance movements. It has a rich tradition and cultural significance in India.\n\n<img src=\"../markdown-media/bharatanatyam.jpg\" style=\"width: 200px; height: auto; display: block; margin-left: auto; margin-right: auto;\">",
+            "modalText": "###### Bharatanatyam is a major form of Indian classical dance that originated in Tamil Nadu. It is known for its grace, elegance, and intricate footwork. The dance is characterized by intricate rhythms and expressive hand gestures. Bharatanatyam is often performed by women and is usually accompanied by Carnatic music. The dance form includes both storytelling and pure dance movements. It has a rich tradition and cultural significance in India.",
             "imgTint": "none",
             "pos": {
               "lat": 20.5937,
