@@ -26,21 +26,46 @@ const About = () => {
                 <br />
                 <a href="https://nodejs.org">node.js</a>
                 <br />
-                <a href="">React</a>
+                <a href="https://react.dev/">React</a>
                 <br />
-                <a href="">Vite</a>
+                <a href="https://vitejs.dev/">Vite</a>
                 <br />
-                <a href="">Bootstrap</a>
+                <a href="https://getbootstrap.com/">Bootstrap</a>
                 <br />
-                <a href="">GlobeGL</a>
+                <a href="https://globe.gl/">GlobeGL</a>
               </td>
             </tr>
             <tr>
-              <td className="l">Data type</td>
+              <td className="l">Data sources</td>
               <td className="r">
-                Data name
+                Fab Lab locations
                 <br />
-                <a href="source">Link text</a>
+                <a href="https://fablabs.io/">Fablabs.io</a>
+                <br />
+                Expert network map
+                <br />
+                <a href="https://pub.fabcloud.io/project/expert-network-map/">Expert Network Map</a>
+                <br />
+                Individual stories 
+                <br />
+                <a href=""></a>
+                <br />
+                Music Narrative Summaries
+                <br />
+                <a href=""></a>
+                <br />
+                Global Radio Stations <br /> 
+                (live streams, geographical data and channel names)
+                <br />
+                <a href="https://radio.garden/">Radio Garden</a>
+                <br />
+                Traditional dances around the world
+                <br />
+                <a href=""></a>
+                <br />
+                Global gender inequality
+                <br />
+                <a href="https://datatopics.worldbank.org/sdgatlas">The World Bank Atlas of Sustainable Development Goals</a>
               </td>
             </tr>
           </tbody>
@@ -48,8 +73,17 @@ const About = () => {
       <h2>Inspiration and history</h2>
         <div className="blurb">
           <p className="center">
-          
+         This project is imagened and led by Peter Gabriel. We could not have build this without standing on the shoulders of giants though, and would like to thank the following sites and projets for inspiration and/or sources of input: 
           </p>
+        <p className="center">
+        <list>
+        <ul><a href="" target="blank">The Expert network Map</a></ul>
+        <ul><a href="" target="blank">The FMCU (the Frankenstein MCU)</a></ul>
+        <ul><a href="" target="blank">Radio Garden</a></ul>
+        <ul><a href="" target="blank">The World Bank Atlas of Sustainable Development Goals</a></ul>
+        <ul><a href="" target="blank">Earth :: a global map of wind, weather and ocean conditions</a></ul>
+        </list>  
+      </p>
         </div>
       </div>
     </div>
