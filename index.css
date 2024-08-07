@@ -158,7 +158,7 @@ p {
   margin: 10px !important;
   padding: 0;
   pointer-events: auto;
-  font-size: min(3em, 8dvw);
+  font-size: min(2.5em, 8dvw);
   font-style: italic;
   font-weight: bolder;
   color: white;
