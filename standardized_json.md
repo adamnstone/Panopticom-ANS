@@ -14,7 +14,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 ### Arc Example
 
-```json
+```js
 {
     "zoomLevel": 300, // zoom at which this attribute is disabled/enabled
     "dataType": "arc", // options: arc, html, cylinder, poly, spikeHex
@@ -59,7 +59,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 ### HTML Example
 
-```json
+```js
 {
     "zoomLevel": 50, // zoom at which this attribute is disabled/enabled
     "dataType": "html", // options: arc, html, cylinder, poly, spikeHex
@@ -100,7 +100,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 ### Cylinder Example
 
-```json
+```js
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
     "dataType": "cylinder", // options: arc, html, cylinder, poly, spikeHex
@@ -129,7 +129,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 ### Poly Example
 
-```json
+```js
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
     "dataType": "poly", // options: arc, html, cylinder, poly, spikeHex
@@ -156,7 +156,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 ### SpikeHex Example (Not Recommended)
 
-```json
+```js
 {
     "zoomLevel": 250, // zoom at which this attribute is disabled/enabled
     "dataType": "spikeHex", // options: arc, html, cylinder, poly, spikeHex
@@ -187,7 +187,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
 
 *(using the above data)*
 
-```json
+```js
 [
     {
         "zoomLevel": 300,
