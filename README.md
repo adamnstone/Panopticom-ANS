@@ -29,4 +29,4 @@
 
 ## Repo Organization
 
-The [`dev`](./dev/) directory contains the [`JSONL Schema`](./dev/jsonSchema.json), datasets formatted to the `JSONL Schema` specification in the [`dev/datasets`](./dev/datasets/) directory and the Python code used to transform the data in the [`dev/reshape_data`](./dev/reshape_data/) directory, example projects and brainstorming documents in the [`dev/brainstorm`](./dev/brainstorm/) directory.
+The [`dev`](./dev/) directory contains the [`JSONL Schema`](./dev/jsonSchema.json), datasets formatted to the `JSONL Schema` specification in the [`dev/datasets`](./dev/datasets/) directory and the Python code used to transform the data in the [`dev/reshape_data`](./dev/reshape_data/) directory, example projects and brainstorming documents in the [`dev/brainstorm`](./dev/brainstorm/) directory, and experiments interfacing geolocated data with the OpenAI API in [`dev/python-tests/gpt-interface`](./dev/python-tests/gpt_interface/).
