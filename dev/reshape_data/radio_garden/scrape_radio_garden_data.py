@@ -73,5 +73,5 @@ for station in scraped_data:
     })
 
 if True:
-    with open("../datasets/formatted_datasets/radio_garden_hex.jsonl", "w", encoding="utf-8") as file:
+    with open("../../datasets/formatted_datasets/radio_garden_hex.jsonl", "w", encoding="utf-8") as file:
         json.dump(formatted_hex_data, file)

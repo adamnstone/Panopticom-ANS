@@ -99,5 +99,5 @@ if __name__ == "__main__":
                 "isMultiPolygon": item['geometry']['type'] == "MultiPolygon"
             })
     
-    with open("../../../public/datasets/formatted_datasets/gender_inequality.jsonl", "w") as file:
+    with open("../../../../public/datasets/formatted_datasets/gender_inequality.jsonl", "w") as file:
         json.dump([formatted_dataset], file)
