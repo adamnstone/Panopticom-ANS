@@ -1,17 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import AINav from './AINav.jsx'
-import AIDashboard from './AIDashboard.jsx'
-import Dashboard from './Dashboard.jsx'
 import About from './About.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+// enum for whether a dataset follows the JSONL Schema
 const LayerType = {
-  STANDARD: 0,
-  CUSTOM: 1
+  STANDARD: 0, // dataset follows the JSONL Schema
+  CUSTOM: 1 // dataset doesn't follow the schema and requires custom behavior (e.g., radio garden)
 }
 
+// defines the details of each dataset to be included in the website
 const layerData = [
   {
     title: "Expert Network Map",
@@ -69,17 +68,12 @@ const layerData = [
   }
 ];
 
+// setup router component and define routes to the main visualization and the about page
 ReactDOM.createRoot(document.getElementById('root')).render(
-  //<React.StrictMode>
-    // <App />
-    <Router basename={import.meta.env.BASE_URL}>     
-            <Routes>
-                <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
-                {/*<Route path="/ai-nav" element={<AINav />} />
-                <Route path="/ai-dashboard" element={<AIDashboard />} />
-                <Route path="/dashboard" element={<Dashboard layerData={layerData} LayerType={LayerType} />} />*/}
-                <Route path="/about" element={<About />} />
-            </Routes>
-        </Router>
-  //</React.StrictMode>,
+    <Router basename={import.meta.env.BASE_URL}>
+        <Routes>
+            <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
+            <Route path="/about" element={<About />} />
+        </Routes>
+    </Router>
 )

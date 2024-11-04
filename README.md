@@ -2,9 +2,9 @@
 
 ## Overview
 
-[To see the live site, click here!](https://panopticom.fabcloud.io/)
+To see the live site, click here: [`https://panopticom.fabcloud.io/`](https://panopticom.fabcloud.io/)
 
-[High level oveview here](https://petergabriel.com/focus/the-panopticom/)
+High level oveview here: [`https://petergabriel.com/focus/the-panopticom/`](https://petergabriel.com/focus/the-panopticom/)
 
 ### Demo Videos & Presentations
 
@@ -28,7 +28,9 @@
 
 The [`dev`](./dev/) directory contains:
 - the [`JSONL Schema`](./dev/jsonSchema.json)
-- datasets formatted to the `JSONL Schema` specification in the [`dev/datasets`](./dev/datasets/) directory and the Python code used to transform the data in the [`dev/reshape_data`](./dev/reshape_data/) directory
+- datasets formatted to the `JSONL Schema` specification in the [`dev/datasets`](./dev/datasets/) directory 
+    - (before the final datasets are moved to the [`public/datasets/formatted_datasets`](./public/datasets/formatted_datasets/) directory)
+- the Python code used to format the datasets in the [`dev/reshape_data`](./dev/reshape_data/) directory
 - example projects and brainstorming documents in the [`dev/brainstorm`](./dev/brainstorm/) directory
 - early attempt at using D3JS for the global visualization in the [`dev/D3JS-test`](./dev/D3JS-test/) directory
 - experiments interfacing geolocated data with the OpenAI API in [`dev/python-tests/gpt-interface`](./dev/python-tests/gpt_interface/)
