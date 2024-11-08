@@ -5,7 +5,7 @@ import Filters from './components/Filters.jsx'
 import IndividualStoriesDetails from './components/IndividualStoriesDetails.jsx'
 import OverlayText from './components/OverlayText.jsx'
 
-function App({ layerData, LayerType }) {
+const App = ({ layerData, LayerType }) => {
   // handles hover text that appears in the menu
   const [hoverDetails, setHoverDetails] = useState({});
   const [musicDetails, setMusicDetails] = useState({});
@@ -40,6 +40,6 @@ function App({ layerData, LayerType }) {
       <IndividualStoriesDetails open={open} handleOpen={handleOpen} handleClose={handleClose} storyTitle={storyTitle} storyText={storyText} />
     </>
   )
-}
+};
 
-export default App
+export default App;

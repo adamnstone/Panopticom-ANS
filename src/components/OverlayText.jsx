@@ -1,5 +1,6 @@
 import React from 'react'
 
+// contains foreground UI elements and links
 const OverlayText = () => {
   return (
     <div id="overlay-text-container">
