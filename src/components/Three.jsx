@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
+import { add } from 'three/webgpu';
 
 let radioGardenData, prevPov;
 
@@ -29,7 +30,14 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       }
     };
 
+    /* declare undefined additional cleanup function that will be initialized by `mainRender` 
+      if additional event listeners are added before the component is unmounted */
+    let additionalCleanup;
+
+    // async wrapper function to be able to call await within
     const wrapper = async () => {
+
+      // main/initialization function
       const mainRender = async () => {
         // filter for all standard layers (which follow the JSONL Schema)
         const standardLayerData = layerData.filter(l => l.layerType == LayerType.STANDARD);
@@ -181,12 +189,11 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           playMusic(pov, musicChangeCallback)
         };
 
-
         /* CALLBACKS FOR EACH DATA LAYER TYPE ON HOVER */
         
         // behavior when hovering on an data point of layer type arc
         const arcHoverCallback = (arc, prevArc) => {
-          if (!arc) return;
+          if (!arc) return;           
           setHoverDetails({title: "## Expert Network Map", description: arc[configKeys.arcLabel]});
         };
       
@@ -208,7 +215,10 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       
         // behavior when clicking on an data point of layer type HTML
         const htmlClickCallback = htmlObj => {
+          // if this HTML element does not contain a modal, stop
           if (!htmlObj[configKeys.htmlModalOnClick]) return;
+
+          // rotate the camera to zoom in on the HTML object clicked on
           const currentZoom = getZoomLevel().distance;
           const latLng = {
             lat: htmlObj.lat,
@@ -218,11 +228,16 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
             ...latLng,
             altitude: 0.5
           }, 1000);
+
+          /* after zooming, update the layers that should appear or disappear based on zoom distance, 
+            play the appropriate music based on the scroll position on the globe, and update the menu with details */
           setTimeout(() => {
             zoomUpdate(null, null, currentZoom);
             playMusicStandard(latLng);
             setStoryDetails({ newTitle: htmlObj[configKeys.htmlModalTitle], newText: htmlObj[configKeys.htmlModalText] })
           }, 1000); // must be same as animation time for world.pointOfView() above
+
+          // open the modal 250 miliseconds after the previous update
           setTimeout(() => {
             openModal();
           }, 1250)
@@ -234,10 +249,20 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           setHoverDetails({title: "## Countries", description: poly[configKeys.polygonLabel]});
         }; 
     
-        configureWorldDatasets(world, configKeys, [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback], world.getGlobeRadius());
+        // bind the callbacks to the hover actions of the 3D objects
+        configureWorldDatasets(
+          world, 
+          configKeys, 
+          [arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback], 
+          world.getGlobeRadius()
+        );
 
-        let radioActive = true; // radio active starts activated
+        // the radio livestream starts activated
+        let radioActive = true;
+
+        // activate or deactivate layers based on changed filters
         setFilterUpdateFunc(() => (_changedLayerID, _changedLayerEnabled) => { // function in a function because the useState hook can be used with a function
+          // format the parameters to be arrays
           let changedLayerIDs, changedLayerEnableds;
           if (Array.isArray(_changedLayerID) && Array.isArray(_changedLayerEnabled)) {
             changedLayerIDs = _changedLayerID;
@@ -246,59 +271,106 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
             changedLayerIDs = [_changedLayerID];
             changedLayerEnableds = [_changedLayerEnabled];
           }
+
+          // for each layer id that should be added or removed from rendering...
           for (let i = 0; i < changedLayerIDs.length; i++) {
+            // store the layer id and whether it should be added or removed
             const changedLayerID = changedLayerIDs[i];
             const changedLayerEnabled = changedLayerEnableds[i];
+
+            // filter for the data layer based on the id
             const layer = layerData.filter(l => l.id == changedLayerID)[0];
+
+            // if it is a custom layer...
             if (layer.layerType == LayerType.CUSTOM) {
+              // if it is the radio garden layer...
               if (layer.id == "radio_garden") {
+                // set the activation status of the radio
                 radioActive = changedLayerEnabled;
+
+                // if the radio is being disabled, play the default music
                 if (!changedLayerEnabled) playMusic(-1, musicChangeCallback);
               }
               continue;
             }
+
+            // otherwise, add or remove the standard layer from rendering
             zoomUpdate(changedLayerID, changedLayerEnabled, null);
-            // if zoomLevel and zoomLevelCurrent are the same, the visualization won't update;
           }
         });
 
+        // store current zoom level
         let previousZoomLevel = 0;
+
+        // called whenever the user scrolls (zooms in or out)
         const scrollCallback = () => {
+          // get the current zoom level
           const zoomLevel = getZoomLevel().distance;
+
+          // update the layers being rendered based on the zoom distance
           zoomUpdate(null, null, previousZoomLevel);
+
+          // set the previous zoom level to the current zoom level 
           previousZoomLevel = zoomLevel;
         };
+
+        // call the scroll callback to initialize the layers being rendered and the previous zoom distance
         scrollCallback();
+
+        // bind the scroll callback to a mouse movement or a zoom with touch
         window.addEventListener('wheel', scrollCallback);
         window.addEventListener('touchmove', scrollCallback);
     
+        // callback to update the radio livestream when the mouse is lifted
         const mouseUpCallback = () => {
+          // wait until the earth stops spinning...
           setTimeout(() => {
+            // store the coordinates of the current point of view
             const pov = world.pointOfView()
+
+            // if the radio is active, there is a previous position (i.e. not first time loaded), and the coordinates have changed...
             if (((!prevPov) || (pov.lat != prevPov.lat && pov.lng != prevPov.lng)) && radioActive) {
+              // live stream radio music from the radio station closest to the current coordinates
               playMusicStandard(pov);
+
+              // set the previous point of view data to the current point of view
               prevPov = pov;
             }
-          }, 300); // delay for when the earth stops spinning after it's dragged. TODO replace with robust system.
+          }, 300);
         };
+
+        // bind the mouse up callback to the 'mouseup' event
         window.addEventListener('mouseup', mouseUpCallback);
     
+        // start playing the default music
         playMusic(-1, musicChangeCallback);
-    
       };
         
+      /* run the main/initializing function (need to await so that the 
+        `world` variable is initialized and can be accessed by `resizeRender`) */
       await mainRender();
 
+      // size the ThreeJS window to the current window dimensions
       resizeRenderer();
+
+      // bind the resize function to the 'resize' event
       window.addEventListener('resize', resizeRenderer);
 
-      return () => {
-        window.removeEventListener('resize', resizeRenderer);
+      additionalCleanup = () => {
+        window.removeEventListener('wheel', scrollCallback);
+        window.removeEventListener('touchmove', scrollCallback);
+        window.removeEventListener('mouseup', mouseUpCallback);
       };
 
     };
   
     wrapper();
+
+    return () => {
+      // when the component is unmounted, remove event listeners if they have been added to prevent memory leak
+      window.removeEventListener('resize', resizeRenderer);
+      if (additionalCleanup) additionalCleanup();
+    };
 
   }, [mountRef]);
 
