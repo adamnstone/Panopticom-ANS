@@ -109,7 +109,7 @@ const updateData = (currentDataset, world, configKeys, datasetsToChange="all") =
 const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback ], worldRadius) => {
     // arc
     world
-        .onArcHover((a,b) => arcHoverCallback(a, b))
+        .onArcHover((a, b) => arcHoverCallback(a, b))
         //.arcLabel(configKeys.arcLabel)
         .arcColor(configKeys.arcColor)
         .arcDashLength(configKeys.arcDashLength)
