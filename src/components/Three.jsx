@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
-import { add } from 'three/webgpu';
 
 let radioGardenData, prevPov;
 
