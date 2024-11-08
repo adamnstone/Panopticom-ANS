@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState, memo } from 'react'
-import * as d3 from 'd3';
 import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
@@ -12,14 +11,17 @@ const loadConfigKeys = async () => fetch('../../configKeys.json').then(data => d
 
 // contains main ThreeJS logic
 const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails, LayerType }) => {
+  // useRef to prevent visualization component from being re-rendered
   const mountRef = useRef(null);
 
+  // useEffect hook so that code initializing the visualization is only run once or whenever the ref updates
   useEffect(() => {
-    const mount = mountRef.current;
+    // declare variables for renderer and globe.gl world
     let renderer, world;
 
     // resize window to fit screen
     const resizeRenderer = () => {
+      const mount = mountRef.current;
       if (renderer && mount) {
         const { clientWidth, clientHeight } = mount;
         renderer.setSize(clientWidth, clientHeight);
@@ -188,6 +190,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           playMusic(pov, musicChangeCallback)
         };
 
+
         /* CALLBACKS FOR EACH DATA LAYER TYPE ON HOVER */
         
         // behavior when hovering on an data point of layer type arc
@@ -256,6 +259,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
           world.getGlobeRadius()
         );
 
+        
         // the radio livestream starts activated
         let radioActive = true;
 
@@ -355,6 +359,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
       // bind the resize function to the 'resize' event
       window.addEventListener('resize', resizeRenderer);
 
+      // add removing event listeners to cleanup code to prevent memory leaks
       additionalCleanup = () => {
         window.removeEventListener('wheel', scrollCallback);
         window.removeEventListener('touchmove', scrollCallback);
@@ -363,6 +368,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
 
     };
   
+    // call async wrapper function 
     wrapper();
 
     return () => {
@@ -376,5 +382,7 @@ const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFun
   return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
 }
 
+
+// memo used to prevent Three from re-rendering when parent component re-renders
 export default memo(Three)
 export { radioGardenData }
