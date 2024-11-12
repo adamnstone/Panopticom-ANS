@@ -11,19 +11,19 @@ const Details = ({ details, titleClassName, descriptionClassName, titleDefaultTe
         // if the object has the title property...
         if (details.title) {
             // set title to a cleaned html compilation of the markdown
-            title = <div className="fs-1" dangerouslySetInnerHTML={{ __html:parseSanitizeModifyLinks(details.title) }}></div>;
+            title = <div className={titleClassName} dangerouslySetInnerHTML={{ __html:parseSanitizeModifyLinks(details.title) }}></div>;
         } else {
             // otherwise, show the default title text
-            title = <div className="fs-1">{titleDefaultText}</div>;
+            title = <div className={titleClassName}>{titleDefaultText}</div>;
         }
 
         // if the object has the description property...
         if (details.description) {
             // set the description to a cleaned html compilation of the markdown
-            description = <div className="fs-3" dangerouslySetInnerHTML={{ __html:parseSanitizeModifyLinks(details.description) }}></div>;
+            description = <div className={descriptionClassName} dangerouslySetInnerHTML={{ __html:parseSanitizeModifyLinks(details.description) }}></div>;
         } else {
             // otherwise, show the default description text
-            description = <div className="fs-3">{descriptionDefaultText}</div>
+            description = <div className={descriptionClassName}>{descriptionDefaultText}</div>
         }
     }
     return (
