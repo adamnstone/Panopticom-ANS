@@ -3,21 +3,32 @@ import HoverDetails from './HoverDetails.jsx'
 import MusicDetails from './MusicDetails.jsx'
 import ActiveLayerFilters from './ActiveLayerFilters.jsx'
 
+// contains menu for user filters and hover details
 const Filters = ({ hoverDetails, musicDetails, layerData, filterUpdateFunc }) => {
-    const [checkedList, setCheckedList] = useState(layerData.map(l => true)); // all filters initially true, also must change in Three.jsx
+    // all filters initially true
+    const [checkedList, setCheckedList] = useState(layerData.map(l => true));
+    
+    // handles whether the menu is open or collapsed
     const [menuOpen, setMenuOpen] = useState(false);
 
+    // callback for updating the filter state
     const onChangeCallback = (layerID, position, isSolo) => {
-        if (isSolo) {
-            const updatedCheckedState = checkedList.map((item, index) => index === position);
+        // will store whether each filter is active or deactive
+        let updatedCheckedState;
 
+        // if the 'solo' button has been pressed on this layer...
+        if (isSolo) { 
+            // set the 'solo'-ed filter as the only active filter
+            updatedCheckedState = checkedList.map((item, index) => index === position);
+
+            // update the visualization based on the active filters
             filterUpdateFunc(layerData.map(i => i.id), updatedCheckedState);
-
-            setCheckedList(updatedCheckedState);
-        }
-        else {
+        } else { 
+            // will store whether the filtering being changed is becoming active or deactive
             let changedLayerEnabled;
-            const updatedCheckedState = checkedList.map((item, index) =>
+
+            // flip only the state of the filter being changed, store the changed state
+            updatedCheckedState = checkedList.map((item, index) =>
                 {
                     if (index === position) {
                         changedLayerEnabled = !item;
@@ -28,12 +39,15 @@ const Filters = ({ hoverDetails, musicDetails, layerData, filterUpdateFunc }) =>
                 }
             );
 
+            // update the visualization by only changing the filter being toggled
             filterUpdateFunc(layerID, changedLayerEnabled);
-        
-            setCheckedList(updatedCheckedState);
         }
+
+        // update the filter UI to reflect which filters are active
+        setCheckedList(updatedCheckedState);
     };
 
+    // toggle the menu state
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
