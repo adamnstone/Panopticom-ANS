@@ -1,26 +1,14 @@
-import React from 'react'
-import parseSanitizeModifyLinks from './clean_markdown';
+import Details from './DetailBlock.jsx'
 
+// returns the sanitized markdown details for the title and description of objects on hover
 const MusicDetails = ({ musicDetails }) => {
-    let title, description;
-    if (musicDetails && musicDetails.title) {
-        title = <div className="fs-4" dangerouslySetInnerHTML={{ __html: parseSanitizeModifyLinks(musicDetails.title)}}></div>;
-    } else {
-        title = <div className="fs-4">View music details...</div>;
-    }
-
-    if (musicDetails && musicDetails.description) {
-        description = <div className="fs-6" dangerouslySetInnerHTML={{ __html:parseSanitizeModifyLinks(musicDetails.description) }}></div>;
-    } else {
-        description = <div className="fs-6">View description here...</div>
-    }
-    return (
-        <>
-            {title}
-            <hr></hr>
-            {description}
-        </>
-    )
+    return <Details 
+        details={musicDetails} 
+        titleClassName='fs-4'
+        descriptionClassName='fs-6'
+        titleDefaultText="View music details..."
+        descriptionDefaultText="View description here..."
+    />
 }
 
 export default MusicDetails

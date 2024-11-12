@@ -2,6 +2,7 @@ import React from 'react'
 
 // UI filters in menu for user to turn on and off data layers
 const ActiveLayerFilters = ({ layerData, onChangeCallback, checkedList }) => {
+    // for each layer, add a filter with the appropraite callback
     const elems = [];
     for (let i = 0; i < layerData.length; i++) {
         const layer = layerData[i];
