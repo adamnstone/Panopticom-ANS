@@ -1,23 +1,57 @@
-import { formatDefaultLocale } from 'd3';
 import * as THREE from 'three';
 
 let filterLayers = [];
 
+const latLngReshape = arr => {
+    const reshapedData = [];
+    arr.forEach(a => {
+        reshapedData.push({
+            "lat": a.pos.lat,
+            "lng": a.pos.lng,
+            ...spikeHex
+        });
+    });
+    return reshapedData;
+};
+
+// update the visualization with new arc data
 const updateArcData = (arcData, world, configKeys) => {
+    // arc data object that will be passed to the GlobeGL world object
     const formattedArcData = [];
+
+    // for every arc in the dataset...
     arcData.forEach(arc => {
+        // store whether the two values of the arc data are arrays (i.e. whether it is a multicolor arc)
         const arcColorIsArray = Array.isArray(arc[configKeys.arcColor]);
         const arcDashLengthIsArray = Array.isArray(arc[configKeys.arcDashLength]);
-        if (arcColorIsArray || arcDashLengthIsArray) { // if it is a multicolor arc
+
+        // if it is a multicolor arc...
+        if (arcColorIsArray || arcDashLengthIsArray) { 
             const arcColorArray = arc[configKeys.arcColor];
             const arcDashLengthArray = arc[configKeys.arcDashLength];
-            if ((!(arcColorIsArray && arcDashLengthIsArray)) || ((arcColorIsArray && arcDashLengthIsArray) && (arcColorArray.length != arcDashLengthArray.length))) {
-                throw `Only one, but not the other, is an array; or they are different lengths: ${configKeys.arcColor}, ${configKeys.arcDashLength}`;
+            if (
+                // if only one of the variables is an array
+                (!(arcColorIsArray && arcDashLengthIsArray)) || 
+                // or they are both arrays but of different lengths...
+                ((arcColorIsArray && arcDashLengthIsArray) && (arcColorArray.length != arcDashLengthArray.length))
+            ) { 
+                // throw an error
+                throw `Data Error: only one, but not the other, is an array; or they are different lengths: ${configKeys.arcColor}, ${configKeys.arcDashLength}`;
             }
+
+            // store the array length
             const arrLen = arcColorArray.length;
+
+            // calculate the total length of one cycle of the moving arc relative to the total length of the arc between the points
+            const totalCycleLength = arc[configKeys.arcDashGap] + arc[configKeys.arcDashLength].reduce((a, c) => a + c);
+
+            /* for each arc that will be created that together make up the multicolor arc, will store the
+                initial time to delay before begining arc movement so that it follows after previous arcs */
             let cummulativeInitialGap = 0;
-            const totalCycleLength = arc[configKeys.arcDashGap] + arc[configKeys.arcDashLength].reduce((a,c)=>a+c);
+
+            // for each arc...
             for (let i = 0; i < arrLen; i++) {
+                // reshape the arc data
                 const arcToAdd = {
                     "startLat": arc.start.lat,
                     "startLng": arc.start.lng,
@@ -25,16 +59,24 @@ const updateArcData = (arcData, world, configKeys) => {
                     "endLng": arc.end.lng,
                     ...arc,
                 };
+
+                // add the i-th arc color, dash length, and initial gap to this multicolor arc piece
                 arcToAdd[configKeys.arcColor] = arcToAdd[configKeys.arcColor][i];
                 arcToAdd[configKeys.arcDashLength] = arcToAdd[configKeys.arcDashLength][i];
                 arcToAdd['arcDashInitialGap'] = cummulativeInitialGap;
 
+                // add the i-th dash length to the cummulative initial gap
                 cummulativeInitialGap += arcToAdd[configKeys.arcDashLength];
                 
+                /* add a gap between cycles of this multicolor arc piece so that it gives time for 
+                    subsequent multicolor arc pieces to move and without overlapping */
                 arcToAdd[configKeys.arcDashGap] = totalCycleLength - arcToAdd[configKeys.arcDashLength];
+                
+                // add the new arc to the final data
                 formattedArcData.push(arcToAdd);
             }
-        } else { // else, if it is not a multicolor arc
+        } else { // otherwise, if it is not a multicolor arc
+            // simply add the reshaped arc to the dataset
             formattedArcData.push({
                 "startLat": arc.start.lat,
                 "startLng": arc.start.lng,
@@ -45,45 +87,33 @@ const updateArcData = (arcData, world, configKeys) => {
             });
         }
     });
+
+    // update the final arc data on the globe
     world.arcsData(formattedArcData);
 };
 
+// update the visualization with new spikehex data
 const updateSpikeHexData = (spikeHexData, world, configKeys) => {
-    const formattedSpikeHexData = [];
-    spikeHexData.forEach(spikeHex => {
-        formattedSpikeHexData.push({
-            "lat": spikeHex.pos.lat,
-            "lng": spikeHex.pos.lng,
-            ...spikeHex
-        })
-    });
+    // for every spikehex, add a reshaped data point to the formatted data set
+    const formattedSpikeHexData = latLngReshape(spikeHexData);
+
+    // update the spikehex data on the globe
     world.hexBinPointsData(formattedSpikeHexData);
 };
 
+// update the visualization with new cylinder data
 const updateCylinderData = (cylinderData, world, configKeys) => {
-    const formattedCylinderData = [];
-    cylinderData.forEach(cylinder => {
-        formattedCylinderData.push({
-            "lat": cylinder.pos.lat,
-            "lng": cylinder.pos.lng,
-            ...cylinder
-        })
-    });
+    const formattedCylinderData = latLngReshape(cylinderData);
     world.objectsData(formattedCylinderData);
 };
 
+// update the visualization with new html data
 const updateHtmlData = (htmlData, world, configKeys) => {
-    const formattedHtmlData = [];
-    htmlData.forEach(html => {
-        formattedHtmlData.push({
-            "lat": html.pos.lat,
-            "lng": html.pos.lng,
-            ...html
-        })
-    });
+    const formattedHtmlData = latLngReshape(htmlData);
     world.htmlElementsData(formattedHtmlData);
 };
 
+// update the visualization with new polygon data
 const updatePolyData = (polyData, world, configKeys) => {
     const formattedPolyData = [];
     polyData.forEach(poly => {
@@ -98,6 +128,7 @@ const updatePolyData = (polyData, world, configKeys) => {
     world.polygonsData(formattedPolyData);
 };  
 
+// update all of the data set types in the visualization
 const updateData = (currentDataset, world, configKeys, datasetsToChange="all") => {
     if (datasetsToChange == "all" || datasetsToChange.includes("arc")) updateArcData(currentDataset.arc, world, configKeys);
     if (datasetsToChange == "all" || datasetsToChange.includes("spikeHex")) updateSpikeHexData(currentDataset.spikeHex, world, configKeys);
@@ -190,7 +221,13 @@ const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataB
     const datasetsToChange = [];
     Object.keys(groupedDataByVizType).forEach(dataType => {
         groupedDataByVizType[dataType].forEach(dataGroup => {
-            if (((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) || (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))) {
+            if (
+                ((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) // the zoom scroll has crossed the threshold for the layer to be toggled
+                 
+                || 
+                
+                (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))
+            ) {
                 datasetsToChange.push({
                     data: dataGroup,
                     enable: (dataGroup.zoomLevel <= zoomLevel) && (filterLayers.filter(i => i.layerID == dataGroup.layerID)[0].enable)

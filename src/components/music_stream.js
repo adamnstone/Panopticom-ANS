@@ -2,7 +2,7 @@ import { Howl } from 'howler';
 import { radioGardenData } from './Three';
 
 // store the current sound being played and URL path to the audio
-let currentSound, prevURL;
+let currentSound, currentAudioURL;
 
 /* counter to ensure that async promises only resolve and 
     play the loaded audio if another call has not been made */
@@ -51,14 +51,14 @@ const loadAudio = (_url, successCallback, errorCallback) => {
         // the default is to play the panopticom audio, signaled by _url = -1
         let url;
         if (_url == -1) {
-            if (prevURL == _url) return; // if we are currently playing the panopticom song, do not make any changes
+            if (currentAudioURL == _url) return; // if we are currently playing the panopticom song, do not make any changes
             url = "../../panopticom.mp3"
         } else {
             url = _url;
         }
 
         // update the current song being played
-        prevURL = _url;
+        currentAudioURL = _url;
 
         // load the audio
         const sound = new Howl({
