@@ -2,15 +2,19 @@ import * as THREE from 'three';
 
 let filterLayers = [];
 
+// reshape a data array to deconstruct lat and lng properties from the pos property for each data point
 const latLngReshape = arr => {
+    // for each data point, reshape the data point and add it to the formatted array
     const reshapedData = [];
     arr.forEach(a => {
         reshapedData.push({
             "lat": a.pos.lat,
             "lng": a.pos.lng,
-            ...spikeHex
+            ...a
         });
     });
+
+    // return the formatted data
     return reshapedData;
 };
 
@@ -92,29 +96,36 @@ const updateArcData = (arcData, world, configKeys) => {
     world.arcsData(formattedArcData);
 };
 
-// update the visualization with new spikehex data
+// update the visualization with new spikeHex data
 const updateSpikeHexData = (spikeHexData, world, configKeys) => {
-    // for every spikehex, add a reshaped data point to the formatted data set
+    // for every spikeHex, add a reshaped data point to the formatted data set
     const formattedSpikeHexData = latLngReshape(spikeHexData);
 
-    // update the spikehex data on the globe
+    // update the spikeHex data on the globe
     world.hexBinPointsData(formattedSpikeHexData);
 };
 
 // update the visualization with new cylinder data
 const updateCylinderData = (cylinderData, world, configKeys) => {
+    // for every cylinder, add a reshaped data point to the formatted data set
     const formattedCylinderData = latLngReshape(cylinderData);
+
+    // update the cylinder data on the globe
     world.objectsData(formattedCylinderData);
 };
 
 // update the visualization with new html data
 const updateHtmlData = (htmlData, world, configKeys) => {
+    // for every html data point, add a reshaped data point to the formatted data set
     const formattedHtmlData = latLngReshape(htmlData);
+
+    // update the html data on the globe
     world.htmlElementsData(formattedHtmlData);
 };
 
 // update the visualization with new polygon data
 const updatePolyData = (polyData, world, configKeys) => {
+    // for every polygon data point, format the polygon data differently based on whether it's a MultiPolygon
     const formattedPolyData = [];
     polyData.forEach(poly => {
         formattedPolyData.push({
@@ -123,31 +134,50 @@ const updatePolyData = (polyData, world, configKeys) => {
                 "coordinates": poly[configKeys.polygonCoordinates]
             },
             ...poly
-        })
+        });
     });
+
+    // update the polygon data on the globe
     world.polygonsData(formattedPolyData);
 };  
 
 // update all of the data set types in the visualization
 const updateData = (currentDataset, world, configKeys, datasetsToChange="all") => {
-    if (datasetsToChange == "all" || datasetsToChange.includes("arc")) updateArcData(currentDataset.arc, world, configKeys);
-    if (datasetsToChange == "all" || datasetsToChange.includes("spikeHex")) updateSpikeHexData(currentDataset.spikeHex, world, configKeys);
-    if (datasetsToChange == "all" || datasetsToChange.includes("cylinder")) updateCylinderData(currentDataset.cylinder, world, configKeys);
-    if (datasetsToChange == "all" || datasetsToChange.includes("html")) updateHtmlData(currentDataset.html, world, configKeys);
-    if (datasetsToChange == "all" || datasetsToChange.includes("poly")) updatePolyData(currentDataset.poly, world, configKeys);
+    // ["arc", "spikeHex", ...]
+    const layerTypes = Object.keys(currentDataset);
+
+    // for each layer type, map it to a specific function to update those layer types from the dataset in the visualization
+    const layerTypeToFunc = {
+        "arc": () => updateArcData(currentDataset.arc, world, configKeys),
+        "spikeHex": () => updateSpikeHexData(currentDataset.spikeHex, world, configKeys),
+        "cylinder": () => updateCylinderData(currentDataset.cylinder, world, configKeys),
+        "html": () => updateHtmlData(currentDataset.html, world, configKeys),
+        "poly": () => updatePolyData(currentDataset.poly, world, configKeys)
+    };
+
+    /* if the layerTypes does not match the keys of the layerTypeToFunc object, throw an error; this is to ensure 
+        that if a new layer is added, a new update function is added and defined here */
+    if (JSON.stringify(Object.keys(layerTypeToFunc)) != JSON.stringify(layerTypes))
+        throw `Error: layer types in current dataset don't match layerTypeToFunc: layerTypes=[${layerTypes}], layerTypeToFunc=[${Object.keys(layerTypeToFunc)}]`;
+
+    // for each layer type, update it in the visualization if it is supposed to be updated
+    layerTypes.forEach(layerType => {
+        if (datasetsToChange == "all" || datasetsToChange.includes(layerType))
+            layerTypeToFunc[layerType]();
+    });
 };
 
+// map GlobeGL attributes and callbacks of visualization layers to properties of the JSONL Schema datasets
 const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverCallback, cylinderHoverCallback, htmlHoverCallback, htmlClickCallback, polygonHoverCallback ], worldRadius) => {
     // arc
     world
-        .onArcHover((a, b) => arcHoverCallback(a, b))
-        //.arcLabel(configKeys.arcLabel)
+        .onArcHover((a, b) => arcHoverCallback(a, b)) 
         .arcColor(configKeys.arcColor)
         .arcDashLength(configKeys.arcDashLength)
         .arcDashGap(configKeys.arcDashGap)
         .arcDashAnimateTime(configKeys.arcAnimateTime)
         .arcStroke(d => d[configKeys.arcStroke] == 0 ? null : d[configKeys.arcStroke])
-        .arcDashInitialGap('arcDashInitialGap'); // `arcDashInitialGap` is only accessed by multicolor code, not by user in creating the JSONL, so doesn't go through `configKeys`
+        .arcDashInitialGap('arcDashInitialGap'); // `arcDashInitialGap` is only accessed by multicolor arc handling code in `updateArcData`, not by user in creating the JSONL, so doesn't go through `configKeys`
     
     // spikeHex
     world
@@ -164,11 +194,11 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
     // cylinder
     world
         .objectThreeObject(obj => {
-            const geometry = new THREE.CylinderGeometry( 0.3, 0.3, obj[configKeys.cylinderHeight], 16 ); 
-            const material = new THREE.MeshBasicMaterial( {color: obj[configKeys.cylinderColor]} ); 
-            const cylinder = new THREE.Mesh( geometry, material );
+            const geometry = new THREE.CylinderGeometry(0.3, 0.3, obj[configKeys.cylinderHeight], 16); 
+            const material = new THREE.MeshBasicMaterial({color: obj[configKeys.cylinderColor]}); 
+            const cylinder = new THREE.Mesh(geometry, material);
             return cylinder;
-        })
+        }) // create a ThreeJS cylinder object customizable based on the JSONL Schema
         .objectLat(obj => obj.lat)
         .objectLng(obj => obj.lng)
         .objectRotation(obj => { return {x: 90, y: 0, z: 0}; })
@@ -181,18 +211,27 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
         .htmlLng(obj => obj.lng)
         .htmlAltitude(obj => obj[configKeys.htmlAltitude])
         .htmlElement(obj => {
+            // create HTML element
             const el = document.createElement("div");
             el.className = obj[configKeys.htmlClass];
             el.style['pointer-events'] = 'auto';
             el.style.cursor = 'pointer';
+            
+            // bind mouse hover and click events to callbacks
             el.addEventListener("mouseover", () => htmlHoverCallback(obj));
             el.onclick = () => htmlClickCallback(obj);
+
+            // create the image to add to the div
             const imgEl = document.createElement("img");
             imgEl.src = obj[configKeys.htmlImgPath];
             imgEl.alt = obj[configKeys.htmlAltText];
+
+            // add the tint using CSS
             if (obj[configKeys.htmlImgTint] != "none") {
                 imgEl.style.filter = `opacity(0.6) drop-shadow(0 0 0 ${obj[configKeys.htmlImgTint]})`;
             }
+
+            // add the image to the div
             el.appendChild(imgEl);
             return el;
         });
@@ -204,29 +243,35 @@ const configureWorldDatasets = (world, configKeys, [ arcHoverCallback, hexHoverC
         .polygonsTransitionDuration(4000)
         .polygonAltitude(obj => obj[configKeys.polygonAltitude])
         .onPolygonHover(hoverD => {
+            // slightly increase the altitude of the polygons on hover, and change color
             world
                 .polygonAltitude(d => d === hoverD ? d[configKeys.polygonAltitude] + 0.06 : d[configKeys.polygonAltitude])
                 .polygonCapColor(d => d === hoverD ? 'steelblue' : d[configKeys.polygonMainColor]);
 
+            // trigger the hover callback
             polygonHoverCallback(hoverD);
         })
 };
 
+// initialize the state of each standard layer type
 const initializeFilterLayers = initializedFilterLayers => filterLayers = initializedFilterLayers;
 
 const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataByVizType, world, currentDataset, configKeys, filterLayersToChange) => {
+    // for every layer type to change, change that layer's enabled state
     filterLayersToChange.forEach(f => {
         filterLayers.filter(i => f.layerID == i.layerID)[0].enable = f.enable;
     });
+
+    // will store each data group and whether it should be enabled or disabled
     const datasetsToChange = [];
+
+    // for every layer type (["arc", "spikeHex", ...])...
     Object.keys(groupedDataByVizType).forEach(dataType => {
+        // for every data group of that layer type...
         groupedDataByVizType[dataType].forEach(dataGroup => {
+            // if that data group has just crossed the zoom threshold for the layer to be toggled or a filter has 
             if (
-                ((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) // the zoom scroll has crossed the threshold for the layer to be toggled
-                 
-                || 
-                
-                (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))
+                ((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) || (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))
             ) {
                 datasetsToChange.push({
                     data: dataGroup,
