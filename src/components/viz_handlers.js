@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+// will store the current active data groups
 let filterLayers = [];
 
 // reshape a data array to deconstruct lat and lng properties from the pos property for each data point
@@ -269,28 +270,34 @@ const updateCurrentDatasetFromZoom = (zoomLevel, previousZoomLevel, groupedDataB
     Object.keys(groupedDataByVizType).forEach(dataType => {
         // for every data group of that layer type...
         groupedDataByVizType[dataType].forEach(dataGroup => {
-            // if that data group has just crossed the zoom threshold for the layer to be toggled or a filter has 
-            if (
-                ((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) || (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))
-            ) {
+            // if that data group has just crossed the zoom threshold for the layer to be toggled or a filter has been changed to toggle that dataset...
+            if (((dataGroup.zoomLevel <= zoomLevel) != (dataGroup.zoomLevel <= previousZoomLevel)) || (filterLayersToChange.map(f => f.layerID).includes(dataGroup.layerID))) {
+                // add this dataset to the list of those that should be toggled
                 datasetsToChange.push({
                     data: dataGroup,
-                    enable: (dataGroup.zoomLevel <= zoomLevel) && (filterLayers.filter(i => i.layerID == dataGroup.layerID)[0].enable)
+                    enable: (dataGroup.zoomLevel <= zoomLevel) && (filterLayers.filter(i => i.layerID == dataGroup.layerID)[0].enable) // enable the layer if the user zoomed out and the filter toggle is on
                 });
             }
         });
     });
 
+    // for each dataset that should be toggled...
     datasetsToChange.forEach(dataset => {
+        // if the dataset should be enabled...
         if (dataset.enable) {
+            // add the data to the current dataset
             currentDataset[dataset.data.dataType] = [...currentDataset[dataset.data.dataType], ...dataset.data.data];
         } else {
+            // otherwise, delete of the data objects that should be deactivated based on their unique id's
             const datasetIDs = dataset.data.data.map(d => d.id);
             currentDataset[dataset.data.dataType] = currentDataset[dataset.data.dataType].filter(d => !datasetIDs.includes(d.id));
         }
     });
 
+    // compute a unique list of all of the data layer types that have changed
     const dataTypesUpdated = Array.from(new Set(datasetsToChange.map(d => d.data.dataType)));
+
+    // update the visualization for all of those layer types
     updateData(currentDataset, world, configKeys, dataTypesUpdated);
 };
 
