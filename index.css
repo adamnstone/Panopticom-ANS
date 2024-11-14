@@ -1,6 +1,5 @@
 p {
     font-size: 0.5em;
-    /*line-height: 0.5em;*/
     margin-bottom: 0.5em !important;
 }
 
@@ -148,7 +147,6 @@ p {
   width: max(7%, 40px);
   height: auto;
   cursor: pointer;
-  /*filter: invert(1);*/
 }
 
 #panopticom-txt {

@@ -3,7 +3,12 @@ import Globe from 'globe.gl';
 import { configureWorldDatasets, updateCurrentDatasetFromZoom, initializeFilterLayers } from './viz_handlers.js';
 import playMusic from './music_stream.js';
 
-let radioGardenData, prevPov;
+// will store loaded radio garden JSON data
+let radioGardenData;
+
+/* will store the previous scroll/zoom position recorded, allows for checking the direction of zooming and 
+  whether a user has just crossed the threshold for a data layer to be activated or deactivated */
+let prevPov;
 
 // load JSON data file and key name configuration data
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
