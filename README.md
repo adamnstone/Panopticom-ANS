@@ -1,5 +1,7 @@
 # Panopticom
 
+***This is a copy of the Panopticom GitLab repo to be submitted as a part of my (Adam Stone's) MIT Maker Portfolio.***
+
 ## Overview
 
 To see the live site, click here: [`https://panopticom.fabcloud.io/`](https://panopticom.fabcloud.io/)
