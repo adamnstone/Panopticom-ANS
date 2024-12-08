@@ -68,8 +68,8 @@ p {
     cursor: pointer;
     position: absolute;
     color: white;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
     z-index: 1000001;
     transition: transform 0.3s ease;
 }
