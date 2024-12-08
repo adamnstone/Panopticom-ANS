@@ -14,55 +14,55 @@ const LayerType = {
 const layerData = [
   {
     title: "Expert Network Map",
-    dataPath: '../datasets/formatted_datasets/exnm.jsonl',
+    dataPath: './datasets/formatted_datasets/exnm.jsonl',
     id: "exnm",
     layerType: LayerType.STANDARD
   },
   {
     title: "FabLabs",
-    dataPath: '../datasets/formatted_datasets/labs.jsonl',
+    dataPath: './datasets/formatted_datasets/labs.jsonl',
     id: "labs",
     layerType: LayerType.STANDARD
   },
   {
     title: "Individual Stories",
-    dataPath: "../datasets/formatted_datasets/individual_stories.jsonl",
+    dataPath: "./datasets/formatted_datasets/individual_stories.jsonl",
     id: "individual_stories",
     layerType: LayerType.STANDARD
   },
   {
     title: "Music Narrative Summaries",
-    dataPath: "../datasets/formatted_datasets/music_narrative.jsonl",
+    dataPath: "./datasets/formatted_datasets/music_narrative.jsonl",
     id: "music_narrative",
     layerType: LayerType.STANDARD
   },
   {
     title: "Radio Station Geo",
-    dataPath: '../datasets/formatted_datasets/radio_hex.jsonl',
+    dataPath: './datasets/formatted_datasets/radio_hex.jsonl',
     id: "radio_hex",
     layerType: LayerType.STANDARD
   },
   {
     title: "Traditional Dance",
-    dataPath: '../datasets/formatted_datasets/dance.jsonl',
+    dataPath: './datasets/formatted_datasets/dance.jsonl',
     id: "dance",
     layerType: LayerType.STANDARD
   },
   {
     title: "Radio Stations",
-    dataPath: '../datasets/radio_garden_data/radio_garden.jsonl',
+    dataPath: './datasets/radio_garden_data/radio_garden.jsonl',
     id: "radio_garden",
     layerType: LayerType.CUSTOM
   },
   {
     title: "Gender Inequality",
-    dataPath: '../datasets/formatted_datasets/gender_inequality.jsonl',
+    dataPath: './datasets/formatted_datasets/gender_inequality.jsonl',
     id: 'gender_inequality',
     layerType: LayerType.STANDARD
   },
   {
     title: "Humor",
-    dataPath: '../datasets/formatted_datasets/humor.jsonl',
+    dataPath: './datasets/formatted_datasets/humor.jsonl',
     id: 'humor',
     layerType: LayerType.STANDARD
   }
