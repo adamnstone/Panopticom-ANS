@@ -6,7 +6,7 @@
           {
             "hoverLabel": "Samba",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Samba - Brazil",
@@ -21,7 +21,7 @@
           {
             "hoverLabel": "Bharatanatyam",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Bharatanatyam - India",
@@ -36,7 +36,7 @@
           {
             "hoverLabel": "Flamenco",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Flamenco - Spain",
@@ -51,7 +51,7 @@
           {
             "hoverLabel": "Ballet",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Ballet - France",
@@ -66,7 +66,7 @@
           {
             "hoverLabel": "Tango",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Tango - Argentina",
@@ -81,7 +81,7 @@
           {
             "hoverLabel": "Kathak",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Kathak - India",
@@ -96,7 +96,7 @@
           {
             "hoverLabel": "Hula",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Hula - Hawaii",
@@ -111,7 +111,7 @@
           {
             "hoverLabel": "Waltz",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Waltz - Austria",
@@ -126,7 +126,7 @@
           {
             "hoverLabel": "Salsa",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Salsa - Cuba",
@@ -141,7 +141,7 @@
           {
             "hoverLabel": "Jive",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Jive - USA",
@@ -156,7 +156,7 @@
           {
             "hoverLabel": "Hip-hop",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Hip-hop - USA",
@@ -171,7 +171,7 @@
           {
             "hoverLabel": "Breakdance",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Breakdance - USA",
@@ -186,7 +186,7 @@
           {
             "hoverLabel": "Cossack Dance",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Cossack Dance - Ukraine",
@@ -201,7 +201,7 @@
           {
             "hoverLabel": "Irish Dance",
             "class": "dance-icon",
-            "imgPath": "../dance.png",
+            "imgPath": "./dance.png",
             "altText": "Dance Icon",
             "modalOnClick": true,
             "modalTitle": "## Irish Dance - Ireland",

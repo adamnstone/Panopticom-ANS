@@ -72,7 +72,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
             "altitude": 0.1, // altitude above globe
             "hoverLabel": "Visit from Rosemarry School to FabLab Bhutan", // what text appears when hovering over this html element, written in markdown
             "class": "story-thought-bubble", // css class of the html element (div)
-            "imgPath": "../thought_bubble.png", // path to an image placed inside of the div
+            "imgPath": "./thought_bubble.png", // path to an image placed inside of the div
             "altText": "Thought Bubble", // alt text property of the <img> element
             "modalOnClick": true, // if true, a modal will appear when the html element is clicked on (details of the modal are in the following properties)
             "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan", // title of the modal, written in markdown
@@ -87,7 +87,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
             "altitude": 0.1,
             "hoverLabel": "Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
             "class": "story-thought-bubble",
-            "imgPath": "../thought_bubble.png",
+            "imgPath": "./thought_bubble.png",
             "altText": "Thought Bubble",
             "modalOnClick": true,
             "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
@@ -241,7 +241,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "altitude": 0.1,
                 "hoverLabel": "Visit from Rosemarry School to FabLab Bhutan",
                 "class": "story-thought-bubble",
-                "imgPath": "../thought_bubble.png",
+                "imgPath": "./thought_bubble.png",
                 "altText": "Thought Bubble",
                 "modalOnClick": true,
                 "modalTitle": "## Visit from Rosemarry School to FabLab Bhutan",
@@ -256,7 +256,7 @@ Hex is problematic because multiple datasets will overlap in their buckets. Only
                 "altitude": 0.1,
                 "hoverLabel": "Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
                 "class": "story-thought-bubble",
-                "imgPath": "../thought_bubble.png",
+                "imgPath": "./thought_bubble.png",
                 "altText": "Thought Bubble",
                 "modalOnClick": true,
                 "modalTitle": "## Kids Recreate Model of the Houses Under the Lava: FabLab Vestmannaeyjar",
