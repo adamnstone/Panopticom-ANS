@@ -12,7 +12,7 @@ Panopticom 2.0 will enable users around the world to optimize decision-making by
 
 ## Project Details
 
-To see the live site, click here: [`https://panopticom.fabcloud.io/`](https://panopticom.fabcloud.io/)
+To see the live site, click here: [`https://adamnstone.github.io/Panopticom-ANS/`](https://adamnstone.github.io/Panopticom-ANS/)
 
 High level oveview here: [`https://petergabriel.com/focus/the-panopticom/`](https://petergabriel.com/focus/the-panopticom/)
 
