@@ -70,7 +70,7 @@ for i in range(49):
         "altitude": 0.1,
         "hoverLabel": f"{j['country']} Billboard Summary",
         "class": "story-billboard-summary",
-        "imgPath": "../billboard-summary.png",
+        "imgPath": "./billboard-summary.png",
         "altText": "Billboard Summary",
         "modalOnClick": True,
         "modalTitle": f"## Top Billboard Songs in {j['country']}: Narrative Summary",
