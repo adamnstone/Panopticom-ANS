@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Ensure this is the correct base path
+  base: '/Panopticom-ANS/', // Ensure this is the correct base path
   build: {
     rollupOptions: {
       output: {
