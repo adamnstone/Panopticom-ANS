@@ -12,7 +12,7 @@ let prevPov;
 
 // load JSON data file and key name configuration data
 const loadData = async path => fetch(path).then(data => [path, data.json()]);
-const loadConfigKeys = async () => fetch('../configKeys.json').then(data => data.json());
+const loadConfigKeys = async () => fetch('./configKeys.json').then(data => data.json());
 
 // contains main ThreeJS logic
 const Three = ({ setHoverDetails, setMusicDetails, layerData, setFilterUpdateFunc, openModal, setStoryDetails, LayerType }) => {
