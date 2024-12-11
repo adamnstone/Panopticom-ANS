@@ -52,7 +52,7 @@ const loadAudio = (_url, successCallback, errorCallback) => {
         let url;
         if (_url == -1) {
             if (currentAudioURL == _url) return; // if we are currently playing the panopticom song, do not make any changes
-            url = "../../panopticom.mp3"
+            url = "../panopticom.mp3"
         } else {
             url = _url;
         }
