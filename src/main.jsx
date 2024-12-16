@@ -70,7 +70,7 @@ const layerData = [
 
 // setup router component and define routes to the main visualization and the about page
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={process.env.NODE_ENV === 'production' ? '/Panopticom-ANS' : ''}>
         <Routes>
             <Route exact path="/" element={<App layerData={layerData} LayerType={LayerType} />} />
             <Route path="/about" element={<About />} />
