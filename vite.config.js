@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => { return {
   plugins: [react()],
-  base: '/Panopticom-ANS/', // Ensure this is the correct base path
+  base: mode === 'production' ? '/Panopticom-ANS/' : '/', // Ensure this is the correct base path
   build: {
     rollupOptions: {
       output: {
@@ -14,4 +14,4 @@ export default defineConfig({
   server: {
     historyApiFallback: true, // This ensures the dev server handles routing correctly
   },
-});
+}});
