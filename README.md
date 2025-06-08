@@ -1,6 +1,6 @@
 # Panopticom
 
-***This is a copy of the Panopticom GitLab repo to be submitted as a part of my (Adam Stone's) MIT Maker Portfolio.***
+***This is a copy of the Panopticom GitLab repo.***
 
 ## Project Overview
 
